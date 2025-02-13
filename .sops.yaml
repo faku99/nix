@@ -1,0 +1,15 @@
+keys:
+  - &users
+    - &lelisei 0AAFA0446C8016928C872276DC25BABDE40033A1
+  - &hosts
+    - &home age1s0ftlw5jw3uxy7z5pyhmczt2p7tsg67s2fktl9mg3mx7deyqkyvqym849n
+    - &work age17lhfyhd8qr78rd4cqmt7af6m4n8j4xuh3c892jrjpcjya9fsav4sefpxny
+
+creation_rules:
+  - path_regex: system/shared/secrets.ya?ml$
+    key_groups:
+    - pgp:
+      - *lelisei
+      age:
+      - *home
+      - *work

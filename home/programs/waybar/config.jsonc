@@ -1,0 +1,156 @@
+{
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 30, // Waybar height (to be removed for auto height)
+    "spacing": 4, // Gaps between modules (4px)
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "network",
+        "pulseaudio",
+        "cpu",
+        "memory",
+        "battery",
+        "tray",
+        "custom/notification"
+    ],
+    "reload_style_on_change": true,
+    "hyprland/workspaces": {
+        "format": "{id}"
+    },
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "sway/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["", ""],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}"
+    },
+    "mpd": {
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "unknown-tag": "N/A",
+        "interval": 2,
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+    "idle_inhibitor": {
+        "format": "<span font-family='RobotoMono Nerd Font' weight='bold'>IDLE</span> {status}"
+    },
+    "tray": {
+        "spacing": 10
+    },
+    "clock": {
+        "timezone": "Europe/Zurich",
+        "locale": "fr_CH.UTF-8",
+        "interval": 1,
+        "format": "{:%Y-%m-%d %H:%M}",
+        "format-alt": "{:%Y-%m-%d %H:%M:%S}",
+        "tooltip": true,
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "weeks-pos": "left",
+            "on-scroll": 1,
+            "format": {
+                "months":   "<span color='#ffead3'><b>{}</b></span>",
+                "days":     "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks":    "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                "today":    "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+    "cpu": {
+        "interval": 1,
+        "format": "<span font-family='RobotoMono Nerd Font' weight='bold'>CPU</span> {usage:02}%",
+        "tooltip": false
+    },
+    "memory": {
+        "interval": 1,
+        "format": "<span font-family='RobotoMono Nerd Font' weight='bold'>MEM</span> {:02}%",
+        "tooltip": true,
+        "tooltip-format": "Used: {used} GiB\nFree: {avail} GiB"
+    },
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+    "backlight": {
+        "format": "{percent}% {icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    "battery": {
+        "format": "<span font-family='RobotoMono Nerd Font' weight='bold'>BAT</span> {capacity}%",
+        "format-time": "{H}h{m}m",
+        "tooltip": false
+    },
+    "network": {
+        "format": "<span font-family='RobotoMono Nerd Font' weight='bold'>NET</span> 󰁝 {bandwidthUpBytes} 󰁅 {bandwidthDownBytes}",
+        "interval": 1,
+        "tooltip": false
+    },
+    "pulseaudio": {
+        "format": "<span font-family='RobotoMono Nerd Font' weight='bold'>VOL</span> {volume}%",
+        "format-muted": "<span font-family='RobotoMono Nerd Font' weight='bold'>VOL</span> MUTED",
+        "tooltip": false,
+        "on-click": "pavucontrol"
+    },
+    "custom/notification": {
+        "format": "{icon}",
+        "format-icons": {
+          "notification": "<span foreground='red'><sup></sup></span>",
+          "none": "",
+          "dnd-notification": "<span foreground='red'><sup></sup></span>",
+          "dnd-none": "",
+          "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+          "inhibited-none": "",
+          "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+          "dnd-inhibited-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    }
+}
+
