@@ -34,6 +34,7 @@ in {
       enable = false;
       components = ["pkcs11" "secrets" "ssh"];
     };
+    safeeyes.enable = true;
   };
 
   nixpkgs = {
