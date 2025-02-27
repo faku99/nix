@@ -56,6 +56,7 @@ in {
     ../programs/zsh
 
     # Shared services
+    ../services/dunst
     ../services/gpg-agent
 
     # stylix
