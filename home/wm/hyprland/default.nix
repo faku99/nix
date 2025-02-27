@@ -26,6 +26,7 @@ in {
     ../../programs/hyprlock
     ../../programs/rofi
     ../../programs/waybar
+    ../../programs/wlogout
 
     ../../services/hyprpaper
 
@@ -98,7 +99,7 @@ in {
         # Menu bindings
         "$mod, SPACE, exec, $menu -modes 'drun,calc,emoji' -show 'drun'"
         "$mod SHIFT, SPACE, exec, $menu-rbw"
-        "$mod SHIFT, S, exec, $menu -modes 'power-menu:rofi-power-menu' -show 'power-menu'"
+        "$mod SHIFT, S, exec, wlogout -b 1"
       ];
 
       cursor = {} // nvidiaCursor;

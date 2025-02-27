@@ -6,8 +6,4 @@
       rofi-emoji
     ];
   };
-
-  home.packages = with pkgs; [
-    rofi-power-menu
-  ];
 }
