@@ -5,47 +5,57 @@
 }: let
   inherit (lib) mkOption types;
 in {
-  options.monitors = mkOption {
-    type = types.listOf (
-      types.submodule {
-        options = {
-          name = mkOption {
-            type = types.str;
-            example = "DP-1";
+  options = {
+    monitors = mkOption {
+      type = types.listOf (
+        types.submodule {
+          options = {
+            name = mkOption {
+              type = types.str;
+              example = "DP-1";
+            };
+            primary = mkOption {
+              type = types.bool;
+              default = false;
+            };
+            width = mkOption {
+              type = types.int;
+              example = 1920;
+            };
+            height = mkOption {
+              type = types.int;
+              example = 1080;
+            };
+            refreshRate = mkOption {
+              type = types.int;
+              default = 60;
+            };
+            position = mkOption {
+              type = types.str;
+              default = "auto";
+            };
+            enabled = mkOption {
+              type = types.bool;
+              default = true;
+            };
+            workspace = mkOption {
+              type = types.nullOr types.str;
+              default = null;
+            };
           };
-          primary = mkOption {
-            type = types.bool;
-            default = false;
-          };
-          width = mkOption {
-            type = types.int;
-            example = 1920;
-          };
-          height = mkOption {
-            type = types.int;
-            example = 1080;
-          };
-          refreshRate = mkOption {
-            type = types.int;
-            default = 60;
-          };
-          position = mkOption {
-            type = types.str;
-            default = "auto";
-          };
-          enabled = mkOption {
-            type = types.bool;
-            default = true;
-          };
-          workspace = mkOption {
-            type = types.nullOr types.str;
-            default = null;
-          };
-        };
-      }
-    );
-    default = [];
+        }
+      );
+      default = [];
+    };
+
+    getPrimaryMonitor = mkOption {
+      type = types.functionTo types.attrs;
+      default = _: lib.findFirst (monitor: monitor.primary) null config.monitors;
+      description = "Function that returns the primary monitor configuration.";
+      readOnly = true;
+    };
   };
+
   config = {
     assertions = [
       {
