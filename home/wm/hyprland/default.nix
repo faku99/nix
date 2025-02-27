@@ -23,6 +23,7 @@
   rgb = color: "rgb(${color})";
 in {
   imports = [
+    ../../programs/hyprlock
     ../../programs/rofi
     ../../programs/waybar
 

@@ -29,6 +29,8 @@
     xserver.exportConfiguration = true;
   };
 
+  security.pam.services.hyprlock = {};
+
   environment.systemPackages = with pkgs; [
     nwg-look
     pavucontrol
