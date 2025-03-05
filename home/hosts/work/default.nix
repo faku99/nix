@@ -1,7 +1,8 @@
 let
   height = 1080;
   width = 3840;
-in {
+in
+{
   imports = [
     ../../shared
     ../../wm/hyprland
@@ -26,4 +27,21 @@ in {
       inherit height width;
     }
   ];
+
+  userConfig = {
+    global.enable = true;
+
+    programs = {
+      browser = {
+        librewolf = {
+          enable = true;
+          defaultBrowser = true;
+        };
+      };
+
+      editor = {
+        vscode.enable = true;
+      };
+    };
+  };
 }

@@ -1,12 +1,14 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.git = {
     enable = true;
+    lfs.enable = true;
 
     extraConfig = {
       branch.sort = "-committerdate";
       column.ui = "auto";
       commit.verbose = true;
-      credential.helper = "${pkgs.git.override {withLibsecret = true;}}/bin/git-credential-libsecret";
+      credential.helper = "${pkgs.git.override { withLibsecret = true; }}/bin/git-credential-libsecret";
       diff = {
         algorithm = "histogram";
         colorMoved = "plain";

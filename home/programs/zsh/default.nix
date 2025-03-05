@@ -1,6 +1,8 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   zsh_custom_path = ".config/oh-my-zsh";
-in {
+in
+{
   home.file = {
     "${zsh_custom_path}/custom.zsh-theme".source = ./custom.zsh-theme;
   };
@@ -16,9 +18,8 @@ in {
     };
 
     shellAliases = {
-      "ls" = "eza -l --git";
+      "ls" = "eza -lg --git";
       "la" = "ls -a";
-      "sudo" = "sudo -E";
     };
 
     oh-my-zsh = {

@@ -3,7 +3,7 @@
     ./monitors.nix
     ./nvidia.nix
     ./secrets.nix
-    ./stylix.nix
+    ./theme
     ./wallpaper.nix
   ];
 }

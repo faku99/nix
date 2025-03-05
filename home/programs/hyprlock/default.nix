@@ -32,9 +32,9 @@ in {
         monitor = monitor.name;
         dots_center = false;
         fade_on_empty = false;
-        font_color = "rgb(202, 211, 245)";
-        inner_color = "rgb(91, 96, 120)";
-        outer_color = "rgb(24, 25, 38)";
+        # font_color = "rgb(202, 211, 245)";
+        # inner_color = "rgb(91, 96, 120)";
+        # outer_color = "rgb(24, 25, 38)";
         outline_thickness = 2;
         placeholder_text = "";
       };

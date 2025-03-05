@@ -105,6 +105,7 @@ in {
           on-click = "pavucontrol";
         };
         tray = {
+          show-passive-items = true;
           spacing = 10;
         };
       }
@@ -119,6 +120,9 @@ in {
       @define-color color-fg ${colors.base06};
 
       * {
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
         font-family: ${fonts.monospace.name};
       }
 
@@ -127,11 +131,13 @@ in {
         color: @color-fg;
       }
 
-      button {
-        /* Use box-shadow instead of border so the text isn't offset */
-        box-shadow: inset 0 -3px transparent;
-        border: none;
-        border-radius: 0;
+      tooltip {
+        background: @color-bg;
+        border: solid 1px @color-bg3;
+      }
+
+      #workspaces {
+        background-color: @color-bg;
       }
 
       #workspaces button {
@@ -140,23 +146,18 @@ in {
         border-radius: 0;
         border: none;
         font-weight: bold;
-        background: transparent;
+        min-width: 20px;
       }
 
-      #workspaces button.active {
+      #workspaces button.active,
+      #workspaces button.focused,
+      #workspaces button:hover {
         background-color: @color-fg;
         color: @color-bg;
       }
 
-      #workspaces button:hover {
-        border: none;
-        background: ${colors.base06};
-        color: @color-bg;
-        box-shadow: inherit;
-        text-shadow: inherit;
-      }
-
       #workspaces button.urgent {
+        color: @color-bg;
         background-color: ${colors.base08};
       }
 
@@ -166,16 +167,20 @@ in {
       }
 
       #cpu,
+      #custom-notification,
       #memory,
       #network,
       #tray
       #volume {
-        padding: 0 8px;
+        padding: 0 4px;
       }
 
-      #tray {
-        margin-right: 4px;
+      #custom-notification {
+        margin-right: 12px;
       }
     '';
   };
+
+  # Make our own waybar styling
+  stylix.targets.waybar.enable = false;
 }

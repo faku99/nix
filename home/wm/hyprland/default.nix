@@ -19,8 +19,7 @@
     else {};
 
   inherit (config.lib.stylix) colors;
-
-  rgb = color: "rgb(${color})";
+  # rgb = color: "rgb(${color})";
 in {
   imports = [
     ../../programs/hyprlock
@@ -40,6 +39,7 @@ in {
     loupe # Image viewer
     nemo # File explorer
     networkmanagerapplet
+    swaynotificationcenter
     wl-clipboard # Clipboard support
   ];
 
@@ -116,7 +116,7 @@ in {
 
         shadow = {
           enabled = true;
-          color = rgb colors.base00;
+          # color = rgb colors.base00;
         };
       };
 
@@ -141,13 +141,14 @@ in {
       exec-once = [
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "hyprpaper"
+        "swaync"
       ];
 
       general = {
         allow_tearing = false;
         border_size = 2;
-        "col.active_border" = rgb colors.base05;
-        "col.inactive_border" = rgb colors.base01;
+        # "col.active_border" = rgb colors.base05;
+        # "col.inactive_border" = rgb colors.base01;
         gaps_in = 3;
         gaps_out = 5;
         layout = "dwindle";

@@ -4,13 +4,15 @@
   inputs,
   outputs,
   ...
-}: let
+}:
+let
   username = "lelisei";
   homeDirectory = "/home/${username}";
   configHome = "${homeDirectory}/.config";
 
   flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-in {
+in
+{
   nix = {
     package = lib.mkDefault pkgs.nix;
     settings = {
@@ -21,7 +23,7 @@ in {
       ];
       flake-registry = ""; # Disable global flake registry
     };
-    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
+    registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
   };
 
   programs = {
@@ -32,7 +34,11 @@ in {
   services = {
     gnome-keyring = {
       enable = false;
-      components = ["pkcs11" "secrets" "ssh"];
+      components = [
+        "pkcs11"
+        "secrets"
+        "ssh"
+      ];
     };
     safeeyes.enable = true;
   };
@@ -49,11 +55,10 @@ in {
 
     # Shared programs
     ../programs/alacritty
-    ../programs/firefox
     ../programs/git
     ../programs/gpg
+    ../programs/neovim
     ../programs/rbw
-    ../programs/vscodium
     ../programs/zsh
 
     # Shared services
@@ -74,17 +79,27 @@ in {
 
     # Shared packages that don't need specific configuration
     packages = with pkgs; [
+      atool
+      unzip
+
       git-crypt
       eza # Better 'ls'
       fd # Better 'find'
+      ripgrep
 
       # Nix-related
-      alejandra # Nix formatter
+      # alejandra # Nix formatter
       nixd # Nix LSP
+      nil
+      nixfmt-rfc-style
 
       # Shitty webapps mandatory for work
       prospect-mail
       teams-for-linux
+
+      clang-tools
+
+      wine
     ];
 
     stateVersion = "24.11";
@@ -95,4 +110,8 @@ in {
 
   # Disable notifications about home-manager news
   news.display = "silent";
+
+  userConfig = {
+    global.enable = true;
+  };
 }
