@@ -51,17 +51,19 @@ in
             "https://confluence.tandemdiabetes.com:8443"
             "https://jira.tandemdiabetes.com:8443"
             "https://tandem.okta.com"
+
+            # Personal stuff
+            "https://elisei.ch"
           ];
         };
 
-        DisableFirefoxAccounts = true;
         DisableFirefoxStudies = true;
         DisablePocket = true;
         DisableSetDesktopBackground = true;
         DisableTelemetry = true;
 
         NoDefaultBookmarks = true;
-        OfferToSaveLogins = true;
+        OfferToSaveLogins = false;
         PasswordManagerEnabled = false;
 
         UserMessaging = {
@@ -86,16 +88,6 @@ in
             icon = "briefcase";
           };
         };
-
-        extensions.packages = with pkgs.inputs.firefox-addons; [
-          ublock-origin
-
-          multi-account-containers
-          skip-redirect
-          istilldontcareaboutcookies
-
-          tridactyl
-        ];
 
         search = {
           default = "SearXNG";
@@ -132,6 +124,8 @@ in
           "privacy.clearOnShutdown.cookies" = false;
           "privacy.clearOnShutdown.downloads" = false;
           "privacy.clearOnShutdown.history" = false;
+
+          "identity.sync.tokenserver.uri" = "https://mozilla-sync.elisei.ch/1.0/sync/1.5";
         };
       };
     };
