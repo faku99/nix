@@ -3,11 +3,13 @@
   outputs,
   pkgs,
   ...
-}: let
+}:
+let
   isED25519 = k: k.type == "ed25519";
   getKeyPath = k: k.path;
   sshKeys = builtins.filter isED25519 config.services.openssh.hostKeys;
-in {
+in
+{
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -39,8 +41,13 @@ in {
   users.users.lelisei = {
     isNormalUser = true;
     description = "Lucas";
-    extraGroups = ["docker" "sudo" "networkmanager" "wheel"];
-    packages = [];
+    extraGroups = [
+      "docker"
+      "sudo"
+      "networkmanager"
+      "wheel"
+    ];
+    packages = [ ];
     shell = pkgs.zsh;
   };
 
@@ -77,7 +84,10 @@ in {
 
   nix = {
     settings = {
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       auto-optimise-store = true;
     };
     gc = {
