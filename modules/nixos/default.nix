@@ -2,7 +2,9 @@
   imports = [
     ./global.nix
 
-    ./programs
+    ./networking
     ./system
+    ./theme
+    ./users
   ];
 }

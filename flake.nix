@@ -4,12 +4,27 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     systems.url = "github:nix-systems/default-linux";
-    # flake-utils.url = "github:numtide/flake-utils";
 
+    # Shared
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    impermanence = {
+      url = "github:nix-community/impermanence";
+    };
     nurpkgs = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # NixOS
+
+    # HomeManager
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
@@ -18,11 +33,6 @@
 
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    sops-nix = {
-      url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -58,17 +68,52 @@
     let
       inherit (self) outputs;
       lib = nixpkgs.lib // home-manager.lib;
-      forEachSystem = f: lib.genAttrs (import systems) (system: f pkgsFor.${system});
-      pkgsFor = lib.genAttrs (import systems) (
-        system:
-        import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        }
-      );
+
+      forAllSystems = lib.genAttrs (import systems);
+
+      inputPkgsFor =
+        pkgs:
+        forAllSystems (
+          system:
+          import pkgs {
+            inherit system;
+            config.allowUnfree = true;
+          }
+        );
+
+      # Nixpkgs for each system
+      nixpkgsFor = inputPkgsFor nixpkgs;
+
+      # specialArgs shared between nixosConfig and homeConfig
+      specialArgs = forAllSystems (system: {
+        inherit inputs outputs;
+        self = self;
+        pkgs-stable = (inputPkgsFor inputs.nixpkgs-stable).${system};
+      });
+
+      nixosConfig =
+        { modules, system }:
+        lib.nixosSystem {
+          pkgs = nixpkgsFor.${system};
+          specialArgs = specialArgs.${system};
+
+          modules = modules ++ [
+            outputs.nixosModules
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                sharedModules = [ outputs.homeManagerModules ];
+                extraSpecialArgs = specialArgs.${system};
+              };
+            }
+          ];
+        };
     in
     {
-      inherit lib sops-nix stylix;
+      inherit lib; # sops-nix stylix;
+
+      nixosModules = import ./modules/nixos;
+      homeManagerModules = import ./modules/home-manager;
 
       home-manager = {
         useGlobalPkgs = true;
@@ -80,7 +125,8 @@
 
       overlays = import ./overlays { inherit inputs outputs; };
 
-      packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
+      # packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
+      packages = forAllSystems (system: import ./pkgs { pkgs = nixpkgsFor.${system}; });
 
       nixosConfigurations = {
         # Home desktop
@@ -98,6 +144,11 @@
             inherit inputs outputs;
           };
         };
+
+        pluto = nixosConfig {
+          modules = [ ./hosts/pluto ];
+          system = "aarch64-linux";
+        };
       };
 
       homeConfigurations = {
@@ -107,7 +158,7 @@
             ./home/hosts/home
             ./modules/home-manager
           ];
-          pkgs = pkgsFor.x86_64-linux;
+          pkgs = nixpkgsFor.x86_64-linux;
           extraSpecialArgs = {
             inherit inputs outputs;
           };
@@ -119,7 +170,7 @@
             ./home/hosts/work
             ./modules/home-manager
           ];
-          pkgs = pkgsFor.x86_64-linux;
+          pkgs = nixpkgsFor.x86_64-linux;
           extraSpecialArgs = {
             inherit inputs outputs;
           };
