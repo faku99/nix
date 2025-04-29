@@ -33,7 +33,7 @@ in
       profiles.default = {
         extensions = with pkgs.vscode-marketplace; [
           aaron-bond.better-comments
-          asvetliakov.vscode-neovim
+          cschlosser.doxdocgen
           eamodio.gitlens
           esbenp.prettier-vscode
           jnoortheen.nix-ide
