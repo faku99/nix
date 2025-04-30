@@ -29,5 +29,12 @@
         vscode.enable = true;
       };
     };
+
+    shell = {
+      zsh = {
+        enable = true;
+        defaultShell = true;
+      };
+    };
   };
 }

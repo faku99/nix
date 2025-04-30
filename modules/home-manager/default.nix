@@ -3,6 +3,7 @@
     ./global.nix
 
     ./programs
+    ./shell
     ./system
   ];
 }

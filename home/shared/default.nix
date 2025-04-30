@@ -58,7 +58,6 @@ in
     ../programs/git
     ../programs/gpg
     ../programs/rbw
-    ../programs/zsh
 
     # Shared services
     ../services/dunst
