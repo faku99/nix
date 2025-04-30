@@ -223,7 +223,7 @@
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
-          "nurpkgs",
+          "nur",
           "nixpkgs"
         ]
       },
@@ -298,10 +298,7 @@
     },
     "flake-utils_3": {
       "inputs": {
-        "systems": [
-          "stylix",
-          "systems"
-        ]
+        "systems": "systems_2"
       },
       "locked": {
         "lastModified": 1731533236,
@@ -319,7 +316,10 @@
     },
     "flake-utils_4": {
       "inputs": {
-        "systems": "systems_4"
+        "systems": [
+          "stylix",
+          "systems"
+        ]
       },
       "locked": {
         "lastModified": 1731533236,
@@ -512,6 +512,27 @@
         "type": "github"
       }
     },
+    "nix-vscode-extensions": {
+      "inputs": {
+        "flake-utils": "flake-utils_3",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1745978191,
+        "narHash": "sha256-DC9GhExyUbJKbBMgs+YA4fuUzOqUPuA6pR0mDI3MELk=",
+        "owner": "nix-community",
+        "repo": "nix-vscode-extensions",
+        "rev": "72da67da783674ef82032f4d5bcf686a7ccd8776",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nix-vscode-extensions",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1742800061,
@@ -559,23 +580,29 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nur": {
+      "inputs": {
+        "flake-parts": "flake-parts",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "treefmt-nix": "treefmt-nix"
+      },
       "locked": {
-        "lastModified": 1740547748,
-        "narHash": "sha256-Ly2fBL1LscV+KyCqPRufUBuiw+zmWrlJzpWOWbahplg=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "3a05eebede89661660945da1f151959900903b6a",
+        "lastModified": 1746008811,
+        "narHash": "sha256-R6AVrTpAbezoI60kfg2IB3JvPfxENB+CDQ3OX9OjVH8=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "20b1f8b216d0ffbabb99e8f1c9625844bdaf3e86",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "3a05eebede89661660945da1f151959900903b6a",
+        "owner": "nix-community",
+        "repo": "NUR",
         "type": "github"
       }
     },
-    "nur": {
+    "nur_2": {
       "inputs": {
         "flake-parts": "flake-parts_2",
         "nixpkgs": [
@@ -598,28 +625,6 @@
         "type": "github"
       }
     },
-    "nurpkgs": {
-      "inputs": {
-        "flake-parts": "flake-parts",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "treefmt-nix": "treefmt-nix"
-      },
-      "locked": {
-        "lastModified": 1741181581,
-        "narHash": "sha256-rMMCOt6u1b9DaGOT/xrl6naKhzHt9HhJpAKLlWv7D3g=",
-        "owner": "nix-community",
-        "repo": "NUR",
-        "rev": "2c7ace8de4e4054a245e3133fcb54cc4d7ab214c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "NUR",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "claude-desktop": "claude-desktop",
@@ -629,12 +634,12 @@
         "hyprpanel": "hyprpanel",
         "impermanence": "impermanence",
         "nix-colors": "nix-colors",
+        "nix-vscode-extensions": "nix-vscode-extensions",
         "nixpkgs": "nixpkgs_2",
-        "nurpkgs": "nurpkgs",
+        "nur": "nur",
         "sops-nix": "sops-nix",
         "stylix": "stylix",
-        "systems": "systems_3",
-        "vscode-extensions": "vscode-extensions"
+        "systems": "systems_4"
       }
     },
     "sops-nix": {
@@ -665,15 +670,15 @@
         "base16-vim": "base16-vim",
         "firefox-gnome-theme": "firefox-gnome-theme",
         "flake-compat": "flake-compat",
-        "flake-utils": "flake-utils_3",
+        "flake-utils": "flake-utils_4",
         "git-hooks": "git-hooks",
         "gnome-shell": "gnome-shell",
         "home-manager": "home-manager_2",
         "nixpkgs": [
           "nixpkgs"
         ],
-        "nur": "nur",
-        "systems": "systems_2",
+        "nur": "nur_2",
+        "systems": "systems_3",
         "tinted-foot": "tinted-foot",
         "tinted-kitty": "tinted-kitty",
         "tinted-schemes": "tinted-schemes",
@@ -726,21 +731,6 @@
     },
     "systems_3": {
       "locked": {
-        "lastModified": 1689347949,
-        "narHash": "sha256-12tWmuL2zgBgZkdoB6qXZsgJEH9LR3oUgpaQq2RbI80=",
-        "owner": "nix-systems",
-        "repo": "default-linux",
-        "rev": "31732fcf5e8fea42e59c2488ad31a0e651500f68",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default-linux",
-        "type": "github"
-      }
-    },
-    "systems_4": {
-      "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
         "owner": "nix-systems",
@@ -751,6 +741,21 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_4": {
+      "locked": {
+        "lastModified": 1689347949,
+        "narHash": "sha256-12tWmuL2zgBgZkdoB6qXZsgJEH9LR3oUgpaQq2RbI80=",
+        "owner": "nix-systems",
+        "repo": "default-linux",
+        "rev": "31732fcf5e8fea42e59c2488ad31a0e651500f68",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default-linux",
         "type": "github"
       }
     },
@@ -839,7 +844,7 @@
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
-          "nurpkgs",
+          "nur",
           "nixpkgs"
         ]
       },
@@ -876,25 +881,6 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "vscode-extensions": {
-      "inputs": {
-        "flake-utils": "flake-utils_4",
-        "nixpkgs": "nixpkgs_3"
-      },
-      "locked": {
-        "lastModified": 1741179910,
-        "narHash": "sha256-HicSyZC++JYqarYrfFEL5tgSYR05UFBzFFY6hPljcFU=",
-        "owner": "nix-community",
-        "repo": "nix-vscode-extensions",
-        "rev": "9564b2a7d2bea90bb42b48d2fd0c5371cbe03e26",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nix-vscode-extensions",
         "type": "github"
       }
     }

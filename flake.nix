@@ -13,7 +13,7 @@
     impermanence = {
       url = "github:nix-community/impermanence";
     };
-    nurpkgs = {
+    nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -48,7 +48,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     claude-desktop = {
       url = "github:k3d3/claude-desktop-linux-flake";

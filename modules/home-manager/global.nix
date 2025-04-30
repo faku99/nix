@@ -1,6 +1,8 @@
 {
   config,
+  inputs,
   lib,
+  outputs,
   ...
 }:
 let
@@ -16,6 +18,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # TODO 
+    nixpkgs = {
+      config.allowUnfree = true;
+      overlays = [ inputs.nur.overlays.default ] ++ builtins.attrValues outputs.overlays;
+    };
   };
 }
