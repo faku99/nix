@@ -63,9 +63,7 @@
       self,
       nixpkgs,
       home-manager,
-      sops-nix,
       systems,
-      stylix,
       ...
     }:
     let
@@ -113,7 +111,7 @@
         };
     in
     {
-      inherit lib; # sops-nix stylix;
+      inherit lib;
 
       nixosModules = import ./modules/nixos;
       homeManagerModules = import ./modules/home-manager;
@@ -128,7 +126,6 @@
 
       overlays = import ./overlays { inherit inputs outputs; };
 
-      # packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
       packages = forAllSystems (system: import ./pkgs { pkgs = nixpkgsFor.${system}; });
 
       nixosConfigurations = {

@@ -10,7 +10,6 @@ let
     mkDefault
     mkEnableOption
     mkIf
-    mkMerge
     mkOption
     types
     ;
@@ -18,8 +17,6 @@ let
   cfg = config.nixosConfig.users.lelisei;
 
   username = "lelisei";
-
-  impermanence = config.nixosConfig.system.impermanence;
 
   ifGroupExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in
@@ -39,23 +36,19 @@ in
 
     programs.zsh.enable = true;
 
-    users.users.${username} = mkMerge [
-      {
-        home = mkDefault "/home/${username}";
-        isNormalUser = true;
-        shell = pkgs.zsh;
+    users.users.${username} = {
+      home = mkDefault "/home/${username}";
+      isNormalUser = true;
+      shell = pkgs.zsh;
 
-        extraGroups = ifGroupExist [
-          "docker"
-          "networkmanager"
-          "wheel"
-        ];
-      }
+      extraGroups = ifGroupExist [
+        "docker"
+        "networkmanager"
+        "wheel"
+      ];
 
-      (mkIf impermanence.enable {
-        hashedPasswordFile = "${impermanence.persist_dir}/passwords/${username}";
-      })
-    ];
+      initialHashedPassword = "$y$j9T$Z7neCacyHo.DRe/YK35HL0$HbdjL2Sy1l.yV8Kzoz0mW0Idx0EyzBU7EqG8BAZ3Zj2";
+    };
 
     home-manager.users = mkIf cfg.homeManager {
       ${username} = import "${self}/users/${username}/${config.networking.hostName}";

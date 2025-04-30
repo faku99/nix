@@ -1,14 +1,8 @@
 {
-  config,
   outputs,
   pkgs,
   ...
 }:
-let
-  isED25519 = k: k.type == "ed25519";
-  getKeyPath = k: k.path;
-  sshKeys = builtins.filter isED25519 config.services.openssh.hostKeys;
-in
 {
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -67,14 +61,7 @@ in
 
     # Shared services
     ../services/openssh
-
-    # sops
-    outputs.sops-nix.nixosModules.sops
   ];
-
-  sops = {
-    age.sshKeyPaths = map getKeyPath sshKeys;
-  };
 
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
