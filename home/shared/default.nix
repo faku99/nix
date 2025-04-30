@@ -57,7 +57,6 @@ in
     ../programs/alacritty
     ../programs/git
     ../programs/gpg
-    ../programs/neovim
     ../programs/rbw
     ../programs/zsh
 

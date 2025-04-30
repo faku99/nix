@@ -22,9 +22,10 @@
       };
 
       editor = {
-        enable = true;
-        executable = pkgs.nano;
-
+        neovim = {
+          enable = true;
+          defaultEditor = true;
+        };
         vscode.enable = true;
       };
     };

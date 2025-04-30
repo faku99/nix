@@ -8,6 +8,7 @@ let
 in
 {
   imports = [
+    ./neovim
     ./vscode
   ];
 
