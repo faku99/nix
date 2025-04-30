@@ -145,6 +145,11 @@
           };
         };
 
+        jupiter = nixosConfig {
+          modules = [ ./hosts/jupiter ];
+          system = "x86_64-linux";
+        };
+
         pluto = nixosConfig {
           modules = [ ./hosts/pluto ];
           system = "aarch64-linux";
