@@ -154,6 +154,11 @@
           modules = [ ./hosts/pluto ];
           system = "aarch64-linux";
         };
+
+        saturn = nixosConfig {
+          modules = [ ./hosts/saturn ];
+          system = "x86_64-linux";
+        };
       };
 
       homeConfigurations = {
