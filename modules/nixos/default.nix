@@ -6,5 +6,6 @@
     ./system
     ./theme
     ./users
+    ./window-manager
   ];
 }

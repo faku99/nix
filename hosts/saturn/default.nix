@@ -40,6 +40,10 @@
       # tailscale.enable = true;
     };
 
+    windowManager = {
+      hyprland.enable = true;
+    };
+
     # virt = {
     # docker.enable = true;
     # };
