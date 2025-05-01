@@ -13,6 +13,10 @@
   userConfig = {
     global.enable = true;
 
+    desktop = {
+      wayland.enable = true;
+    };
+
     programs = {
       browser = {
         librewolf = {

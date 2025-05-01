@@ -2,25 +2,29 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   nvidiaEnv =
-    if config.nvidiaSupport
-    then [
-      "LIBVA_DRIVER_NAME,nvidia"
-      "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-    ]
-    else [];
+    if config.nvidiaSupport then
+      [
+        "LIBVA_DRIVER_NAME,nvidia"
+        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+      ]
+    else
+      [ ];
 
   nvidiaCursor =
-    if config.nvidiaSupport
-    then {
-      no_hardware_cursors = true;
-    }
-    else {};
+    if config.nvidiaSupport then
+      {
+        no_hardware_cursors = true;
+      }
+    else
+      { };
 
   inherit (config.lib.stylix) colors;
-  # rgb = color: "rgb(${color})";
-in {
+in
+# rgb = color: "rgb(${color})";
+{
   imports = [
     ../../programs/hyprlock
     ../../programs/rofi
@@ -61,16 +65,19 @@ in {
   };
 
   xdg.portal = {
-    extraPortals = [pkgs.xdg-desktop-portal-wlr];
+    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
     config.hyprland = {
-      default = ["wlr" "gtk"];
+      default = [
+        "wlr"
+        "gtk"
+      ];
     };
   };
 
   wayland.windowManager.hyprland = {
     enable = true;
     extraConfig = builtins.readFile ./hyprland.conf;
-    plugins = [];
+    plugins = [ ];
     settings = {
       # Custom definitions
       "$menu" = "rofi";
@@ -102,7 +109,7 @@ in {
         "$mod SHIFT, S, exec, wlogout -b 1"
       ];
 
-      cursor = {} // nvidiaCursor;
+      cursor = { } // nvidiaCursor;
 
       decoration = {
         rounding = 2;
@@ -125,14 +132,12 @@ in {
         preserve_split = true;
       };
 
-      env =
-        [
-          "XDG_DATA_DIRS,$HOME/.nix-profile/share"
-          "XDG_SESSION_TYPE,wayland"
-          "XCURSOR_SIZE,24"
-          "HYPRCURSOR_SIZE,24"
-        ]
-        ++ nvidiaEnv;
+      env = [
+        "XDG_DATA_DIRS,$HOME/.nix-profile/share"
+        "XDG_SESSION_TYPE,wayland"
+        "XCURSOR_SIZE,24"
+        "HYPRCURSOR_SIZE,24"
+      ] ++ nvidiaEnv;
 
       exec = [
         "hyprctl setcursor ${config.gtk.cursorTheme.name} ${toString config.gtk.cursorTheme.size}"
@@ -161,16 +166,18 @@ in {
       };
 
       monitor = map (
-        m: "${m.name},${
-          if m.enabled
-          then "${toString m.width}x${toString m.height}@${toString m.refreshRate},${m.position},1"
-          else "disable"
+        m:
+        "${m.name},${
+          if m.enabled then
+            "${toString m.width}x${toString m.height}@${toString m.refreshRate},${m.position},1"
+          else
+            "disable"
         }"
       ) (config.monitors);
     };
     systemd = {
       enable = true;
-      variables = ["--all"];
+      variables = [ "--all" ];
     };
     xwayland.enable = true;
 
