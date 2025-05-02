@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, self, ... }:
 let
   height = 1440;
   width = 2560;
@@ -55,6 +55,15 @@ in
 
     windowManager = {
       hyprland.enable = true;
+    };
+
+    theme = {
+      enable = true;
+      wallpaper.generate = {
+        enable = true;
+        inputSVG = "${self}/modules/nixos/theme/kcorp.svg";
+        inherit height width;
+      };
     };
 
     # virt = {
