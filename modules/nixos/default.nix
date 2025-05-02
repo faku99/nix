@@ -2,11 +2,10 @@
   imports = [
     ./global.nix
 
-    ./monitors
+    ./desktop
     ./networking
     ./system
     ./theme
     ./users
-    ./window-manager
   ];
 }

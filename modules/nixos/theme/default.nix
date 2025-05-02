@@ -15,8 +15,6 @@ in
   };
 
   imports = [
-    ./wallpaper.nix
-
     inputs.stylix.nixosModules.stylix
   ];
 
@@ -24,7 +22,7 @@ in
     stylix = {
       enable = true;
 
-      image = cfg.wallpaper.path;
+      image = config.nixosConfig.desktop.wallpaper.path;
       base16Scheme = ./gruvbox-dark-modded.yaml;
       polarity = "dark";
 

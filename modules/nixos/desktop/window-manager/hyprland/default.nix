@@ -5,10 +5,10 @@
 }:
 let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.nixosConfig.windowManager.hyprland;
+  cfg = config.nixosConfig.desktop.windowManager.hyprland;
 in
 {
-  options.nixosConfig.windowManager.hyprland = {
+  options.nixosConfig.desktop.windowManager.hyprland = {
     enable = mkEnableOption "hyprland";
   };
 

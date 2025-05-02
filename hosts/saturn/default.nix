@@ -33,19 +33,29 @@ in
 
     users.lelisei.enable = true;
 
+    desktop = {
+      monitors = [
+        {
+          inherit height width;
+          name = "DP-3";
+          refreshRate = 144;
+          primary = true;
+        }
+      ];
+      wallpaper.generate = {
+        enable = true;
+        inputSVG = "${self}/modules/nixos/theme/kcorp.svg";
+        inherit height width;
+      };
+      windowManager = {
+        hyprland.enable = true;
+      };
+    };
+
     system = {
       # sops.enable = true;
       # sudo.enable = true;
     };
-
-    monitors = [
-      {
-        inherit height width;
-        name = "DP-3";
-        refreshRate = 144;
-        primary = true;
-      }
-    ];
 
     networking = {
       # headscale.enable = true;
@@ -53,17 +63,8 @@ in
       # tailscale.enable = true;
     };
 
-    windowManager = {
-      hyprland.enable = true;
-    };
-
     theme = {
       enable = true;
-      wallpaper.generate = {
-        enable = true;
-        inputSVG = "${self}/modules/nixos/theme/kcorp.svg";
-        inherit height width;
-      };
     };
 
     # virt = {

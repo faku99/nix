@@ -5,10 +5,10 @@
 }:
 let
   inherit (lib) mkIf mkOption types;
-  cfg = config.nixosConfig.monitors;
+  cfg = config.nixosConfig.desktop.monitors;
 in
 {
-  options.nixosConfig.monitors = mkOption {
+  options.nixosConfig.desktop.monitors = mkOption {
     type = types.listOf (
       types.submodule {
         options = {

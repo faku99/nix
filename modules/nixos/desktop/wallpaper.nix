@@ -11,10 +11,10 @@ let
     mkOption
     types
     ;
-  cfg = config.nixosConfig.theme.wallpaper;
+  cfg = config.nixosConfig.desktop.wallpaper;
 in
 {
-  options.nixosConfig.theme.wallpaper = {
+  options.nixosConfig.desktop.wallpaper = {
     generate = {
       enable = mkEnableOption "Generate wallpaper from SVG file";
       inputSVG = mkOption {

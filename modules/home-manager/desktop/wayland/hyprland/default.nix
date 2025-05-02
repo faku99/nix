@@ -181,7 +181,7 @@ in
             else
               "disable"
           }"
-        ) (osConfig.nixosConfig.monitors);
+        ) (osConfig.nixosConfig.desktop.monitors);
       };
       systemd = {
         enable = true;
