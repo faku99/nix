@@ -11,6 +11,7 @@ in
 {
   imports = [
     ./hyprland
+    ./waybar
   ];
 
   options.userConfig.desktop.wayland = {
@@ -21,6 +22,7 @@ in
     userConfig.desktop.wayland = {
       # Enable wayland-specific configuration
       hyprland.enable = mkDefault true;
+      waybar.enable = mkDefault true;
     };
   };
 }
