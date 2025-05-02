@@ -32,6 +32,13 @@
         };
         vscode.enable = true;
       };
+
+      terminal = {
+        alacritty = {
+          enable = true;
+          defaultTerminal = true;
+        };
+      };
     };
 
     shell = {
