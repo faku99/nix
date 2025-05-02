@@ -173,15 +173,15 @@ in
         };
 
         # TODO: Handle monitors in system config?
-        # monitor = map (
-        #   m:
-        #   "${m.name},${
-        #     if m.enabled then
-        #       "${toString m.width}x${toString m.height}@${toString m.refreshRate},${m.position},1"
-        #     else
-        #       "disable"
-        #   }"
-        # ) (config.monitors);
+        monitor = map (
+          m:
+          "${m.name},${
+            if m.enabled then
+              "${toString m.width}x${toString m.height}@${toString m.refreshRate},${m.position},1"
+            else
+              "disable"
+          }"
+        ) (osConfig.nixosConfig.monitors);
       };
       systemd = {
         enable = true;

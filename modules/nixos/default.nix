@@ -2,6 +2,7 @@
   imports = [
     ./global.nix
 
+    ./monitors
     ./networking
     ./system
     ./theme

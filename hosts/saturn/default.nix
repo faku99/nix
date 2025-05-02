@@ -1,4 +1,8 @@
 { lib, ... }:
+let
+  height = 1440;
+  width = 2560;
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -33,6 +37,15 @@
       # sops.enable = true;
       # sudo.enable = true;
     };
+
+    monitors = [
+      {
+        inherit height width;
+        name = "DP-3";
+        refreshRate = 144;
+        primary = true;
+      }
+    ];
 
     networking = {
       # headscale.enable = true;
