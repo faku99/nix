@@ -62,10 +62,12 @@ in
             "asvetliakov.vscode-neovim" = 1;
           };
 
-          # Files associations
+          # Files settings
           "files.associations" = {
             "*.h" = "c";
           };
+          "files.insertFinalNewline" = true;
+          "files.trimTrailingWhitespace" = true;
 
           # Window settings
           "window.menuBarVisibility" = "toggle";
@@ -98,6 +100,11 @@ in
           "[yaml]" = {
             "editor.tabSize" = 2;
           };
+
+          # llvm-vs-code-extensions.vscode-clangd
+          "clangd.arguments" = [
+            "--header-insertion=never"
+          ];
 
           # jnoortheen.nix-ide
           "nix.enableLanguageServer" = true;
