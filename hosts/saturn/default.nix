@@ -28,6 +28,12 @@ in
     };
   };
 
+  # Auto-log at home
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "lelisei";
+  };
+
   nixosConfig = {
     global.enable = true;
 
