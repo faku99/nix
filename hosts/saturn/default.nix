@@ -63,10 +63,6 @@ in
       # tailscale.enable = true;
     };
 
-    theme = {
-      enable = true;
-    };
-
     # virt = {
     # docker.enable = true;
     # };
