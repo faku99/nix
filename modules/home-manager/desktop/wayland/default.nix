@@ -26,5 +26,16 @@ in
       rofi.enable = mkDefault true;
       waybar.enable = mkDefault true;
     };
+
+    home.packages = with pkgs; [
+      flameshot # Screenshot program
+      grim # Screenshots
+      libnotify # Notifications
+      loupe # Image viewer
+      nemo # File explorer
+      networkmanagerapplet
+      swaynotificationcenter
+      wl-clipboard # Clipboard support
+    ];
   };
 }

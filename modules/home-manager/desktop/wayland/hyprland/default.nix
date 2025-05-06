@@ -28,28 +28,6 @@ let
       { };
 in
 {
-  # imports = [
-  #   ../../programs/hyprlock
-  #   ../../programs/rofi
-  #   ../../programs/waybar
-  #   ../../programs/wlogout
-
-  #   ../../services/hyprpaper
-
-  #   ../../shared
-  # ];
-
-  # home.packages = with pkgs; [
-  #   flameshot # Screenshot program
-  #   grim # Screenshots
-  #   libnotify # Notifications
-  #   loupe # Image viewer
-  #   nemo # File explorer
-  #   networkmanagerapplet
-  #   swaynotificationcenter
-  #   wl-clipboard # Clipboard support
-  # ];
-
   options.userConfig.desktop.wayland.hyprland = {
     enable = mkEnableOption "hyprland";
   };
@@ -172,7 +150,6 @@ in
           force_default_wallpaper = 1;
         };
 
-        # TODO: Handle monitors in system config?
         monitor = map (
           m:
           "${m.name},${
