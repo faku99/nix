@@ -31,6 +31,7 @@
 
       sh-utils = {
         eza.enable = true;
+        nix-helper.enable = true;
       };
 
       terminal = {
