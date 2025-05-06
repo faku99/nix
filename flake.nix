@@ -23,38 +23,26 @@
     };
 
     # NixOS
-
-    # HomeManager
-
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    hyprpanel = {
-      url = "github:jas-singhfsu/hyprpanel";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-colors.url = "github:misterio77/nix-colors";
-
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # HomeManager
+    claude-desktop = {
+      url = "github:k3d3/claude-desktop-linux-flake";
+    };
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    claude-desktop = {
-      url = "github:k3d3/claude-desktop-linux-flake";
     };
   };
 
@@ -116,35 +104,11 @@
       nixosModules = import ./modules/nixos;
       homeManagerModules = import ./modules/home-manager;
 
-      home-manager = {
-        useGlobalPkgs = true;
-        extraSpecialArgs = {
-          inherit nixpkgs;
-        };
-        backupFileExtension = "hm-bak";
-      };
-
       overlays = import ./overlays { inherit inputs outputs; };
 
       packages = forAllSystems (system: import ./pkgs { pkgs = nixpkgsFor.${system}; });
 
       nixosConfigurations = {
-        # Home desktop
-        home = lib.nixosSystem {
-          modules = [ ./system/hosts/home ];
-          specialArgs = {
-            inherit inputs outputs;
-          };
-        };
-
-        # Work desktop
-        work = lib.nixosSystem {
-          modules = [ ./system/hosts/work ];
-          specialArgs = {
-            inherit inputs outputs;
-          };
-        };
-
         jupiter = nixosConfig {
           modules = [ ./hosts/jupiter ];
           system = "x86_64-linux";
@@ -158,32 +122,6 @@
         saturn = nixosConfig {
           modules = [ ./hosts/saturn ];
           system = "x86_64-linux";
-        };
-      };
-
-      homeConfigurations = {
-        # Home desktop
-        home = lib.homeManagerConfiguration {
-          modules = [
-            ./home/hosts/home
-            ./modules/home-manager
-          ];
-          pkgs = nixpkgsFor.x86_64-linux;
-          extraSpecialArgs = {
-            inherit inputs outputs;
-          };
-        };
-
-        # Work desktop
-        work = lib.homeManagerConfiguration {
-          modules = [
-            ./home/hosts/work
-            ./modules/home-manager
-          ];
-          pkgs = nixpkgsFor.x86_64-linux;
-          extraSpecialArgs = {
-            inherit inputs outputs;
-          };
         };
       };
     };
