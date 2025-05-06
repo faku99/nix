@@ -24,6 +24,11 @@ in
       executable = "vscodium";
     };
 
+    home.packages = with pkgs; [
+      nixd
+      nixfmt-rfc-style
+    ];
+
     programs.vscode = {
       enable = true;
       package = pkgs.vscodium;
