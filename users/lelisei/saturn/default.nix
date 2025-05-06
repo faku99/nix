@@ -39,6 +39,10 @@
           defaultTerminal = true;
         };
       };
+
+      work = {
+        enable = true;
+      };
     };
 
     shell = {
