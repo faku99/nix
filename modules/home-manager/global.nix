@@ -32,5 +32,9 @@ in
       config.allowUnfree = true;
       overlays = [ inputs.nur.overlays.default ] ++ builtins.attrValues outputs.overlays;
     };
+
+    home.packages = with pkgs; [
+      fd
+    ];
   };
 }
