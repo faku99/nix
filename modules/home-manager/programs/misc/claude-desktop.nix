@@ -6,10 +6,10 @@
   ...
 }:
 let
-  cfg = config.userConfig.programs.claude-desktop;
+  cfg = config.userConfig.programs.misc.claude-desktop;
 in
 {
-  options.userConfig.programs.claude-desktop = {
+  options.userConfig.programs.misc.claude-desktop = {
     enable = lib.mkEnableOption "claude-desktop";
   };
 

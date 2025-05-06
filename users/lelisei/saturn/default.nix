@@ -29,6 +29,10 @@
         vscode.enable = true;
       };
 
+      misc = {
+        claude-desktop.enable = true;
+      };
+
       sh-utils = {
         eza.enable = true;
         nix-helper.enable = true;
