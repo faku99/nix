@@ -29,6 +29,10 @@
         vscode.enable = true;
       };
 
+      sh-utils = {
+        eza.enable = true;
+      };
+
       terminal = {
         alacritty = {
           enable = true;

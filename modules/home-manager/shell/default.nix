@@ -17,7 +17,7 @@ let
   mkEverythingDefault = attr: lib.attrsets.mapAttrs (name: value: mkDefault value) attr;
 
   coreUtilsAliases = mkEverythingDefault {
-    ls = "eza -lg --git";
+    ls = "ls -l --color=always --group-directories-first";
 
     cp = "cp -iv";
     mv = "mv -iv";
