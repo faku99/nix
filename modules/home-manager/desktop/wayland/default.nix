@@ -11,6 +11,7 @@ in
 {
   imports = [
     ./hyprland
+    ./rofi
     ./waybar
   ];
 
@@ -22,6 +23,7 @@ in
     userConfig.desktop.wayland = {
       # Enable wayland-specific configuration
       hyprland.enable = mkDefault true;
+      rofi.enable = mkDefault true;
       waybar.enable = mkDefault true;
     };
   };
