@@ -34,6 +34,9 @@ in
       };
     };
 
+    # Set timezone
+    time.timeZone = "Europe/Zurich";
+
     # Needed by home-manager
     programs.dconf.enable = true;
 
