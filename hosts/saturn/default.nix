@@ -15,6 +15,12 @@ in
   # Make sure the kernel uses the correct driver
   boot.initrd.kernelModules = [ "amdgpu" ];
 
+  # Disable USB power management
+  boot.kernelParams = [
+    "usbcore.autosuspend=-1"
+    "xhci_hcd.power_efficient=0"
+  ];
+
   boot.loader = {
     grub = {
       enable = true;

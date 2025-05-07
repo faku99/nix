@@ -1,5 +1,4 @@
 {
-  pkgs,
   ...
 }:
 {
@@ -19,6 +18,10 @@
           enable = true;
           defaultBrowser = true;
         };
+      };
+
+      dev = {
+        git.enable = true;
       };
 
       editor = {
