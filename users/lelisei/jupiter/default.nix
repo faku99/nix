@@ -70,6 +70,8 @@
           "tandem"
         ];
       };
+      xdg.enable = true;
+      xdgUserDirs.enable = true;
     };
   };
 }

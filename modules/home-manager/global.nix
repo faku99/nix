@@ -33,9 +33,20 @@ in
       overlays = [ inputs.nur.overlays.default ] ++ builtins.attrValues outputs.overlays;
     };
 
+    home.homeDirectory = mkDefault "/home/${config.home.username}";
     home.packages = with pkgs; [
       fd
       ripgrep
     ];
+
+    userConfig = {
+      programs.sh-utils.nix-helper.enable = true;
+      system = {
+        impermanence.directories = [
+          ".cache/nix"
+        ];
+        xdg.enable = true;
+      };
+    };
   };
 }
