@@ -21,6 +21,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    userConfig.system.impermanence = {
+      directories = [ ".librewolf/${config.programs.librewolf.profiles.${profileName}.path}" ];
+    };
+
     userConfig.programs.browser = lib.mkIf cfg.defaultBrowser {
       enable = true;
       executable = "librewolf";
@@ -96,7 +100,7 @@ in
           engines = {
             "SearXNG" = {
               description = "SearXNG - foobar.vip";
-              iconURL = "https://searx.foobar.vip/static/themes/simple/img/favicon.svg";
+              icon = "https://searx.foobar.vip/static/themes/simple/img/favicon.svg";
               urls = [
                 {
                   template = "https://searx.foobar.vip/?q={searchTerms}";
@@ -111,23 +115,24 @@ in
             };
           };
         };
+      };
 
-        settings = {
-          # Auto-enable extensions
-          "extensions.autoDisableScopes" = 0;
+      settings = {
+        # Auto-enable extensions
+        "extensions.autoDisableScopes" = 0;
 
-          # Restore previous session
-          "browser.startup.page" = 3;
-          # Homepage
-          "browser.startup.homepage" = "https://searx.foobar.vip/";
+        # Restore previous session
+        "browser.startup.page" = 3;
+        # Homepage
+        "browser.startup.homepage" = "https://searx.foobar.vip/";
 
-          # Clear-on-shutdown privacy
-          "privacy.clearOnShutdown.cookies" = false;
-          "privacy.clearOnShutdown.downloads" = false;
-          "privacy.clearOnShutdown.history" = false;
+        # Clear-on-shutdown privacy
+        "privacy.clearOnShutdown.cookies" = false;
+        "privacy.clearOnShutdown.downloads" = false;
+        "privacy.clearOnShutdown.history" = false;
 
-          "identity.sync.tokenserver.uri" = "https://mozilla-sync.elisei.ch/1.0/sync/1.5";
-        };
+        "identity.sync.tokenserver.uri" = "https://mozilla-sync.elisei.ch/1.0/sync/1.5";
+        "identity.fxaccounts.enabled" = true;
       };
     };
 
