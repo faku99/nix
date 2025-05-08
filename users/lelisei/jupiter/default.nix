@@ -25,6 +25,10 @@
         };
       };
 
+      dev = {
+        ssh.enable = true;
+      };
+
       editor = {
         neovim = {
           enable = true;
