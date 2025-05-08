@@ -50,7 +50,7 @@ in
     device = mkOption {
       type = types.str;
       default = "";
-      description = "The disk on which ephemeral btrfs will run.";
+      description = "The disk on which ephemeral btrfs will be installed.";
     };
   };
 
@@ -65,8 +65,8 @@ in
       systemd.enable = true;
       systemd.services.restore-root =
         let
-          # /dev/disk/by-partlabel/rootfs
-          root-device = "dev-disk-by\\x2dpartlabel-disk\\x2drootfs.device";
+          # /dev/disk/by-partlabel/disk-main-root
+          root-device = "dev-disk-by\\x2dpartlabel-disk\\x2dmain\\x2droot.device";
         in
         {
           description = "Rollback btrfs rootfs";
@@ -78,6 +78,64 @@ in
           serviceConfig.Type = "oneshot";
           script = wipeScript;
         };
+    };
+
+    disko.devices.disk.main = {
+      device = cfg.device;
+      type = "disk";
+
+      content = {
+        type = "gpt";
+        partitions = {
+          boot = {
+            size = "1M";
+            type = "EF02";
+          };
+
+          ESP = {
+            size = "512M";
+            type = "EF00";
+            content = {
+              type = "filesystem";
+              format = "vfat";
+              mountpoint = "/boot";
+              mountOptions = [ "umask=0077" ];
+            };
+          };
+
+          root = {
+            size = "100%";
+            content = {
+              type = "btrfs";
+              extraArgs = [ "-f" ]; # Override existing partition
+
+              subvolumes = {
+                "@" = {
+                  mountpoint = "/";
+                  mountOptions = [
+                    "compress=zstd"
+                    "noatime"
+                  ];
+                };
+                "@nix" = {
+                  mountpoint = "/nix";
+                  mountOptions = [
+                    "compress=zstd"
+                    "noatime"
+                  ];
+                };
+                "@persistent" = {
+                  mountpoint = "/persistent";
+                  mountOptions = [
+                    "compress=zstd"
+                    "noatime"
+                  ];
+                };
+              };
+            };
+          };
+        };
+      };
     };
   };
 }

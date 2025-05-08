@@ -47,21 +47,11 @@ in
 
   imports = [
     inputs.impermanence.nixosModules.impermanence
-    # ./btrfs.nix
+    ./btrfs.nix
   ];
 
   config = mkIf cfg.enable {
     fileSystems = {
-      "/" = {
-        device = "none";
-        fsType = "tmpfs";
-        neededForBoot = true;
-        options = [
-          "defaults"
-          "mode=755"
-        ];
-      };
-
       ${cfg.persist_dir}.neededForBoot = true;
     };
 
@@ -78,13 +68,13 @@ in
       hideMounts = true;
 
       directories = cfg.directories ++ [
-        "/etc/ssh"
-        "/nix"
+        # "/etc/ssh"
+        # "/nix"
         "/var/lib/nixos"
-        "/var/lib/private"
+        # "/var/lib/private"
         "/var/lib/systemd"
         "/var/log"
-        "/var/tmp"
+        # "/var/tmp"
       ];
 
       files = cfg.files ++ [ "/etc/machine-id" ];

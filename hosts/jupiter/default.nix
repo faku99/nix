@@ -1,8 +1,13 @@
 {
   config,
   lib,
+  self,
   ...
 }:
+let
+  height = 1080;
+  width = 3840;
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -52,9 +57,37 @@
 
     users.lelisei.enable = true;
 
+    desktop = {
+      monitors = [
+        {
+          inherit height width;
+          name = "DP-2";
+          refreshRate = 144;
+          primary = true;
+        }
+      ];
+      wallpaper.generate = {
+        enable = true;
+        inputSVG = "${self}/modules/nixos/theme/kcorp.svg";
+        inherit height width;
+      };
+      windowManager = {
+        hyprland.enable = true;
+      };
+    };
+
     system = {
-      # sops.enable = true;
-      # sudo.enable = true;
+      impermanence = {
+        enable = true;
+        btrfs = {
+          enable = true;
+          device = "/dev/sda";
+        };
+        users = [ "lelisei" ];
+
+        files = [ "/var/lib/preload/preload.state" ];
+        directories = [ "/var/lib/fprint" ];
+      };
     };
 
     networking = {
