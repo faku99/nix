@@ -24,7 +24,9 @@ in
       executable = "vscodium";
     };
 
+    # Packages often required by extensions
     home.packages = with pkgs; [
+      clang-tools
       nixd
       nixfmt-rfc-style
     ];
@@ -48,6 +50,9 @@ in
         ];
 
         userSettings = {
+          # Diff editor settings
+          "diffEditor.ignoreTrimWhitespace" = false;
+
           # Editor settings
           "editor.insertSpaces" = true;
           "editor.minimap.enabled" = false;
