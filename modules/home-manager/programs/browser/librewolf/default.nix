@@ -43,6 +43,7 @@ in
           Allow = [
             "https://github.com"
             "https://searx.foobar.vip"
+            "https://twitch.tv"
 
             # Work-related
             # TODO: Find a way to allow those only in work containers
