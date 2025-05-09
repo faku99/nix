@@ -23,6 +23,10 @@ in
       git
     ];
 
+    fonts.packages = with pkgs; [
+      font-awesome
+    ];
+
     nix = {
       # Disable channel since we use flakes
       channel.enable = false;
