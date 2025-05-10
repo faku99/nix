@@ -5,7 +5,6 @@
 
 {
   imports = [
-    ./disk-config.nix
     ./hardware-configuration.nix
   ];
 
@@ -34,8 +33,8 @@
 
       impermanence = {
         enable = true;
-        # btrfs.enable = true;
-        # btrfs.device = "/dev/mmcblk0";
+        btrfs.enable = true;
+        btrfs.device = "/dev/mmcblk0";
         users = [ "lelisei" ];
       };
     };

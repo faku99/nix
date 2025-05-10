@@ -12,5 +12,22 @@
 
   userConfig = {
     global.enable = true;
+
+    shell = {
+      zsh = {
+        enable = true;
+        defaultShell = true;
+      };
+    };
+
+    system = {
+      impermanence = {
+        enable = true;
+        directories = [
+          "nix"
+          "sources"
+        ];
+      };
+    };
   };
 }
