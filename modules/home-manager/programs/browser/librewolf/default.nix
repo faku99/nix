@@ -22,7 +22,10 @@ in
 
   config = lib.mkIf cfg.enable {
     userConfig.system.impermanence = {
-      directories = [ ".librewolf/${config.programs.librewolf.profiles.${profileName}.path}" ];
+      directories = [
+        ".librewolf/${config.programs.librewolf.profiles.${profileName}.path}"
+        ".mozilla/"
+      ];
     };
 
     userConfig.programs.browser = lib.mkIf cfg.defaultBrowser {
