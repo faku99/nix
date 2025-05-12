@@ -52,6 +52,9 @@ in
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
+  # Time settings
+  time.hardwareClockInLocalTime = true;
+
   nixosConfig = {
     global.enable = true;
 
