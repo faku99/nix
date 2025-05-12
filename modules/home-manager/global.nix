@@ -39,6 +39,10 @@ in
       ripgrep
     ];
 
+    programs = {
+      gpg.enable = true;
+    };
+
     userConfig = {
       programs.sh-utils.nix-helper.enable = true;
       system = {

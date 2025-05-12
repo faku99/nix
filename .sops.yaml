@@ -2,14 +2,16 @@ keys:
   - &users
     - &lelisei 0AAFA0446C8016928C872276DC25BABDE40033A1
   - &hosts
-    - &home age1s0ftlw5jw3uxy7z5pyhmczt2p7tsg67s2fktl9mg3mx7deyqkyvqym849n
+    - &saturn age1s0ftlw5jw3uxy7z5pyhmczt2p7tsg67s2fktl9mg3mx7deyqkyvqym849n
     - &jupiter age17lhfyhd8qr78rd4cqmt7af6m4n8j4xuh3c892jrjpcjya9fsav4sefpxny
+    - &pluto age1c2jqm2na5meve9240qaam5dvxy6y8qc7rrakyzm0hdj7pfpjxgmsdj7nqe
 
 creation_rules:
-  - path_regex: modules/nixos/users/secrets.yaml$
+  - path_regex: users/lelisei/secrets.yaml$
     key_groups:
     - pgp:
       - *lelisei
       age:
-      - *home
+      - *saturn
       - *jupiter
+      - *pluto

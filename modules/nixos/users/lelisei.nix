@@ -19,6 +19,8 @@ let
   username = "lelisei";
 
   ifGroupExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
+
+  homeDirectory = "/home/${username}";
 in
 {
   options.nixosConfig.users.${username} = {
@@ -37,7 +39,7 @@ in
     programs.zsh.enable = true;
 
     users.users.${username} = {
-      home = mkDefault "/home/${username}";
+      home = mkDefault "${homeDirectory}";
       isNormalUser = true;
       shell = pkgs.zsh;
 
@@ -48,6 +50,17 @@ in
       ];
 
       initialHashedPassword = "$y$j9T$Z7neCacyHo.DRe/YK35HL0$HbdjL2Sy1l.yV8Kzoz0mW0Idx0EyzBU7EqG8BAZ3Zj2";
+
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII9YumLqLcxTUgmk0zE5b/CbaEo88yuHbBz3O4VrWefb"
+      ];
+    };
+
+    sops.secrets."ssh/lelisei_ed25519" = {
+      sopsFile = "${self}/users/${username}/secrets.yaml";
+      owner = "lelisei";
+      path = "${homeDirectory}/.ssh/lelisei_ed25519";
+      mode = "0600";
     };
 
     home-manager.users = mkIf cfg.homeManager {

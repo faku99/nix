@@ -65,7 +65,7 @@ in
     };
 
     system = {
-      # sops.enable = true;
+      sops.enable = true;
       # sudo.enable = true;
     };
 
