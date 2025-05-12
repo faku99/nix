@@ -26,6 +26,7 @@
       };
 
       dev = {
+        git.enable = true;
         ssh.enable = true;
       };
 
