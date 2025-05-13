@@ -1,0 +1,10 @@
+{
+	http_port 80
+	https_port 443
+
+	email lucas@elisei.ch
+}
+
+test.elisei.ch {
+	respond "Hello"
+}

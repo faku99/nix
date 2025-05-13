@@ -40,13 +40,11 @@
     };
 
     networking = {
-      # headscale.enable = true;
+      caddy = {
+        enable = true;
+        configFile = ./Caddyfile;
+      };
       networkmanager.enable = true;
-      # tailscale.enable = true;
     };
-
-    # virt = {
-    # docker.enable = true;
-    # };
   };
 }
