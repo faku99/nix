@@ -18,6 +18,11 @@
         git.enable = true;
         ssh.enable = true;
       };
+
+      sh-utils = {
+        eza.enable = true;
+        nix-helper.enable = true;
+      };
     };
 
     shell = {
