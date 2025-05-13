@@ -37,5 +37,14 @@ in
       swaynotificationcenter
       wl-clipboard # Clipboard support
     ];
+
+    services.gnome-keyring = {
+      enable = false;
+      components = [
+        "pkcs11"
+        "secrets"
+        "ssh"
+      ];
+    };
   };
 }
