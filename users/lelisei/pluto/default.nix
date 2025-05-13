@@ -13,6 +13,13 @@
   userConfig = {
     global.enable = true;
 
+    programs = {
+      dev = {
+        git.enable = true;
+        ssh.enable = true;
+      };
+    };
+
     shell = {
       zsh = {
         enable = true;

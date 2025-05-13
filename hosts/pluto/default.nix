@@ -28,15 +28,15 @@
     users.lelisei.enable = true;
 
     system = {
-      sops.enable = true;
-      # sudo.enable = true;
-
       impermanence = {
         enable = true;
         btrfs.enable = true;
         btrfs.device = "/dev/mmcblk0";
         users = [ "lelisei" ];
       };
+
+      openssh.enable = true;
+      sops.enable = true;
     };
 
     networking = {
