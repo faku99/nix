@@ -70,8 +70,8 @@ in
     };
 
     system = {
+      nix-ld.enable = true;
       sops.enable = true;
-      # sudo.enable = true;
     };
 
     networking = {
