@@ -26,6 +26,7 @@ in
 
     # Packages often required by extensions
     home.packages = with pkgs; [
+      caddy
       clang-tools
       nixd
       nixfmt-rfc-style
@@ -45,6 +46,7 @@ in
           esbenp.prettier-vscode
           jnoortheen.nix-ide
           llvm-vs-code-extensions.vscode-clangd
+          matthewpi.caddyfile-support
           ms-vscode.cpptools
           xaver.clang-format
         ];
@@ -134,6 +136,9 @@ in
             "u"
             "w"
           ];
+
+          # matthewpi.caddyfile-support
+          "caddyfile.executable" = "${pkgs.caddy}/bin/caddy";
         };
       };
     };
