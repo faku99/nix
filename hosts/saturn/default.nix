@@ -21,6 +21,11 @@ in
     "xhci_hcd.power_efficient=0"
   ];
 
+  boot.extraModprobeConfig = ''
+    # Solve mouse lag???
+    options drm_kms_helper poll=N
+  '';
+
   boot.loader = {
     grub = {
       enable = true;
