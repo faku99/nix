@@ -39,7 +39,7 @@ in
     ];
 
     services.gnome-keyring = {
-      enable = false;
+      enable = true;
       components = [
         "pkcs11"
         "secrets"
