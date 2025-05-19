@@ -48,6 +48,7 @@ in
           llvm-vs-code-extensions.vscode-clangd
           matthewpi.caddyfile-support
           ms-vscode.cpptools
+          rust-lang.rust-analyzer
           twxs.cmake
           xaver.clang-format
         ];
