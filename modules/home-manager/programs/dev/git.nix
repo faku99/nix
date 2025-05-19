@@ -53,6 +53,7 @@ in
       };
 
       userName = "Lucas Elisei";
+      userEmail = "lucas@elisei.ch";
     };
   };
 }
