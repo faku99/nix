@@ -108,6 +108,8 @@
 
       packages = forAllSystems (system: import ./pkgs { pkgs = nixpkgsFor.${system}; });
 
+      templates = import ./templates;
+
       nixosConfigurations = {
         jupiter = nixosConfig {
           modules = [ ./hosts/jupiter ];
