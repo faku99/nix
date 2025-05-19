@@ -22,6 +22,8 @@ let
     cp = "cp -iv";
     mv = "mv -iv";
     rm = "rm -iv";
+
+    cht = "cht.sh";
   };
 in
 {
@@ -44,11 +46,14 @@ in
     };
 
     home.packages = with pkgs; [
+      cht-sh
       eza
     ];
 
     home.shellAliases = coreUtilsAliases;
+
     programs.bash.shellAliases = coreUtilsAliases;
+    programs.fzf.enable = true;
     programs.zsh.shellAliases = coreUtilsAliases;
   };
 }
