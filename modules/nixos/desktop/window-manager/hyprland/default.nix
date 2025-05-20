@@ -25,5 +25,7 @@ in
       };
       defaultSession = "hyprland-uwsm";
     };
+
+    services.gnome.gnome-keyring.enable = true;
   };
 }
