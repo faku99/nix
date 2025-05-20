@@ -30,10 +30,6 @@ in
       "${zsh_custom_path}/custom.zsh-theme".source = ./custom.zsh-theme;
     };
 
-    programs.fzf = {
-      enableZshIntegration = true;
-    };
-
     programs.zsh = {
       enable = true;
 

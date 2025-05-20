@@ -8,6 +8,7 @@ let
   inherit (lib)
     mkDefault
     mkEnableOption
+    mkForce
     mkIf
     mkOption
     types
@@ -52,8 +53,9 @@ in
 
     home.shellAliases = coreUtilsAliases;
 
+    userConfig.programs.sh-utils.fzf.enable = mkForce true;
+
     programs.bash.shellAliases = coreUtilsAliases;
-    programs.fzf.enable = true;
     programs.zsh.shellAliases = coreUtilsAliases;
   };
 }
