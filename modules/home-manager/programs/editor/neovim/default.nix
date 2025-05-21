@@ -10,6 +10,7 @@ let
     mkOption
     types
     ;
+  inherit (config.lib.file) mkOutOfStoreSymlink;
   cfg = config.userConfig.programs.editor.neovim;
 in
 {
@@ -41,7 +42,12 @@ in
 
     programs.neovim = {
       enable = true;
+      extraConfig = ''
+        lua require('init')
+      '';
     };
+
+    xdg.configFile."nvim/lua".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/modules/home-manager/programs/editor/neovim/lua";
 
     home.sessionVariables = {
       MANPAGER = "nvim -c Man!";
