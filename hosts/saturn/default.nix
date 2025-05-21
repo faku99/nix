@@ -75,14 +75,12 @@ in
     };
 
     networking = {
-      # headscale.enable = true;
       networkmanager.enable = true;
       openfortivpn.enable = true;
-      # tailscale.enable = true;
     };
 
-    # virt = {
-    # docker.enable = true;
-    # };
+    virtualisation = {
+      docker.enable = true;
+    };
   };
 }

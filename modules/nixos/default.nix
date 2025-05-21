@@ -7,5 +7,6 @@
     ./system
     ./theme
     ./users
+    ./virtualisation
   ];
 }
