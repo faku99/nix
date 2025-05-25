@@ -47,6 +47,7 @@ in
           jnoortheen.nix-ide
           llvm-vs-code-extensions.vscode-clangd
           matthewpi.caddyfile-support
+          mkhl.direnv
           ms-vscode.cpptools
           rust-lang.rust-analyzer
           twxs.cmake
@@ -72,6 +73,7 @@ in
           "explorer.confirmDelete" = false;
 
           # Extensions settings
+          "extensions.ignoreRecommendations" = true;
           "extensions.experimental.affinity" = {
             "asvetliakov.vscode-neovim" = 1;
           };
@@ -141,6 +143,14 @@ in
 
           # matthewpi.caddyfile-support
           "caddyfile.executable" = "${pkgs.caddy}/bin/caddy";
+
+          # eamodio.gitlens
+          "gitlens.codeLens.enabled" = false;
+          "gitlens.launchpad.indicator.enabled" = false;
+
+          # rust.rust-analyzer
+          "rust-analyzer.inlayHints.parameterHints.enable" = false;
+          "rust-analyzer.inlayHints.typeHints.enable" = false;
         };
       };
     };
