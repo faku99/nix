@@ -48,6 +48,7 @@ in
       system = {
         impermanence.directories = [
           ".cache/nix"
+          ".gnupg"
         ];
         xdg.enable = true;
       };
