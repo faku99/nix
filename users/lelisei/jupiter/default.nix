@@ -26,6 +26,7 @@
       };
 
       dev = {
+        direnv.enable = true;
         git.enable = true;
         ssh.enable = true;
       };
