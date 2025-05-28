@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  options,
   self,
   ...
 }:
@@ -14,6 +15,7 @@ in
   ];
 
   networking.hostName = "jupiter";
+  networking.timeServers = options.networking.timeServers.default ++ [ "DCTS1.tandemdiabetes.com" ];
 
   system.stateVersion = "24.11";
 
@@ -53,7 +55,7 @@ in
   };
 
   # Time settings
-  time.hardwareClockInLocalTime = true;
+  time.hardwareClockInLocalTime = false;
 
   nixosConfig = {
     global.enable = true;
