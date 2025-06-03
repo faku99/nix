@@ -42,7 +42,6 @@ in
         extensions = with pkgs.vscode-marketplace; [
           aaron-bond.better-comments
           cschlosser.doxdocgen
-          eamodio.gitlens
           esbenp.prettier-vscode
           jnoortheen.nix-ide
           llvm-vs-code-extensions.vscode-clangd
@@ -144,11 +143,9 @@ in
           # matthewpi.caddyfile-support
           "caddyfile.executable" = "${pkgs.caddy}/bin/caddy";
 
-          # eamodio.gitlens
-          "gitlens.codeLens.enabled" = false;
-          "gitlens.launchpad.indicator.enabled" = false;
-
           # rust.rust-analyzer
+          "rust-analyzer.check.command" = "clippy";
+          "rust-analyzer.checkOnSave" = true;
           "rust-analyzer.inlayHints.parameterHints.enable" = false;
           "rust-analyzer.inlayHints.typeHints.enable" = false;
         };
