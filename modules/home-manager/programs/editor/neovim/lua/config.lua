@@ -1,13 +1,7 @@
 local opt = vim.opt
 
--- Make line numbers default
-vim.opt.number = true;
-
--- Tabs and indent
-opt.expandtab = true
-opt.shiftwidth = 4
-opt.tabstop = 4
-opt.smartindent = true
+-- Column
+opt.number = true;
 
 -- Whitespaces
 opt.list = true

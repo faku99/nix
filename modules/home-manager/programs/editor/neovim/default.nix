@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -45,9 +46,34 @@ in
       extraConfig = ''
         lua require('init')
       '';
+      extraPackages = with pkgs; [
+        # Lua
+        lua51Packages.lua
+        lua52Packages.luarocks
+        lua-language-server
+        stylua
+
+        # Nix
+        nil
+        nixd
+        nixfmt-rfc-style
+      ];
     };
 
-    xdg.configFile."nvim/lua".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/modules/home-manager/programs/editor/neovim/lua";
+    xdg.configFile = {
+      "nvim/lsp".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/modules/home-manager/programs/editor/neovim/lsp";
+      "nvim/lua".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/modules/home-manager/programs/editor/neovim/lua";
+    };
+
+    home.file = {
+      ".local/share/nvim/nvim-treesitter" = {
+        recursive = true;
+        source = pkgs.symlinkJoin {
+          name = "nvim-treesitter-grammars";
+          paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
+        };
+      };
+    };
 
     home.sessionVariables = {
       MANPAGER = "nvim -c Man!";
