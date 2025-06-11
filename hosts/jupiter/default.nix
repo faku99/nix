@@ -93,6 +93,10 @@ in
         files = [ "/var/lib/preload/preload.state" ];
         directories = [ "/var/lib/fprint" ];
       };
+
+      udev = {
+        segger = true;
+      };
     };
 
     networking = {

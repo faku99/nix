@@ -66,7 +66,13 @@
           system:
           import pkgs {
             inherit system;
-            config.allowUnfree = true;
+            config = {
+              allowUnfree = true;
+              segger-jlink.acceptLicense = true;
+              permittedInsecurePackages = [
+                "segger-jlink-qt4-810"
+              ];
+            };
           }
         );
 
