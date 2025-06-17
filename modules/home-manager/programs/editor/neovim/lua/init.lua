@@ -6,6 +6,7 @@ vim.g.maplocalleader = ','
 require('config')
 require('keymaps')
 require('lsp')
+require('status')
 
 -------------------------------------------------------------------------------
 -- PLUGINS
