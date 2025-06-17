@@ -4,6 +4,7 @@
 
     ./desktop
     ./networking
+    ./programs
     ./system
     ./theme
     ./users

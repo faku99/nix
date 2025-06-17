@@ -69,6 +69,10 @@ in
       };
     };
 
+    programs = {
+      steam.enable = true;
+    };
+
     system = {
       nix-ld.enable = true;
       sops.enable = true;
