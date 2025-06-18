@@ -42,10 +42,16 @@ in
         extensions = with pkgs.vscode-marketplace; [
           aaron-bond.better-comments
           cschlosser.doxdocgen
+          dan-c-underwood.arm
           esbenp.prettier-vscode
           jnoortheen.nix-ide
           llvm-vs-code-extensions.vscode-clangd
+          marus25.cortex-debug
           matthewpi.caddyfile-support
+          mcu-debug.debug-tracker-vscode
+          mcu-debug.memory-view
+          mcu-debug.peripheral-viewer
+          mcu-debug.rtos-views
           mkhl.direnv
           ms-vscode.cpptools
           rust-lang.rust-analyzer
