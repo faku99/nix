@@ -97,7 +97,10 @@
             home-manager.nixosModules.home-manager
             {
               home-manager = {
-                sharedModules = [ outputs.homeManagerModules ];
+                sharedModules = [
+                  inputs.sops-nix.homeManagerModules.sops
+                  outputs.homeManagerModules
+                ];
                 extraSpecialArgs = specialArgs.${system};
               };
             }
