@@ -54,6 +54,7 @@ in
           mcu-debug.rtos-views
           mkhl.direnv
           ms-vscode.cpptools
+          rioj7.command-variable
           rust-lang.rust-analyzer
           twxs.cmake
           xaver.clang-format
