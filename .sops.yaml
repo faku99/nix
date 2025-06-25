@@ -7,7 +7,8 @@ keys:
     - &pluto age1c2jqm2na5meve9240qaam5dvxy6y8qc7rrakyzm0hdj7pfpjxgmsdj7nqe
 
 creation_rules:
-  - path_regex: users/lelisei/secrets.yaml$
+  # "lelisei" user secrets
+  - path_regex: secrets/users/lelisei.yaml$
     key_groups:
     - pgp:
       - *lelisei

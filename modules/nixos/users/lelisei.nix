@@ -21,6 +21,8 @@ let
   ifGroupExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 
   homeDirectory = "/home/${username}";
+
+  userSecretsFile = "${self}/secrets/users/${username}.yaml";
 in
 {
   options.nixosConfig.users.${username} = {
@@ -57,8 +59,8 @@ in
     };
 
     sops.secrets."ssh/lelisei_ed25519" = {
-      sopsFile = "${self}/users/${username}/secrets.yaml";
-      owner = "lelisei";
+      sopsFile = userSecretsFile;
+      owner = username;
       path = "${homeDirectory}/.ssh/lelisei_ed25519";
       mode = "0600";
     };
