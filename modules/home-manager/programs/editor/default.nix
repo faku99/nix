@@ -9,6 +9,7 @@ in
 {
   imports = [
     ./neovim
+    ./nvf
     ./vscode
   ];
 

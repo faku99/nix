@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     systems.url = "github:nix-systems/default-linux";
+    nvf.url = "github:notashelf/nvf";
 
     # Shared
     disko = {
@@ -100,6 +101,7 @@
                 sharedModules = [
                   inputs.sops-nix.homeManagerModules.sops
                   outputs.homeManagerModules
+                  inputs.nvf.homeManagerModules.default
                 ];
                 extraSpecialArgs = specialArgs.${system};
               };
