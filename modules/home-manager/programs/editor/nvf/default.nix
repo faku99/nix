@@ -21,11 +21,60 @@ in
         vimAlias = false;
         
         options = {
+          shiftwidth = 4;
           tabstop = 4;
           wrap = false;
         };
 
         keymaps = [
+          {
+            key = "<Up>";
+            mode = [ "n" "v" ];
+            action = "<nop>";
+            desc = "Disable up-arrow key to force using HJKL";
+          }
+          {
+            key = "<Down>";
+            mode = [ "n" "v" ];
+            action = "<nop>";
+            desc = "Disable down-arrow key to force using HJKL";
+          }
+          {
+            key = "<Left>";
+            mode = [ "n" "v" ];
+            action = "<nop>";
+            desc = "Disable left-arrow key to force using HJKL";
+          }
+          {
+            key = "<Right>";
+            mode = [ "n" "v" ];
+            action = "<nop>";
+            desc = "Disable right-arrow key to force using HJKL";
+          }
+          {
+            key= "<C-Up>";
+            mode = "i";
+            action = "<nop>";
+            desc = "Use up-arrow key to navigate in insert mode";
+          }
+          {
+            key= "<C-Down>";
+            mode = "i";
+            action = "<nop>";
+            desc = "Use down-arrow key to navigate in insert mode";
+          }
+          {
+            key= "<C-Left>";
+            mode = "i";
+            action = "<nop>";
+            desc = "Use left-arrow key to navigate in insert mode";
+          }
+          {
+            key= "<C-Right>";
+            mode = "i";
+            action = "<nop>";
+            desc = "Use right-arrow key to navigate in insert mode";
+          }
           {
             key = "<leader>ff";
             mode = [ "n" ];

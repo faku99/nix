@@ -37,9 +37,10 @@ in
 
       editor = {
         neovim = {
-          enable = true;
+          enable = false;
           defaultEditor = true;
         };
+        nvf.enable = true;
         vscode.enable = true;
       };
 
