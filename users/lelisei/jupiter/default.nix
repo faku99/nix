@@ -1,14 +1,19 @@
 {
   pkgs,
+  self,
   ...
 }:
+let
+  username = "lelisei";
+in
 {
   home.username = "lelisei";
   home.stateVersion = "24.11";
 
-  home.packages = with pkgs; [
-    fd
-  ];
+  sops = {
+    gnupg.home = "/home/${username}/.gnupg";
+    defaultSopsFile = "${self}/secrets/users/${username}.yaml";
+  };
 
   userConfig = {
     global.enable = true;
@@ -42,6 +47,7 @@
 
       misc = {
         claude-desktop.enable = true;
+        rbw.enable = true;
       };
 
       sh-utils = {
