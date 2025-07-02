@@ -21,7 +21,6 @@ in
     # pinentry-tty is needed for login
     home.packages = with pkgs; [
       pinentry-tty
-      (mkIf config.userConfig.desktop.wayland.enable rofi-rbw-wayland)
     ];
 
     sops.secrets."rbw/config_json" = {

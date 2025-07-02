@@ -20,6 +20,7 @@ in
       plugins = with pkgs; [
         rofi-calc
         rofi-emoji-wayland
+        (mkIf (config.userConfig.programs.misc.rbw.enable) rofi-rbw-wayland)
       ];
     };
   };
