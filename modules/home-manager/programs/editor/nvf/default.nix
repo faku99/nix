@@ -15,6 +15,7 @@ in
   imports = [
     ./keymaps.nix
     ./languages.nix
+    ./motion.nix
     ./mini.nix
     ./options.nix
     ./picker.nix
