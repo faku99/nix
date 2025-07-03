@@ -19,5 +19,7 @@
       tabstop = 4;
       wrap = false;
     };
+
+    theme.enable = true;
   };
 }

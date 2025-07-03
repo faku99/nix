@@ -1,6 +1,6 @@
 {
   programs.nvf.settings.vim = {
-    globals.mapleader = "<space>";
+    globals.mapleader = " ";
 
     binds = {
       whichKey.enable = true;
@@ -55,12 +55,6 @@
         mode = "i";
         action = "<Right>";
         desc = "Use CTRL+L to navigate in insert mode";
-      }
-      {
-        key = "<leader>ff";
-        mode = [ "n" ];
-        action = "<cmd>Telescope find_files<cr>";
-        desc = "Fuzzy-find files by name";
       }
     ];
   };
