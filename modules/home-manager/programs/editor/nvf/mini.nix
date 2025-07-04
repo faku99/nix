@@ -7,6 +7,5 @@
     indentscope.enable = true;
     notify.enable = true;
     pairs.enable = true;
-    # starter.enable = true;
   };
 }

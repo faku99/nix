@@ -20,6 +20,10 @@
       wrap = false;
     };
 
-    theme.enable = true;
+    theme = {
+      enable = true;
+      name = "base16";
+      transparent = true;
+    };
   };
 }

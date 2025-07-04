@@ -39,22 +39,29 @@
         desc = "Use CTRL+K to navigate in insert mode";
       }
       {
-        key= "<C-J>";
+        key = "<C-J>";
         mode = "i";
         action = "<Down>";
         desc = "Use CTRL+J to navigate in insert mode";
       }
       {
-        key= "<C-H>";
+        key = "<C-H>";
         mode = "i";
         action = "<Left>";
         desc = "Use CTRL+H to navigate in insert mode";
       }
       {
-        key= "<C-L>";
+        key = "<C-L>";
         mode = "i";
         action = "<Right>";
         desc = "Use CTRL+L to navigate in insert mode";
+      }
+
+      {
+        key = "<leader>q";
+        mode = "n";
+        action = "<cmd>q<cr>";
+        desc = "Quit buffer with leader key";
       }
     ];
   };
