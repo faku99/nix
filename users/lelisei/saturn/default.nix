@@ -36,11 +36,10 @@ in
       };
 
       editor = {
-        neovim = {
-          enable = false;
+        nvf = {
+          enable = true;
           defaultEditor = true;
         };
-        nvf.enable = true;
         vscode.enable = true;
       };
 

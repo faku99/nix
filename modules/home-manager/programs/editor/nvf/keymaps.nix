@@ -63,6 +63,13 @@
         action = "<cmd>q<cr>";
         desc = "Quit buffer with leader key";
       }
+
+      {
+        key = "<leader>/";
+        mode = "n";
+        action = "<cmd>nohlsearch<cr>";
+        desc = "Clear search highlighting";
+      }
     ];
   };
 }
