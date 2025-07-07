@@ -15,8 +15,9 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      openfortivpn
       networkmanager-fortisslvpn
+      networkmanager-openconnect
+      openfortivpn
     ];
   };
 }
