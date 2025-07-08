@@ -29,6 +29,7 @@ in
     ./terminal.nix
     ./ui.nix
     ./utils.nix
+    ./visuals.nix
   ];
 
   config = mkIf cfg.enable {
