@@ -119,6 +119,10 @@ in
           preserve_split = true;
         };
 
+        ecosystem = {
+          no_update_news = true;
+        };
+
         env = [
           "XDG_DATA_DIRS,$HOME/.nix-profile/share"
           "XDG_SESSION_TYPE,wayland"
