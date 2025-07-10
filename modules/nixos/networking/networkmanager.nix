@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -17,7 +18,12 @@ in
       directories = [ "/etc/NetworkManager/system-connections" ];
     };
 
-    networking.networkmanager.enable = true;
+    networking.networkmanager = {
+      enable = true;
+      plugins = with pkgs; [
+        networkmanager-openconnect
+      ];
+    };
 
     # https://github.com/NixOS/nixpkgs/issues/180175#issuecomment-1473408913
     systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
