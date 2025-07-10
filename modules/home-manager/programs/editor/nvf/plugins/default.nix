@@ -1,0 +1,5 @@
+{
+  imports = [
+    ./tiny-inline.nix
+  ];
+}
