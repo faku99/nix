@@ -3,5 +3,6 @@
     indent-blankline = {
       enable = true;
     };
+    nvim-web-devicons.enable = true;
   };
 }

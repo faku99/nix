@@ -21,10 +21,12 @@ in
 
   imports = [
     ./plugins
+    ./comments.nix
     ./git.nix
     ./keymaps.nix
     ./languages.nix
     ./options.nix
+    ./statusline.nix
     ./telescope.nix
     ./terminal.nix
     ./ui.nix

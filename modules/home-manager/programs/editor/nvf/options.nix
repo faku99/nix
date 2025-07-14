@@ -16,8 +16,9 @@
       shiftwidth = 4;
       signcolumn = "yes";
       smartindent = true;
+      softtabstop = 4;
       tabstop = 4;
-      wrap = false;
+      # wrap = false;
     };
 
     theme = {

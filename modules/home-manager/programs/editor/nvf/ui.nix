@@ -2,7 +2,7 @@
   programs.nvf.settings.vim = {
     ui = {
       breadcrumbs.enable = true;
-
+      illuminate.enable = true;
       noice = {
         enable = true;
         setupOpts = {

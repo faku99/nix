@@ -50,19 +50,6 @@
       trouble.enable = true;
       lspSignature.enable = true;
       lspconfig.enable = true;
-      null-ls.enable = true;
-      otter-nvim = {
-        enable = true;
-        setupOpts = {
-          buffers.set_filetype = true;
-          lsp = {
-            diagnostic_update_event = [
-              "BufWritePost"
-              "InsertLeave"
-            ];
-          };
-        };
-      };
     };
 
     languages = {
@@ -71,7 +58,10 @@
 
       clang.enable = true;
       nix.enable = true;
+      python.enable = true;
       rust.enable = true;
+      tailwind.enable = true;
+      ts.enable = true;
     };
   };
 }
