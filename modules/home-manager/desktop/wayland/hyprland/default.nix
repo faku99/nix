@@ -35,6 +35,7 @@ in
   config = mkIf cfg.enable {
 
     services = {
+      hyprpaper.enable = true;
       network-manager-applet.enable = true;
     };
 

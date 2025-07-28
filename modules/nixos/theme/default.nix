@@ -22,7 +22,7 @@ in
     stylix = {
       enable = true;
 
-      image = config.nixosConfig.desktop.wallpaper.path;
+      # image = config.nixosConfig.desktop.wallpaper.path;
       base16Scheme = ./gruvbox-dark-modded.yaml;
       polarity = "dark";
 

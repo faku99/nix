@@ -71,11 +71,11 @@ in
           primary = true;
         }
       ];
-      wallpaper.generate = {
-        enable = true;
-        inputSVG = "${self}/modules/nixos/theme/kcorp.svg";
-        inherit height width;
-      };
+      # wallpaper.generate = {
+      #   enable = true;
+      #   inputSVG = "${self}/modules/nixos/theme/kcorp.svg";
+      #   inherit height width;
+      # };
       windowManager = {
         hyprland.enable = true;
       };
