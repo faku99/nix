@@ -48,8 +48,8 @@ in
         Cookies = {
           Behavior = "reject";
           Allow = [
+            "https://elisei.ch"
             "https://github.com"
-            "https://searx.foobar.vip"
             "https://twitch.tv"
 
             # Work-related
@@ -59,9 +59,6 @@ in
             "https://confluence.tandemdiabetes.com:8443"
             "https://jira.tandemdiabetes.com:8443"
             "https://tandem.okta.com"
-
-            # Personal stuff
-            "https://elisei.ch"
           ];
         };
 
@@ -102,11 +99,11 @@ in
           force = true;
           engines = {
             "SearXNG" = {
-              description = "SearXNG - foobar.vip";
-              icon = "https://searx.foobar.vip/static/themes/simple/img/favicon.svg";
+              description = "SearXNG - elisei.ch";
+              icon = "https://searxng.elisei.ch/static/themes/simple/img/favicon.svg";
               urls = [
                 {
-                  template = "https://searx.foobar.vip/?q={searchTerms}";
+                  template = "https://searxng.elisei.ch/?q={searchTerms}";
                   params = [
                     {
                       name = "q";
