@@ -44,14 +44,6 @@
       highlight.enable = true;
     };
 
-    lsp = {
-      enable = true;
-
-      trouble.enable = true;
-      lspSignature.enable = true;
-      lspconfig.enable = true;
-    };
-
     languages = {
       enableFormat = true;
       enableTreesitter = true;

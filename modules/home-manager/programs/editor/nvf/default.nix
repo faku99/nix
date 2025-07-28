@@ -25,6 +25,7 @@ in
     ./git.nix
     ./keymaps.nix
     ./languages.nix
+    ./lsp.nix
     ./options.nix
     ./statusline.nix
     ./telescope.nix
