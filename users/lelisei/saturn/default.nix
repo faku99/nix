@@ -43,6 +43,10 @@ in
         vscode.enable = true;
       };
 
+      games = {
+        battle-net.enable = true;
+      };
+
       misc = {
         claude-desktop.enable = true;
         rbw.enable = true;

@@ -71,6 +71,7 @@ in
 
     programs = {
       steam.enable = true;
+      wine.enable = true;
     };
 
     system = {

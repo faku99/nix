@@ -1,5 +1,6 @@
 {
   imports = [
     ./steam
+    ./wine.nix
   ];
 }
