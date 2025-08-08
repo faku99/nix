@@ -27,6 +27,7 @@ in
           enable = true;
           defaultBrowser = true;
         };
+        qutebrowser.enable = true;
       };
 
       dev = {
