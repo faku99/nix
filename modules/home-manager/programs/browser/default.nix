@@ -9,6 +9,7 @@ in
 {
   imports = [
     ./librewolf
+    ./qutebrowser
   ];
 
   options.userConfig.programs.browser = {
