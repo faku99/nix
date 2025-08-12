@@ -125,7 +125,7 @@ in
         };
 
         env = [
-          "XDG_DATA_DIRS,$HOME/.nix-profile/share"
+          "XDG_DATA_DIRS,$HOME/.nix-profile/share:/run/current-system/sw/share"
           "XDG_SESSION_TYPE,wayland"
           "XCURSOR_SIZE,24"
           "HYPRCURSOR_SIZE,24"
