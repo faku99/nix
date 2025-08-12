@@ -20,7 +20,7 @@ in
 
     # pinentry-tty is needed for login
     home.packages = with pkgs; [
-      pinentry-tty
+      pinentry-rofi
     ];
 
     sops.secrets."rbw/config_json" = {
