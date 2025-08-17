@@ -32,7 +32,7 @@ in
       grim # Screenshots
       libnotify # Notifications
       loupe # Image viewer
-      nemo # File explorer
+      nemo-with-extensions # File explorer
       networkmanagerapplet
       swaynotificationcenter
       wl-clipboard # Clipboard support
