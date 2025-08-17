@@ -15,6 +15,10 @@ in
   config = mkIf cfg.enable {
     programs.qutebrowser = {
       enable = true;
+
+      settings = {
+        auto_save.session = true;
+      };
     };
   };
 }
