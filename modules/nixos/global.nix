@@ -56,6 +56,9 @@ in
     # Enable theming
     nixosConfig.theme.enable = mkDefault true;
 
+    # Enable GVFS
+    services.gvfs.enable = true;
+
     # Internationalization
     i18n = {
       defaultLocale = "en_US.UTF-8";
