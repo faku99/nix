@@ -11,14 +11,15 @@
 
     options = {
       autoindent = true;
+      autoread = true;
       list = true;
       listchars = "nbsp:␣,space:·,tab:» ,trail:~";
+      shiftround = true;
       shiftwidth = 4;
       signcolumn = "yes";
       smartindent = true;
       softtabstop = 4;
       tabstop = 4;
-      # wrap = false;
     };
 
     theme = {
