@@ -22,6 +22,7 @@ in
   imports = [
     ./plugins
     ./comments.nix
+    ./formatter.nix
     ./git.nix
     ./keymaps.nix
     ./languages.nix
