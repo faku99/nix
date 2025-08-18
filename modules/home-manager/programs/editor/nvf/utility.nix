@@ -1,5 +1,4 @@
 {
-  pkgs,
   ...
 }:
 {
@@ -7,14 +6,6 @@
     autocomplete = {
       nvim-cmp = {
         enable = true;
-        # sources = {
-        #   buffer = "[Buffer]";
-        #   nvim-cmp = null;
-        #   path = "[Path]";
-        # };
-        # sourcePlugins = [
-        #   pkgs.vimPlugins.cmp-cmdline
-        # ];
       };
     };
 
@@ -23,6 +14,8 @@
     statusline.lualine.enable = true;
 
     utility = {
+      diffview-nvim.enable = true; # For neogit
+
       motion.flash-nvim.enable = true;
 
       oil-nvim = {
