@@ -18,6 +18,15 @@ in
       claude-desktop-with-fhs
     ];
 
+    xdg.desktopEntries = {
+      claude-desktop = {
+        name = "Claude Desktop";
+        exec = "claude-desktop";
+        terminal = false;
+        categories = [ "Application" ];
+      };
+    };
+
     userConfig.system.impermanence = {
       directories = [
         ".config/Claude"
