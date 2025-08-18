@@ -82,6 +82,7 @@ in
           "nix"
           "sources"
           "tandem"
+          ".cargo"
         ];
       };
       xdg.enable = true;
