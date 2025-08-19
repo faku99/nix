@@ -44,6 +44,10 @@ in
         vscode.enable = true;
       };
 
+      games = {
+        curseforge.enable = true;
+      };
+
       misc = {
         claude-desktop.enable = true;
         rbw.enable = true;
