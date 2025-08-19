@@ -1,11 +1,9 @@
 {
   self,
   ...
-}:
-let
+}: let
   username = "lelisei";
-in
-{
+in {
   home.username = username;
   home.stateVersion = "24.11";
 

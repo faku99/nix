@@ -1,13 +1,11 @@
 # Shamelessly taken from https://github.com/uimataso/nix-config/blob/main/modules/home-manager/programs/sh-util/nix-helper.nix
-
 {
   config,
   lib,
-  pkgs,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkIf
     mkEnableOption
     mkOption
@@ -16,9 +14,7 @@ let
   cfg = config.userConfig.programs.sh-utils.nix-helper;
 
   homeDir = config.home.homeDirectory;
-  configHome = config.xdg.configHome;
-in
-{
+in {
   options.userConfig.programs.sh-utils.nix-helper = {
     enable = mkEnableOption ''
       Yet-another-nix-helper and other nix alias/scripts that improves QoL.
@@ -38,8 +34,6 @@ in
       nt = "nh os test ${cfg.flakeDir}";
       nr = "nix repl --expr 'builtins.getFlake \"${cfg.flakeDir}\"'";
       nd = "nix develop path:$(pwd)";
-
-      # it = "${pkgs.scripts.nix-template-tool}/bin/nix-template-tool";
     };
 
     programs.nh.enable = true;
