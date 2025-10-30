@@ -47,7 +47,6 @@ in {
       };
 
       misc = {
-        claude-desktop.enable = true;
         libreoffice.enable = true;
         opencode.enable = true;
         rbw.enable = true;
