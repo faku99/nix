@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -37,8 +36,6 @@ in
     programs.librewolf = {
       enable = true;
 
-      package = pkgs.librewolf-wayland;
-
       languagePacks = [
         "en-US"
         "fr"
@@ -51,14 +48,6 @@ in
             "https://elisei.ch"
             "https://github.com"
             "https://twitch.tv"
-
-            # Work-related
-            # TODO: Find a way to allow those only in work containers
-            "https://bamboo.tandemdiabetes.com"
-            "https://bitbucket.tandemdiabetes.com"
-            "https://confluence.tandemdiabetes.com:8443"
-            "https://jira.tandemdiabetes.com:8443"
-            "https://tandem.okta.com"
           ];
         };
 
