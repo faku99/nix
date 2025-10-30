@@ -21,13 +21,4 @@
 
   # My custom packages
   additions = final: prev: import ../pkgs { pkgs = final; };
-
-  modifications = final: prev: {
-    flameshot = prev.flameshot.overrideAttrs (_: {
-      cmakeFlags = [
-        "-DUSE_WAYLAND_CLIPBOARD=true"
-        "-DUSE_WAYLAND_GRIM=true"
-      ];
-    });
-  };
 }
