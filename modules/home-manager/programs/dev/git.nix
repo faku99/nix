@@ -17,7 +17,7 @@ in
       enable = true;
       lfs.enable = true;
 
-      extraConfig = {
+      settings = {
         branch.sort = "-committerdate";
         column.ui = "auto";
         commit.verbose = true;
@@ -50,10 +50,11 @@ in
           enabled = true;
         };
         tag.sort = "version:refname";
+        user = {
+          name = "Lucas Elisei";
+          email = "lucas@elisei.ch";
+        };
       };
-
-      userName = "Lucas Elisei";
-      userEmail = "lucas@elisei.ch";
     };
   };
 }

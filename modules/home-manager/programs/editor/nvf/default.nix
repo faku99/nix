@@ -52,7 +52,7 @@ in
       MANWIDTH = 1000000;
     };
 
-    programs.git.extraConfig = {
+    programs.git.settings = {
       core.pager = "nvim -R";
       color.pager = false;
     };
