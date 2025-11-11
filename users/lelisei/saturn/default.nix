@@ -21,6 +21,7 @@ in {
 
     programs = {
       browser = {
+        glide-browser.enable = true;
         librewolf = {
           enable = true;
           defaultBrowser = true;
