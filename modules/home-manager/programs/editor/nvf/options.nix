@@ -12,8 +12,10 @@
     options = {
       autoindent = true;
       autoread = true;
+      exrc = true;
       list = true;
       listchars = "nbsp:␣,space:·,tab:» ,trail:~";
+      secure = true;
       shiftround = true;
       shiftwidth = 4;
       signcolumn = "yes";
