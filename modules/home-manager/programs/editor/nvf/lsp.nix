@@ -6,6 +6,11 @@
       trouble.enable = true;
       lspSignature.enable = true;
       lspconfig.enable = true;
+
+      servers.nil_ls = {
+        enable = true;
+        settings.nix.flake.autoArchive = true;
+      };
     };
 
     keymaps = [
