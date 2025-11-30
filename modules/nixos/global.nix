@@ -59,6 +59,18 @@ in
     # Enable GVFS
     services.gvfs.enable = true;
 
+    services.printing = {
+      enable = true;
+      drivers = [
+        pkgs.gutenprint
+      ];
+    };
+    services.avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
+
     # Internationalization
     i18n = {
       defaultLocale = "en_US.UTF-8";
