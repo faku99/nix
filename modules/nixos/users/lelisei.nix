@@ -48,6 +48,7 @@ in
       extraGroups = ifGroupExist [
         "docker"
         "networkmanager"
+        "video"
         "wheel"
       ];
 
