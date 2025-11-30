@@ -90,6 +90,7 @@ in
 
         bind = [
           "$mod, D, togglefloating,"
+          "$mod, F, fullscreen"
 
           # Menu bindings
           "$mod, SPACE, exec, $menu -modes 'drun,calc,emoji' -show 'drun'"
