@@ -49,6 +49,7 @@ in {
 
       misc = {
         libreoffice.enable = true;
+        okular.enable = true;
         opencode.enable = true;
         rbw.enable = true;
       };
