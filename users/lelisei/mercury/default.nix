@@ -17,6 +17,15 @@ in {
     };
   };
 
+  monitors = [
+    {
+      name = "eDP-1";
+      width = 1920;
+      height = 1080;
+      primary = true;
+    }
+  ];
+
   userConfig = {
     global.enable = true;
 

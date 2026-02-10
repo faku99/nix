@@ -156,15 +156,13 @@ in
           force_default_wallpaper = 1;
         };
 
-        monitor = map (
-          m:
-          "${m.name},${
-            if m.enabled then
-              "${toString m.width}x${toString m.height}@${toString m.refreshRate},${m.position},1"
-            else
-              "disable"
+        monitor = (map (
+          m: "${m.name},${
+            if m.enabled
+            then "${toString m.width}x${toString m.height}@${toString m.refreshRate},${m.position},${toString m.scale}"
+            else "disable"
           }"
-        ) (osConfig.nixosConfig.desktop.monitors);
+        ) (config.monitors));
       };
       systemd = {
         enable = true;
