@@ -40,6 +40,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-gl = {
+      url = "github:nix-community/nixgl";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -111,6 +115,19 @@
             }
           ];
         };
+
+      homeConfig =
+        { modules, system }:
+        lib.homeManagerConfiguration {
+          pkgs = nixpkgsFor.${system};
+          extraSpecialArgs = specialArgs.${system};
+          modules = modules ++ [
+            outputs.homeManagerModules
+            inputs.sops-nix.homeManagerModules.sops
+            inputs.nvf.homeManagerModules.default
+            inputs.stylix.homeModules.stylix
+          ];
+        };
     in
     {
       inherit lib;
@@ -137,6 +154,13 @@
 
         saturn = nixosConfig {
           modules = [ ./hosts/saturn ];
+          system = "x86_64-linux";
+        };
+      };
+
+      homeConfigurations = {
+        mercury = homeConfig {
+          modules = [ ./users/lelisei/mercury ];
           system = "x86_64-linux";
         };
       };
