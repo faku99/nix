@@ -171,7 +171,9 @@ in
       xwayland.enable = true;
 
       # Use packages from the NixOS module
-      package = null;
+      package = config.lib.nixGL.wrap (pkgs.hyprland.override {
+        wrapRuntimeDeps = false;
+      });
       portalPackage = null;
     };
   };
