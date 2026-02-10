@@ -33,6 +33,8 @@ in
     programs.zsh = {
       enable = true;
 
+      dotDir = "${config.xdg.configHome}/zsh";
+
       sessionVariables = {
         CASE_SENSITIVE = true;
         DISABLE_AUTO_TITLE = true;
@@ -45,6 +47,7 @@ in
         custom = "$HOME/${zsh_custom_path}";
         theme = "custom";
         plugins = [
+          "direnv"
           "git"
           "gitignore"
           "history"
@@ -55,5 +58,7 @@ in
         '';
       };
     };
+
+    programs.direnv.enableZshIntegration = true;
   };
 }
