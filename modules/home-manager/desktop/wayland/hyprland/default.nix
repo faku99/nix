@@ -1,31 +1,12 @@
 {
   config,
   lib,
-  osConfig,
   pkgs,
   ...
 }:
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.userConfig.desktop.wayland.hyprland;
-
-  # Handle NVIDIA-specific options
-  nvidiaSupport = (builtins.elem "nvidia" (osConfig.services.xserver.videoDrivers or [ ]));
-  nvidiaEnv =
-    if nvidiaSupport then
-      [
-        "LIBVA_DRIVER_NAME,nvidia"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-      ]
-    else
-      [ ];
-  nvidiaCursor =
-    if nvidiaSupport then
-      {
-        no_hardware_cursors = true;
-      }
-    else
-      { };
 in
 {
   options.userConfig.desktop.wayland.hyprland = {
@@ -98,8 +79,6 @@ in
           "$mod SHIFT, S, exec, wlogout -b 1"
         ];
 
-        cursor = { } // nvidiaCursor;
-
         decoration = {
           rounding = 2;
           active_opacity = 1.0;
@@ -130,7 +109,7 @@ in
           "XDG_SESSION_TYPE,wayland"
           "XCURSOR_SIZE,24"
           "HYPRCURSOR_SIZE,24"
-        ] ++ nvidiaEnv;
+        ];
 
         exec = [
           "hyprctl setcursor ${config.gtk.cursorTheme.name} ${toString config.gtk.cursorTheme.size}"
