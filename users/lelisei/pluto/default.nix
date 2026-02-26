@@ -1,22 +1,25 @@
 {
-  pkgs,
   ...
 }:
 {
   home.username = "lelisei";
-  home.stateVersion = "24.11";
-
-  home.packages = with pkgs; [
-    fd
-  ];
+  home.stateVersion = "26.05";
 
   userConfig = {
     global.enable = true;
 
     programs = {
       dev = {
+        direnv.enable = true;
         git.enable = true;
         ssh.enable = true;
+      };
+
+      editor = {
+        nvf = {
+          enable = true;
+          defaultEditor = true;
+        };
       };
 
       sh-utils = {
@@ -29,16 +32,6 @@
       zsh = {
         enable = true;
         defaultShell = true;
-      };
-    };
-
-    system = {
-      impermanence = {
-        enable = true;
-        directories = [
-          "nix"
-          "sources"
-        ];
       };
     };
   };

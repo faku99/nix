@@ -44,7 +44,6 @@ in
 
     programs = {
       gpg.enable = true;
-      git.enable = true;
       home-manager.enable = true;
     };
 

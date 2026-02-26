@@ -147,11 +147,6 @@
           system = "x86_64-linux";
         };
 
-        pluto = nixosConfig {
-          modules = [ ./hosts/pluto ];
-          system = "aarch64-linux";
-        };
-
         saturn = nixosConfig {
           modules = [ ./hosts/saturn ];
           system = "x86_64-linux";
@@ -162,6 +157,11 @@
         mercury = homeConfig {
           modules = [ ./users/lelisei/mercury ];
           system = "x86_64-linux";
+        };
+
+        pluto = homeConfig {
+          modules = [ ./users/lelisei/pluto ];
+          system = "aarch64-linux";
         };
       };
     };
