@@ -14,13 +14,51 @@ in
   };
 
   config = mkIf cfg.enable {
+    # Required for MCP servers
     home.packages = with pkgs; [
-      opencode
+      nodejs_25
     ];
 
-    xdg.configFile."opencode/opencode.json".text = builtins.toJSON {
-      "$schema" = "https://opencode.ai/config.json";
-      theme = "gruvbox";
+    # Claude Code is required by opencode-claude-auth plugin
+    programs.claude-code.enable = true;
+
+    programs.opencode = {
+      enable = true;
+      settings = {
+        plugin = [
+          "opencode-claude-auth@latest"
+        ];
+        mcp = {
+          filesystem = {
+            enabled = true;
+            type = "local";
+            command = [
+              "npx"
+              "-y"
+              "@modelcontextprotocol/server-filesystem"
+              "."
+            ];
+          };
+          git = {
+            enabled = true;
+            type = "local";
+            command = [
+              "npx"
+              "-y"
+              "mcp-server-git"
+            ];
+          };
+          rg = {
+            enabled = true;
+            type = "local";
+            command = [
+              "npx"
+              "-y"
+              "mcp-ripgrep"
+            ];
+          };
+        };
+      };
     };
 
     userConfig.system.impermanence = {
