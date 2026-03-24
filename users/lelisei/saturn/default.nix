@@ -5,12 +5,28 @@
   username = "lelisei";
 in {
   home.username = username;
-  home.stateVersion = "24.11";
+  home.stateVersion = "26.05";
 
   sops = {
     gnupg.home = "/home/${username}/.gnupg";
     defaultSopsFile = "${self}/secrets/users/${username}.yaml";
   };
+
+  monitors = [
+    {
+      name = "DP-2";
+      width = 2560;
+      height = 1440;
+      refreshRate = 144;
+      primary = true;
+    }
+    {
+      name = "DP-3";
+      width = 2560;
+      height = 1440;
+      transform = 1;
+    }
+  ];
 
   userConfig = {
     global.enable = true;

@@ -39,6 +39,8 @@ in
     };
   };
 
+  boot.supportedFilesystems = [ "nfs" ];
+
   # Auto-log at home
   services.displayManager.autoLogin = {
     enable = true;
