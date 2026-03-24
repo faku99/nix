@@ -26,7 +26,7 @@
     '';
   };
 in let
-  version = "1.285.2-27841";
+  version = "1.295.0-29976";
   pname = "curseforge";
 
   src = appimageFromZip;
