@@ -43,6 +43,10 @@ in
             type = types.bool;
             default = true;
           };
+          transform = mkOption {
+            type = types.int;
+            default = 0;
+          };
           workspace = mkOption {
             type = types.nullOr types.str;
             default = null;
