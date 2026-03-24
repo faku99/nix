@@ -38,8 +38,10 @@ in
 
     home.homeDirectory = mkDefault "/home/${config.home.username}";
     home.packages = with pkgs; [
+      atool
       fd
       ripgrep
+      unzip
     ];
 
     programs = {
