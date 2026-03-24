@@ -14,9 +14,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    # Required for MCP servers
+    # Required for installing MCP servers
     home.packages = with pkgs; [
       nodejs_25
+      uv
     ];
 
     # Claude Code is required by opencode-claude-auth plugin
@@ -43,8 +44,7 @@ in
             enabled = true;
             type = "local";
             command = [
-              "npx"
-              "-y"
+              "uvx"
               "mcp-server-git"
             ];
           };
