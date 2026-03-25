@@ -37,12 +37,11 @@ in {
 
     programs = {
       browser = {
-        glide-browser.enable = true;
-        librewolf = {
+        chromium.enable = true;
+        glide-browser = {
           enable = true;
           defaultBrowser = true;
         };
-        qutebrowser.enable = true;
       };
 
       dev = {
