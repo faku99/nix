@@ -16,5 +16,16 @@ in
     home.packages = with pkgs; [
       glide-browser
     ];
+
+    xdg.desktopEntries = {
+      glide-browser = {
+        name = "glide";
+        genericName = "Browser App";
+        exec = "${pkgs.glide-browser}/bin/glide";
+        icon = "glide";
+        terminal = false;
+        startupNotify = true;
+      };
+    };
   };
 }
