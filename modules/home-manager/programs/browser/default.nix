@@ -8,6 +8,7 @@ let
 in
 {
   imports = [
+    ./chromium
     ./glide-browser
     ./librewolf
     ./qutebrowser
