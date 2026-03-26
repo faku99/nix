@@ -3,7 +3,7 @@
     ./claude-desktop.nix
     ./libreoffice.nix
     ./okular.nix
-    ./opencode.nix
+    ./opencode
     ./rbw.nix
   ];
 }

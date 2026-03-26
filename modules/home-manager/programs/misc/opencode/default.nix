@@ -25,6 +25,8 @@ in
 
     programs.opencode = {
       enable = true;
+      rules = ./AGENTS.md;
+      enableMcpIntegration = true;
       settings = {
         plugin = [
           "opencode-claude-auth@latest"
@@ -59,6 +61,12 @@ in
           };
         };
       };
+    };
+
+    xdg.configFile = {
+      "opencode/agents".source = ./agents;
+      "opencode/commands".source = ./commands;
+      "opencode/skills".source = ./skills;
     };
 
     userConfig.system.impermanence = {
