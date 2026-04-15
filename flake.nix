@@ -36,6 +36,11 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    glide-browser = {
+      url = "github:glide-browser/glide.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -109,6 +114,7 @@
                   inputs.sops-nix.homeManagerModules.sops
                   outputs.homeManagerModules
                   inputs.nvf.homeManagerModules.default
+                  inputs.glide-browser.homeModules.default
                 ];
                 extraSpecialArgs = specialArgs.${system};
               };

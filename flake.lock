@@ -276,6 +276,29 @@
         "type": "github"
       }
     },
+    "glide-browser": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773656868,
+        "narHash": "sha256-IvWd8A3MM2qASf2U5diOoYEc2dCxqR4BOhB5RuOQnZM=",
+        "owner": "glide-browser",
+        "repo": "glide.nix",
+        "rev": "1a3dd001865f6ac5a3562d2cb484388672ad6eaf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "glide-browser",
+        "repo": "glide.nix",
+        "type": "github"
+      }
+    },
     "gnome-shell": {
       "flake": false,
       "locked": {
@@ -555,6 +578,7 @@
         "claude-desktop": "claude-desktop",
         "disko": "disko",
         "firefox-addons": "firefox-addons",
+        "glide-browser": "glide-browser",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "nix-gl": "nix-gl",

@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -19,25 +18,16 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      glide-browser
-    ];
+    programs.glide-browser = {
+      enable = true;
+
+      # TODO: config
+    };
 
     userConfig.programs.browser = lib.mkIf cfg.defaultBrowser {
       enable = true;
-      executable = "librewolf";
-      desktop = "librewolf.desktop";
-    };
-
-    xdg.desktopEntries = {
-      glide-browser = {
-        name = "glide";
-        genericName = "Browser App";
-        exec = "${pkgs.glide-browser}/bin/glide";
-        icon = "glide";
-        terminal = false;
-        startupNotify = true;
-      };
+      executable = "glide-browser";
+      desktop = "glide-browser.desktop";
     };
   };
 }
