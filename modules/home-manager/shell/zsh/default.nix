@@ -7,8 +7,6 @@ let
     types
     ;
   cfg = config.userConfig.shell.zsh;
-
-  zsh_custom_path = ".config/oh-my-zsh";
 in
 {
   options.userConfig.shell.zsh = {
@@ -27,7 +25,8 @@ in
     };
 
     home.file = {
-      "${zsh_custom_path}/custom.zsh-theme".source = ./custom.zsh-theme;
+      ".oh-my-zsh/custom/.keep".text = "";
+      ".oh-my-zsh/custom/themes/custom.zsh-theme".source = ./custom.zsh-theme;
     };
 
     programs.zsh = {
@@ -44,7 +43,7 @@ in
 
       oh-my-zsh = {
         enable = true;
-        custom = "$HOME/${zsh_custom_path}";
+        custom = "${config.home.homeDirectory}/.oh-my-zsh/custom";
         theme = "custom";
         plugins = [
           "direnv"
