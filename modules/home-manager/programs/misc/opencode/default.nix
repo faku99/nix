@@ -25,11 +25,11 @@ in
 
     programs.opencode = {
       enable = true;
-      rules = ./AGENTS.md;
+      context = ./AGENTS.md;
       enableMcpIntegration = true;
       settings = {
         plugin = [
-          "opencode-claude-auth@latest"
+          "@ex-machina/opencode-anthropic-auth@1.6.1"
         ];
         mcp = {
           filesystem = {
