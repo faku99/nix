@@ -29,7 +29,7 @@ in
       caddy
       clang-tools
       nixd
-      nixfmt-rfc-style
+      nixfmt
     ];
 
     programs.vscode = {

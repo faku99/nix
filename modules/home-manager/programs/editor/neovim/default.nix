@@ -56,7 +56,7 @@ in
         # Nix
         nil
         nixd
-        nixfmt-rfc-style
+        nixfmt
       ];
     };
 
