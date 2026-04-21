@@ -8,6 +8,5 @@
     ./misc
     ./sh-utils
     ./terminal
-    ./work
   ];
 }

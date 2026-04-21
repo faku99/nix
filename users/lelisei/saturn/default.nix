@@ -80,10 +80,6 @@ in {
           defaultTerminal = true;
         };
       };
-
-      work = {
-        enable = true;
-      };
     };
 
     shell = {
