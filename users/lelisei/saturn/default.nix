@@ -37,7 +37,7 @@ in {
 
     programs = {
       browser = {
-        chromium.enable = true;
+        brave.enable = true;
         glide-browser = {
           enable = true;
           defaultBrowser = true;
