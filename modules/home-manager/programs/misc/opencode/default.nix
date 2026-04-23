@@ -62,6 +62,11 @@ in
               Authorization = "{file:${config.sops.secrets."opencode/github_token".path}}";
             };
           };
+          penpot = {
+            enabled = true;
+            type = "remote";
+            url = "http://localhost:4401/mcp";
+          };
           rg = {
             enabled = true;
             type = "local";
