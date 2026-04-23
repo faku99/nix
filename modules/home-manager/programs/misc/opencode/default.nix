@@ -33,7 +33,7 @@ in
       enableMcpIntegration = true;
       settings = {
         plugin = [
-          "@ex-machina/opencode-anthropic-auth@1.6.1"
+          "@ex-machina/opencode-anthropic-auth@latest"
         ];
         mcp = {
           filesystem = {
