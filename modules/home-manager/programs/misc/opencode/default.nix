@@ -14,6 +14,10 @@ in
   };
 
   config = mkIf cfg.enable {
+    sops.secrets = {
+      "opencode/github_token" = {};
+    };
+
     # Required for installing MCP servers
     home.packages = with pkgs; [
       nodejs_25
@@ -49,6 +53,14 @@ in
               "uvx"
               "mcp-server-git"
             ];
+          };
+          github = {
+            enabled = true;
+            type = "remote";
+            url = "https://api.githubcopilot.com/mcp/";
+            headers = {
+              Authorization = "{file:${config.sops.secrets."opencode/github_token".path}}";
+            };
           };
           rg = {
             enabled = true;
