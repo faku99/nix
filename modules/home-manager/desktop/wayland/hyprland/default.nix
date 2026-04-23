@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -45,6 +46,9 @@ in
 
     wayland.windowManager.hyprland = {
       enable = true;
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+
       extraConfig = builtins.readFile ./hyprland.conf;
       plugins = [ ];
       settings = {
@@ -105,10 +109,21 @@ in
         };
 
         env = [
-          "XDG_DATA_DIRS,$HOME/.nix-profile/share:/run/current-system/sw/share"
-          "XDG_SESSION_TYPE,wayland"
-          "XCURSOR_SIZE,24"
+          "CLUTTER_BACKEND,wayland"
+          "ELECTRON_OZONE_PLATFORM_HINT,wayland"
+          "GDK_BACKEND,wayland,x11,*"
           "HYPRCURSOR_SIZE,24"
+          "MOZ_ENABLE_WAYLAND,1"
+          "QT_AUTO_SCREEN_SCALE_FACTOR,1"
+          "QT_QPA_PLATFORM,wayland;xcb"
+          "QT_QPA_PLATFORMTHEME,qt6ct"
+          "QT_STYLE_OVERRIDE,kvantum"
+          "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+          "SDL_VIDEODRIVER,wayland"
+          "XCURSOR_SIZE,24"
+          "XDG_DATA_DIRS,$HOME/.nix-profile/share:/run/current-system/sw/share"
+          "XDG_SESSION_DESKTOP,Hyprland"
+          "XDG_SESSION_TYPE,wayland"
         ];
 
         exec = [
@@ -143,17 +158,12 @@ in
           }"
         ) (config.monitors));
       };
+
       systemd = {
         enable = true;
         variables = [ "--all" ];
       };
       xwayland.enable = true;
-
-      # Use packages from the NixOS module
-      package = config.lib.nixGL.wrap (pkgs.hyprland.override {
-        wrapRuntimeDeps = false;
-      });
-      portalPackage = null;
     };
   };
 }
