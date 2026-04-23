@@ -7,6 +7,10 @@
       lspSignature.enable = true;
       lspconfig.enable = true;
 
+      presets = {
+        tailwindcss-language-server.enable = true;
+      };
+
       servers.nil_ls = {
         enable = true;
         settings.nix.flake.autoArchive = true;
