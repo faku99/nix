@@ -22,9 +22,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # NixOS
     stylix = {
-      url = "github:danth/stylix";
+      url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -73,6 +72,8 @@
       lib = nixpkgs.lib // home-manager.lib;
 
       forAllSystems = lib.genAttrs (import systems);
+
+      forEachPkgs = f: forAllSystems (sys: f nixpkgs.legacyPackages.${sys});
 
       inputPkgsFor =
         pkgs:
@@ -138,6 +139,8 @@
     in
     {
       inherit lib;
+
+      formatter = forEachPkgs (pkgs: pkgs.nixfmt);
 
       nixosModules = import ./modules/nixos;
       homeManagerModules = import ./modules/home-manager;

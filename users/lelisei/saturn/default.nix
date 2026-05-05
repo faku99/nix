@@ -30,6 +30,7 @@ in {
 
   userConfig = {
     global.enable = true;
+    stylix.enable = true;
 
     desktop = {
       wayland.enable = true;
