@@ -11,6 +11,7 @@ in
 {
   imports = [
     ./hyprland
+    ./noctalia-shell
     ./rofi
     ./waybar
   ];

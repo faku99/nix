@@ -33,7 +33,10 @@ in {
     stylix.enable = true;
 
     desktop = {
-      wayland.enable = true;
+      wayland = {
+        enable = true;
+        noctalia-shell.enable = true;
+      };
     };
 
     programs = {
