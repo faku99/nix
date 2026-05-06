@@ -71,6 +71,7 @@ in {
         okular.enable = true;
         opencode.enable = true;
         rbw.enable = true;
+        telegram.enable = true;
       };
 
       sh-utils = {

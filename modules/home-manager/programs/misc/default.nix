@@ -4,5 +4,6 @@
     ./okular.nix
     ./opencode
     ./rbw.nix
+    ./telegram.nix
   ];
 }
