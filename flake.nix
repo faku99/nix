@@ -31,10 +31,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # HomeManager
-    claude-desktop = {
-      url = "github:k3d3/claude-desktop-linux-flake";
-    };
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
