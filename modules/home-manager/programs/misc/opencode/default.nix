@@ -34,6 +34,9 @@ in
       settings = {
         plugin = [
           "@ex-machina/opencode-anthropic-auth@latest"
+          "@ramtinj95/opencode-tokenscope@latest"
+          "@simonwjackson/opencode-direnv@latest"
+          "@tarquinen/opencode-dcp@latest"
         ];
         mcp = {
           filesystem = {
