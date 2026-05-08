@@ -53,7 +53,6 @@ in
       plugins = [ ];
       settings = {
         # Custom definitions
-        "$menu" = "rofi";
         "$menu-rbw" = "rofi-rbw";
         "$mod" = "SUPER";
         "$terminal" = "alacritty";
@@ -78,7 +77,7 @@ in
           "$mod, F, fullscreen"
 
           # Menu bindings
-          "$mod, SPACE, exec, $menu -modes 'drun,calc,emoji' -show 'drun'"
+          "$mod, SPACE, exec, $menu"
           "$mod SHIFT, SPACE, exec, $menu-rbw"
           "$mod SHIFT, S, exec, wlogout -b 1"
         ];

@@ -22,6 +22,12 @@ in
       ];
     };
 
+    wayland.windowManager.hyprland = {
+      settings = {
+        "$menu" = "rofi -modes 'drun,calc,emoji' show 'drun'";
+      };
+    };
+
     home.packages = mkIf config.userConfig.programs.misc.rbw.enable [
       pkgs.rofi-rbw-wayland
     ];

@@ -15,6 +15,15 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    wayland.windowManager.hyprland = {
+      settings = {
+        "$menu" = "noctalia-shell ipc call launcher toggle";
+        exec-once = [
+          "noctalia-shell"
+        ];
+      };
+    };
+
     programs.noctalia-shell = {
       enable = true;
 
