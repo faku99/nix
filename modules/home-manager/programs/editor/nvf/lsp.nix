@@ -8,12 +8,29 @@
       lspconfig.enable = true;
 
       presets = {
+        clangd.enable = true;
+        nixd.enable = true;
+        qmlls.enable = true;
         tailwindcss-language-server.enable = true;
       };
 
-      servers.nil_ls = {
-        enable = true;
-        settings.nix.flake.autoArchive = true;
+      servers = {
+        clangd = {
+          enable = true;
+          filetypes = [
+            "c"
+            "cpp"
+          ];
+        };
+        qmlls = {
+          enable = true;
+          filetypes = [ "qml" ];
+        };
+        nixd = {
+          enable = true;
+          settings.nix.flake.autoArchive = true;
+          filetypes = [ "nix" ];
+        };
       };
     };
 
