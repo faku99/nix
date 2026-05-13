@@ -3,12 +3,12 @@ name: "Gruvbox Dark Modded"
 author: "uima"
 variant: "dark"
 palette:
-  base00: "#161616" # 0.0
-  base01: "#3e3932" # 0.2
-  base02: "#524b40" # 0.3
-  base03: "#7a6f5c" # 0.5
-  base04: "#ab9b7e" # 0.75
-  base05: "#ddc7a1" # 1.0
+  base00: "#161616"
+  base01: "#3e3932"
+  base02: "#524b40"
+  base03: "#7a6f5c"
+  base04: "#ab9b7e"
+  base05: "#ddc7a1"
   base06: "#ebdbb2"
   base07: "#fbf1c7"
   base08: "#ea6962"
