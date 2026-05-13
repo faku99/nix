@@ -31,15 +31,15 @@ in
 
     programs.alacritty = {
       enable = true;
-      # settings = {
-      #   window = {
-      #     dynamic_title = true;
-      #     padding = {
-      #       x = 5;
-      #       y = 5;
-      #     };
-      #   };
-      # };
+      settings = {
+        keyboard.bindings = [
+          {
+            key = "Return";
+            mods = "Shift | Super";
+            action = "SpawnNewInstance";
+          }
+        ];
+      };
     };
   };
 }
