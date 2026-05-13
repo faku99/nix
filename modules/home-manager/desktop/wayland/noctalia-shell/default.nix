@@ -27,10 +27,23 @@ in
     programs.noctalia-shell = {
       enable = true;
 
+      colors = {
+        mBackground = lib.mkForce "#${config.lib.stylix.colors.base00}";
+        mOnBackground = lib.mkForce "#${config.lib.stylix.colors.base05}";
+        mPrimary = lib.mkForce "#${config.lib.stylix.colors.base0D}";
+        mOnPrimary = lib.mkForce "#${config.lib.stylix.colors.base00}";
+        mSecondary = lib.mkForce "#${config.lib.stylix.colors.base0E}";
+        mOnSecondary = lib.mkForce "#${config.lib.stylix.colors.base00}";
+        mSurface = lib.mkForce "#${config.lib.stylix.colors.base00}";
+        mOnSurface = lib.mkForce "#${config.lib.stylix.colors.base05}";
+        mOutline = lib.mkForce "#${config.lib.stylix.colors.base03}";
+      };
+
       settings = {
         settingsVersion = 59;
         bar = {
           density = "comfortable";
+          fontScale = 1.20;
           showCapsule = false;
           enableExclusionZoneInset = false;
           outerCorners = false;
@@ -64,7 +77,7 @@ in
                 showApplications = false;
                 showApplicationsHover = false;
                 showBadge = true;
-                showLabelsOnlyWhenOccupied = true;
+                showLabelsOnlyWhenOccupied = false;
                 unfocusedIconsOpacity = 1;
               }
             ];
