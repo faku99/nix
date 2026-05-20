@@ -1,8 +1,7 @@
-{ lib, self, ... }:
-let
-  height = 1440;
-  width = 2560;
-in
+{
+  lib,
+  ...
+}:
 {
   imports = [
     ./hardware-configuration.nix
@@ -10,7 +9,7 @@ in
 
   networking.hostName = "saturn";
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "26.05";
 
   # Make sure the kernel uses the correct driver
   boot.initrd.kernelModules = [ "amdgpu" ];
@@ -51,25 +50,6 @@ in
     global.enable = true;
 
     users.lelisei.enable = true;
-
-    desktop = {
-      monitors = [
-        {
-          inherit height width;
-          name = "DP-3";
-          refreshRate = 144;
-          primary = true;
-        }
-      ];
-      # wallpaper.generate = {
-      #   enable = true;
-      #   inputSVG = "${self}/modules/nixos/theme/kcorp.svg";
-      #   inherit height width;
-      # };
-      windowManager = {
-        hyprland.enable = true;
-      };
-    };
 
     programs = {
       steam.enable = true;
