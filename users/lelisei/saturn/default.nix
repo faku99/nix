@@ -30,7 +30,7 @@ in {
 
   userConfig = {
     global.enable = true;
-    stylix.enable = true;
+    theme.enable = true;
 
     desktop = {
       windowManager = "hyprland";

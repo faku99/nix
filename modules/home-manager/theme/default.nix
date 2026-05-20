@@ -5,11 +5,11 @@
   ...
 }:
 let
-  cfg = config.userConfig.stylix;
+  cfg = config.userConfig.theme;
 in
 {
-  options.userConfig.stylix = {
-    enable = lib.mkEnableOption "Stylix";
+  options.userConfig.theme = {
+    enable = lib.mkEnableOption "Theme";
   };
 
   config = lib.mkIf cfg.enable {
@@ -20,20 +20,6 @@ in
       image = ./wallpaper.jpg;
       base16Scheme = ./base16-scheme.yaml;
       polarity = "dark";
-
-      # opacity = {
-      #   applications = 1.0;
-      #   desktop = 1.0;
-      #   popups = 0.9;
-      #   terminal = 0.9;
-      # };
-
-      # TODO: I'd love to change my cursor's color
-      # cursor = {
-      #   package = pkgs.phinger-cursors;
-      #   name = "phinger-cursors";
-      #   size = 24;
-      # };
 
       fonts = {
         serif = {

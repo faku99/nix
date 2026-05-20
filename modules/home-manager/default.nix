@@ -6,7 +6,7 @@
     ./desktop
     ./programs
     ./shell
-    ./stylix
     ./system
+    ./theme
   ];
 }
