@@ -4,9 +4,6 @@
   lib,
   ...
 }:
-let
-  cfg = config.userConfig.desktop.wayland.noctalia-shell;
-in
 {
   imports = [ inputs.noctalia.homeModules.default ];
 
@@ -14,7 +11,7 @@ in
     enable = lib.mkEnableOption "Noctalia Shell";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (config.userConfig.desktop.shell == "noctalia") {
     wayland.windowManager.hyprland = {
       settings = {
         "$menu" = "noctalia-shell ipc call launcher toggle";

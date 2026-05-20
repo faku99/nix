@@ -1,18 +1,14 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 let
-  inherit (lib) mkEnableOption mkIf;
-  cfg = config.userConfig.desktop.wayland.waybar;
-
   colors = config.lib.stylix.colors.withHashtag;
   fonts = config.stylix.fonts;
 in
 {
-  options.userConfig.desktop.wayland.waybar = {
-    enable = mkEnableOption "wayland";
-  };
-
-  config = mkIf cfg.enable {
-
+  config = lib.mkIf (config.userConfig.desktop.components.bar == "waybar") {
     programs.waybar = {
       enable = true;
 

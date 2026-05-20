@@ -5,57 +5,25 @@
   pkgs,
   ...
 }:
-let
-  inherit (lib) mkEnableOption mkIf;
-  cfg = config.userConfig.desktop.wayland.hyprland;
-in
 {
-  options.userConfig.desktop.wayland.hyprland = {
-    enable = mkEnableOption "hyprland";
-  };
-
-  config = mkIf cfg.enable {
+  config = lib.mkIf (config.userConfig.desktop.windowManager == "hyprland") {
 
     services = {
-      hyprpaper.enable = true;
+      # TODO: Activate only with waybar
       network-manager-applet.enable = true;
-    };
-
-    gtk = {
-      enable = true;
-      iconTheme = {
-        name = "Adwaita";
-        package = pkgs.adwaita-icon-theme;
-      };
-      cursorTheme = {
-        name = "Adwaita";
-        package = pkgs.adwaita-icon-theme;
-        size = 24;
-      };
-    };
-
-    xdg.portal = {
-      extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
-      config.hyprland = {
-        default = [
-          "wlr"
-          "gtk"
-        ];
-      };
     };
 
     wayland.windowManager.hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+      portalPackage =
+        inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
       extraConfig = builtins.readFile ./hyprland.conf;
       plugins = [ ];
       settings = {
         # Custom definitions
-        "$menu-rbw" = "rofi-rbw";
         "$mod" = "SUPER";
-        "$terminal" = "alacritty";
 
         animations = {
           enabled = true;
@@ -125,13 +93,8 @@ in
           "XDG_SESSION_TYPE,wayland"
         ];
 
-        exec = [
-          "hyprctl setcursor ${config.gtk.cursorTheme.name} ${toString config.gtk.cursorTheme.size}"
-        ];
-
         exec-once = [
           "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-          "hyprpaper"
           "swaync"
         ];
 
@@ -149,13 +112,17 @@ in
           force_default_wallpaper = 1;
         };
 
-        monitor = (map (
-          m: "${m.name},${
-            if m.enabled
-            then "${toString m.width}x${toString m.height}@${toString m.refreshRate},${m.position},${toString m.scale},transform,${toString m.transform}"
-            else "disable"
-          }"
-        ) (config.monitors));
+        monitor = (
+          map (
+            m:
+            "${m.name},${
+              if m.enabled then
+                "${toString m.width}x${toString m.height}@${toString m.refreshRate},${m.position},${toString m.scale},transform,${toString m.transform}"
+              else
+                "disable"
+            }"
+          ) (config.monitors)
+        );
       };
 
       systemd = {

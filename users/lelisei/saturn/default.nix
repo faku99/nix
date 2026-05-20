@@ -33,10 +33,9 @@ in {
     stylix.enable = true;
 
     desktop = {
-      wayland = {
-        enable = true;
-        noctalia-shell.enable = true;
-      };
+      windowManager = "hyprland";
+
+      shell = "noctalia";
     };
 
     programs = {
