@@ -30,5 +30,11 @@ in
     home.sessionVariables = {
       TERMINAL = cfg.executable;
     };
+
+    wayland.windowManager.hyprland = lib.mkIf (config.userConfig.desktop.windowManager == "hyprland") {
+      settings = {
+        "$terminal" = cfg.executable;
+      };
+    };
   };
 }
