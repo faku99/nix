@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     systems.url = "github:nix-systems/default-linux";
+    nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
     # Shared
     disko = {
@@ -161,7 +162,11 @@
         };
 
         saturn = nixosConfig {
-          modules = [ ./hosts/saturn ];
+          modules = [
+            ./hosts/saturn
+            inputs.nixos-hardware.nixosModules.common-cpu-amd
+            inputs.nixos-hardware.nixosModules.common-gpu-amd
+          ];
           system = "x86_64-linux";
         };
       };
