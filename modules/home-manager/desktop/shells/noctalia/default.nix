@@ -2,8 +2,12 @@
   config,
   inputs,
   lib,
+  pkgs,
   ...
 }:
+let
+  noctalia-shell = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
+in
 {
   imports = [ inputs.noctalia.homeModules.default ];
 
@@ -12,17 +16,27 @@
   };
 
   config = lib.mkIf (config.userConfig.desktop.shell == "noctalia") {
+    home.sessionVariables = {
+      DESKTOP_LAUNCHER = "${lib.getExe noctalia-shell} ipc call launcher toggle";
+      DESKTOP_POWERMENU = "${lib.getExe noctalia-shell} ipc call sessionMenu toggle";
+    };
+
     wayland.windowManager.hyprland = {
       settings = {
-        "$menu" = "noctalia-shell ipc call launcher toggle";
-        exec-once = [
-          "noctalia-shell"
+        on = [
+          {
+            _args = [
+              "hyprland.start"
+              (lib.generators.mkLuaInline ''function() hl.exec_cmd("${lib.getExe noctalia-shell}") end'')
+            ];
+          }
         ];
       };
     };
 
     programs.noctalia-shell = {
       enable = true;
+      package = noctalia-shell;
 
       colors = {
         mBackground = lib.mkForce "#${config.lib.stylix.colors.base00}";

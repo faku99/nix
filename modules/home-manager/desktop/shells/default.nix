@@ -9,7 +9,7 @@
 
   options.userConfig.desktop = {
     shell = lib.mkOption {
-      type = lib.types.enum [ "noctalia" ];
+      type = with lib.types; nullOr (enum [ "noctalia" ]);
       default = null;
       example = "noctalia";
       description = "Which desktop shell to use";
