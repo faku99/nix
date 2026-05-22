@@ -7,11 +7,13 @@
 }:
 {
   config = lib.mkIf (config.userConfig.desktop.windowManager == "hyprland") {
-
     services = {
       # TODO: Activate only with waybar
       network-manager-applet.enable = true;
     };
+
+    # TODO: Uncomment when stylix is updated for v0.55.0
+    stylix.targets.hyprland.enable = false;
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -19,116 +21,294 @@
       portalPackage =
         inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
-      extraConfig = builtins.readFile ./hyprland.conf;
       plugins = [ ];
       settings = {
-        # Custom definitions
-        "$mod" = "SUPER";
+        bind = import ./binds.nix { inherit lib; };
 
-        animations = {
-          enabled = true;
-
-          bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
-
-          animation = [
-            "windows, 1, 3, myBezier"
-            "windowsOut, 1, 3, default, popin 80%"
-            "border, 1, 4, default"
-            "borderangle, 0, 8, default"
-            "fade, 1, 3, default"
-            "workspaces, 1, 4, default"
-          ];
-        };
-
-        bind = [
-          "$mod, D, togglefloating,"
-          "$mod, F, fullscreen"
-
-          # Menu bindings
-          "$mod, SPACE, exec, $menu"
-          "$mod SHIFT, SPACE, exec, $menu-rbw"
-          "$mod SHIFT, S, exec, wlogout -b 1"
+        curve = [
+          {
+            _args = [
+              "emphasizedAccel"
+              {
+                type = "bezier";
+                points = [
+                  [
+                    0.3
+                    0
+                  ]
+                  [
+                    0.8
+                    0.15
+                  ]
+                ];
+              }
+            ];
+          }
+          {
+            _args = [
+              "emphasizedDecel"
+              {
+                type = "bezier";
+                points = [
+                  [
+                    0.05
+                    0.7
+                  ]
+                  [
+                    0.1
+                    1
+                  ]
+                ];
+              }
+            ];
+          }
+          {
+            _args = [
+              "standard"
+              {
+                type = "bezier";
+                points = [
+                  [
+                    0.2
+                    0
+                  ]
+                  [
+                    0
+                    1
+                  ]
+                ];
+              }
+            ];
+          }
         ];
 
-        decoration = {
-          rounding = 2;
-          active_opacity = 1.0;
-          inactive_opacity = 0.8;
-
-          blur = {
+        # Animations
+        animation = [
+          {
+            leaf = "layersIn";
             enabled = true;
-            size = 3;
+            speed = 3;
+            bezier = "emphasizedDecel";
+            style = "slide";
+          }
+          {
+            leaf = "layersOut";
+            enabled = true;
+            speed = 2;
+            bezier = "emphasizedAccel";
+            style = "slide";
+          }
+          {
+            leaf = "fadeLayers";
+            enabled = true;
+            speed = 3;
+            bezier = "standard";
+          }
+          {
+            leaf = "windowsIn";
+            enabled = true;
+            speed = 3;
+            bezier = "emphasizedDecel";
+          }
+          {
+            leaf = "windowsOut";
+            enabled = true;
+            speed = 2;
+            bezier = "emphasizedAccel";
+          }
+          {
+            leaf = "windowsMove";
+            enabled = true;
+            speed = 3;
+            bezier = "standard";
+          }
+          {
+            leaf = "workspaces";
+            enabled = true;
+            speed = 3;
+            bezier = "standard";
+          }
+          {
+            leaf = "fade";
+            enabled = true;
+            speed = 3;
+            bezier = "standard";
+          }
+          {
+            leaf = "fadeDim";
+            enabled = true;
+            speed = 3;
+            bezier = "standard";
+          }
+          {
+            leaf = "border";
+            enabled = true;
+            speed = 3;
+            bezier = "standard";
+          }
+        ];
+
+        # Window rules
+        window_rule = [
+          {
+            match.class = "(.*)";
+            suppress_event = "maximize";
+          }
+          {
+            match = {
+              float = true;
+              xwayland = false;
+            };
+            center = true;
+          }
+        ];
+
+        config = {
+          decoration = {
+            rounding = 2;
+            active_opacity = 1.0;
+            inactive_opacity = 0.8;
+
+            blur = {
+              enabled = true;
+              size = 3;
+            };
+
+            shadow = {
+              enabled = true;
+            };
           };
 
-          shadow = {
-            enabled = true;
-            # color = rgb colors.base00;
+          dwindle = {
+            force_split = 2;
+            preserve_split = true;
           };
-        };
 
-        dwindle = {
-          force_split = 2;
-          preserve_split = true;
-        };
+          ecosystem = {
+            no_update_news = true;
+          };
 
-        ecosystem = {
-          no_update_news = true;
+          general = {
+            allow_tearing = false;
+            border_size = 2;
+            gaps_in = 3;
+            gaps_out = 5;
+            layout = "dwindle";
+            resize_on_border = false;
+          };
+
+          misc = {
+            disable_hyprland_logo = true;
+            force_default_wallpaper = 1;
+          };
         };
 
         env = [
-          "CLUTTER_BACKEND,wayland"
-          "ELECTRON_OZONE_PLATFORM_HINT,wayland"
-          "GDK_BACKEND,wayland,x11,*"
-          "HYPRCURSOR_SIZE,24"
-          "MOZ_ENABLE_WAYLAND,1"
-          "QT_AUTO_SCREEN_SCALE_FACTOR,1"
-          "QT_QPA_PLATFORM,wayland;xcb"
-          "QT_QPA_PLATFORMTHEME,qt6ct"
-          "QT_STYLE_OVERRIDE,kvantum"
-          "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
-          "SDL_VIDEODRIVER,wayland"
-          "XCURSOR_SIZE,24"
-          "XDG_DATA_DIRS,$HOME/.nix-profile/share:/run/current-system/sw/share"
-          "XDG_SESSION_DESKTOP,Hyprland"
-          "XDG_SESSION_TYPE,wayland"
+          {
+            _args = [
+              "CLUTTER_BACKEND"
+              "wayland"
+            ];
+          }
+          {
+            _args = [
+              "ELECTRON_OZONE_PLATFORM_HINT"
+              "wayland"
+            ];
+          }
+          {
+            _args = [
+              "GDK_BACKEND"
+              "waylandx11,*"
+            ];
+          }
+          {
+            _args = [
+              "HYPRCURSOR_SIZE"
+              "24"
+            ];
+          }
+          {
+            _args = [
+              "MOZ_ENABLE_WAYLAND"
+              "1"
+            ];
+          }
+          {
+            _args = [
+              "QT_AUTO_SCREEN_SCALE_FACTOR"
+              "1"
+            ];
+          }
+          {
+            _args = [
+              "QT_QPA_PLATFORM"
+              "wayland;xcb"
+            ];
+          }
+          {
+            _args = [
+              "QT_QPA_PLATFORMTHEME"
+              "qt6ct"
+            ];
+          }
+          {
+            _args = [
+              "QT_STYLE_OVERRIDE"
+              "kvantum"
+            ];
+          }
+          {
+            _args = [
+              "QT_WAYLAND_DISABLE_WINDOWDECORATION"
+              "1"
+            ];
+          }
+          {
+            _args = [
+              "SDL_VIDEODRIVER"
+              "wayland"
+            ];
+          }
+          {
+            _args = [
+              "XCURSOR_SIZE"
+              "24"
+            ];
+          }
+          {
+            _args = [
+              "XDG_SESSION_DESKTOP"
+              "Hyprland"
+            ];
+          }
+          {
+            _args = [
+              "XDG_SESSION_TYPE"
+              "wayland"
+            ];
+          }
         ];
 
-        exec-once = [
-          "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-          "swaync"
+        on = [
+          {
+            _args = [
+              "hyprland.start"
+              (lib.generators.mkLuaInline ''function() hl.exec_cmd("swaync") end'')
+            ];
+          }
         ];
 
-        general = {
-          allow_tearing = false;
-          border_size = 2;
-          gaps_in = 3;
-          gaps_out = 5;
-          layout = "dwindle";
-          resize_on_border = false;
-        };
-
-        misc = {
-          disable_hyprland_logo = true;
-          force_default_wallpaper = 1;
-        };
-
-        monitor = (
-          map (
-            m:
-            "${m.name},${
-              if m.enabled then
-                "${toString m.width}x${toString m.height}@${toString m.refreshRate},${m.position},${toString m.scale},transform,${toString m.transform}"
-              else
-                "disable"
-            }"
-          ) (config.monitors)
-        );
+        monitor = map (m: {
+          output = m.name;
+          mode = "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
+          position = m.position;
+          scale = m.scale;
+          transform = m.transform;
+        }) (config.monitors);
       };
 
-      systemd = {
-        enable = true;
-        variables = [ "--all" ];
-      };
+      systemd.variables = [ "--all" ];
       xwayland.enable = true;
     };
   };

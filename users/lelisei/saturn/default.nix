@@ -93,4 +93,14 @@ in {
       };
     };
   };
+
+  wayland.windowManager.hyprland.settings = {
+    device = [
+      {
+        name = "zsa-technology-labs-moonlander-mark-i";
+        kb_layout = "us";
+        kb_variant = "intl";
+      }
+    ];
+  };
 }

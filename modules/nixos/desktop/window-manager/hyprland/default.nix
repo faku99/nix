@@ -1,31 +1,17 @@
 {
-  config,
-  lib,
-  ...
-}:
-let
-  inherit (lib) mkIf mkEnableOption;
-  cfg = config.nixosConfig.desktop.windowManager.hyprland;
-in
-{
-  options.nixosConfig.desktop.windowManager.hyprland = {
-    enable = mkEnableOption "hyprland";
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+    xwayland.enable = true;
   };
 
-  config = mkIf cfg.enable {
-    programs.hyprland = {
+  services.displayManager = {
+    sddm = {
       enable = true;
-      withUWSM = true;
+      wayland.enable = true;
     };
-
-    services.displayManager = {
-      sddm = {
-        enable = true;
-        wayland.enable = true;
-      };
-      defaultSession = "hyprland-uwsm";
-    };
-
-    services.gnome.gnome-keyring.enable = true;
+    defaultSession = "hyprland-uwsm";
   };
+
+  services.gnome.gnome-keyring.enable = true;
 }
