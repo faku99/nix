@@ -81,5 +81,7 @@ in
         LC_PAPER = "fr_CH.UTF-8";
       };
     };
+
+    security.sudo.wheelNeedsPassword = false;
   };
 }
