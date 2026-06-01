@@ -6,6 +6,11 @@
     systems.url = "github:nix-systems/default-linux";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
+    # Denditric pattern
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
+    den.url = "github:vic/den";
+
     # Shared
     disko = {
       url = "github:nix-community/disko";
@@ -63,124 +68,125 @@
     };
   };
 
-  outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      home-manager,
-      systems,
-      ...
-    }:
-    let
-      inherit (self) outputs;
-      lib = nixpkgs.lib // home-manager.lib;
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
-      forAllSystems = lib.genAttrs (import systems);
+  #  inputs@{
+  #    self,
+  #    nixpkgs,
+  #    home-manager,
+  #    systems,
+  #    ...
+  #  }:
+  #  let
+  #    inherit (self) outputs;
+  #    lib = nixpkgs.lib // home-manager.lib;
 
-      forEachPkgs = f: forAllSystems (sys: f nixpkgs.legacyPackages.${sys});
+  #    forAllSystems = lib.genAttrs (import systems);
 
-      inputPkgsFor =
-        pkgs:
-        forAllSystems (
-          system:
-          import pkgs {
-            inherit system;
-            config = {
-              allowUnfree = true;
-              segger-jlink.acceptLicense = true;
-              permittedInsecurePackages = [
-                "segger-jlink-qt4-810"
-              ];
-            };
-          }
-        );
+  #    forEachPkgs = f: forAllSystems (sys: f nixpkgs.legacyPackages.${sys});
 
-      # Nixpkgs for each system
-      nixpkgsFor = inputPkgsFor nixpkgs;
+  #    inputPkgsFor =
+  #      pkgs:
+  #      forAllSystems (
+  #        system:
+  #        import pkgs {
+  #          inherit system;
+  #          config = {
+  #            allowUnfree = true;
+  #            segger-jlink.acceptLicense = true;
+  #            permittedInsecurePackages = [
+  #              "segger-jlink-qt4-810"
+  #            ];
+  #          };
+  #        }
+  #      );
 
-      # specialArgs shared between nixosConfig and homeConfig
-      specialArgs = forAllSystems (system: {
-        inherit inputs outputs;
-        self = self;
-        pkgs-stable = (inputPkgsFor inputs.nixpkgs-stable).${system};
-      });
+  #    # Nixpkgs for each system
+  #    nixpkgsFor = inputPkgsFor nixpkgs;
 
-      nixosConfig =
-        { modules, system }:
-        lib.nixosSystem {
-          pkgs = nixpkgsFor.${system};
-          specialArgs = specialArgs.${system};
+  #    # specialArgs shared between nixosConfig and homeConfig
+  #    specialArgs = forAllSystems (system: {
+  #      inherit inputs outputs;
+  #      self = self;
+  #      pkgs-stable = (inputPkgsFor inputs.nixpkgs-stable).${system};
+  #    });
 
-          modules = modules ++ [
-            outputs.nixosModules
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                sharedModules = [
-                  inputs.sops-nix.homeManagerModules.sops
-                  outputs.homeManagerModules
-                  inputs.nvf.homeManagerModules.default
-                  inputs.glide-browser.homeModules.default
-                ];
-                extraSpecialArgs = specialArgs.${system};
-              };
-            }
-          ];
-        };
+  #    nixosConfig =
+  #      { modules, system }:
+  #      lib.nixosSystem {
+  #        pkgs = nixpkgsFor.${system};
+  #        specialArgs = specialArgs.${system};
 
-      homeConfig =
-        { modules, system }:
-        lib.homeManagerConfiguration {
-          pkgs = nixpkgsFor.${system};
-          extraSpecialArgs = specialArgs.${system};
-          modules = modules ++ [
-            outputs.homeManagerModules
-            inputs.sops-nix.homeManagerModules.sops
-            inputs.nvf.homeManagerModules.default
-            inputs.stylix.homeModules.stylix
-          ];
-        };
-    in
-    {
-      inherit lib;
+  #        modules = modules ++ [
+  #          outputs.nixosModules
+  #          home-manager.nixosModules.home-manager
+  #          {
+  #            home-manager = {
+  #              sharedModules = [
+  #                inputs.sops-nix.homeManagerModules.sops
+  #                outputs.homeManagerModules
+  #                inputs.nvf.homeManagerModules.default
+  #                inputs.glide-browser.homeModules.default
+  #              ];
+  #              extraSpecialArgs = specialArgs.${system};
+  #            };
+  #          }
+  #        ];
+  #      };
 
-      formatter = forEachPkgs (pkgs: pkgs.nixfmt);
+  #    homeConfig =
+  #      { modules, system }:
+  #      lib.homeManagerConfiguration {
+  #        pkgs = nixpkgsFor.${system};
+  #        extraSpecialArgs = specialArgs.${system};
+  #        modules = modules ++ [
+  #          outputs.homeManagerModules
+  #          inputs.sops-nix.homeManagerModules.sops
+  #          inputs.nvf.homeManagerModules.default
+  #          inputs.stylix.homeModules.stylix
+  #        ];
+  #      };
+  #  in
+  #  {
+  #    inherit lib;
 
-      nixosModules = import ./modules/nixos;
-      homeManagerModules = import ./modules/home-manager;
+  #    formatter = forEachPkgs (pkgs: pkgs.nixfmt);
 
-      overlays = import ./overlays { inherit inputs outputs; };
+  #    nixosModules = import ./modules/nixos;
+  #    homeManagerModules = import ./modules/home-manager;
 
-      packages = forAllSystems (system: import ./pkgs { pkgs = nixpkgsFor.${system}; });
+  #    overlays = import ./overlays { inherit inputs outputs; };
 
-      templates = import ./templates;
+  #    packages = forAllSystems (system: import ./pkgs { pkgs = nixpkgsFor.${system}; });
 
-      nixosConfigurations = {
-        jupiter = nixosConfig {
-          modules = [ ./hosts/jupiter ];
-          system = "x86_64-linux";
-        };
+  #    templates = import ./templates;
 
-        saturn = nixosConfig {
-          modules = [
-            ./hosts/saturn
-            inputs.nixos-hardware.nixosModules.common-cpu-amd
-            inputs.nixos-hardware.nixosModules.common-gpu-amd
-          ];
-          system = "x86_64-linux";
-        };
-      };
+  #    nixosConfigurations = {
+  #      jupiter = nixosConfig {
+  #        modules = [ ./hosts/jupiter ];
+  #        system = "x86_64-linux";
+  #      };
 
-      homeConfigurations = {
-        mercury = homeConfig {
-          modules = [ ./users/lelisei/mercury ];
-          system = "x86_64-linux";
-        };
+  #      saturn = nixosConfig {
+  #        modules = [
+  #          ./hosts/saturn
+  #          inputs.nixos-hardware.nixosModules.common-cpu-amd
+  #          inputs.nixos-hardware.nixosModules.common-gpu-amd
+  #        ];
+  #        system = "x86_64-linux";
+  #      };
+  #    };
 
-        pluto = homeConfig {
-          modules = [ ./users/lelisei/pluto ];
-          system = "aarch64-linux";
-        };
-      };
-    };
+  #    homeConfigurations = {
+  #      mercury = homeConfig {
+  #        modules = [ ./users/lelisei/mercury ];
+  #        system = "x86_64-linux";
+  #      };
+
+  #      pluto = homeConfig {
+  #        modules = [ ./users/lelisei/pluto ];
+  #        system = "aarch64-linux";
+  #      };
+  #    };
+  #  };
 }

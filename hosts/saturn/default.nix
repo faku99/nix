@@ -29,7 +29,6 @@
     grub = {
       enable = true;
       useOSProber = true;
-      device = "nodev";
       efiSupport = true;
     };
     systemd-boot.enable = lib.mkForce false;

@@ -1,0 +1,665 @@
+{
+  "disks": {
+    "nvme0n1": {
+      "model": "Force MP510",
+      "serial": "1936823800012888024F",
+      "size": "894.25 GiB",
+      "size_bytes": 960197124096,
+      "type": "ssd",
+      "wwn": "nvme.1987-3139333638323338303030313238383830323446-466f726365204d50353130-00000001"
+    },
+    "sda": {
+      "model": "ST1000DM010-2EP1",
+      "serial": "Z9ANDP0W",
+      "size": "931.51 GiB",
+      "size_bytes": 1000204886016,
+      "type": "hdd",
+      "vendor": "ATA",
+      "wwn": "0x5000c500af645ea9"
+    },
+    "sdb": {
+      "model": "Samsung SSD 860",
+      "serial": "S416NW0R203000X",
+      "size": "1.82 TiB",
+      "size_bytes": 2000398934016,
+      "type": "ssd",
+      "vendor": "ATA",
+      "wwn": "0x5002538e71211799"
+    }
+  },
+  "dmi": {
+    "bios": {
+      "release_date": "08/10/2021",
+      "vendor": "American Megatrends Inc.",
+      "version": "2423"
+    },
+    "board": {
+      "asset_tag": "Default string",
+      "manufacturer": "ASUSTeK COMPUTER INC.",
+      "product": "ROG STRIX B550-F GAMING (WI-FI)"
+    },
+    "chassis": {
+      "asset_tag": "Default string",
+      "type": "Desktop"
+    },
+    "manufacturer": "ASUS",
+    "product": {
+      "name": "System Product Name",
+      "version": "System Version"
+    }
+  },
+  "facterversion": "4.10.0",
+  "filesystems": "ext3,ext4,vfat",
+  "fips_enabled": false,
+  "identity": {
+    "gid": 100,
+    "group": "users",
+    "privileged": false,
+    "uid": 1000,
+    "user": "lelisei"
+  },
+  "is_virtual": false,
+  "kernel": "Linux",
+  "kernelmajversion": "6.18",
+  "kernelrelease": "6.18.31",
+  "kernelversion": "6.18.31",
+  "load_averages": {
+    "15m": 0.48,
+    "1m": 0.88,
+    "5m": 0.74
+  },
+  "memory": {
+    "system": {
+      "available": "22.66 GiB",
+      "available_bytes": 24331309056,
+      "capacity": "27.24%",
+      "total": "31.14 GiB",
+      "total_bytes": 33438232576,
+      "used": "8.48 GiB",
+      "used_bytes": 9106923520
+    }
+  },
+  "mountpoints": {
+    "/": {
+      "available": "8.74 GiB",
+      "available_bytes": 9380720640,
+      "capacity": "95.33%",
+      "device": "/dev/mapper/linux_vg-nixos_2411",
+      "filesystem": "ext4",
+      "options": [
+        "rw",
+        "relatime"
+      ],
+      "size": "196.30 GiB",
+      "size_bytes": 210779168768,
+      "used": "178.53 GiB",
+      "used_bytes": 191696625664
+    },
+    "/boot": {
+      "available": "780.24 MiB",
+      "available_bytes": 818139136,
+      "capacity": "23.58%",
+      "device": "/dev/nvme0n1p1",
+      "filesystem": "vfat",
+      "options": [
+        "rw",
+        "relatime",
+        "fmask=0077",
+        "dmask=0077",
+        "codepage=437",
+        "iocharset=iso8859-1",
+        "shortname=mixed",
+        "errors=remount-ro"
+      ],
+      "size": "1020.98 MiB",
+      "size_bytes": 1070579712,
+      "used": "240.75 MiB",
+      "used_bytes": 252440576
+    },
+    "/dev": {
+      "available": "1.56 GiB",
+      "available_bytes": 1671913472,
+      "capacity": "0%",
+      "device": "devtmpfs",
+      "filesystem": "devtmpfs",
+      "options": [
+        "rw",
+        "nosuid",
+        "size=1632728k",
+        "nr_inodes=4064437",
+        "mode=755"
+      ],
+      "size": "1.56 GiB",
+      "size_bytes": 1671913472,
+      "used": "0 bytes",
+      "used_bytes": 0
+    },
+    "/dev/hugepages": {
+      "available": "0 bytes",
+      "available_bytes": 0,
+      "capacity": "100%",
+      "device": "hugetlbfs",
+      "filesystem": "hugetlbfs",
+      "options": [
+        "rw",
+        "nosuid",
+        "nodev",
+        "relatime",
+        "pagesize=2M"
+      ],
+      "size": "0 bytes",
+      "size_bytes": 0,
+      "used": "0 bytes",
+      "used_bytes": 0
+    },
+    "/dev/mqueue": {
+      "available": "0 bytes",
+      "available_bytes": 0,
+      "capacity": "100%",
+      "device": "mqueue",
+      "filesystem": "mqueue",
+      "options": [
+        "rw",
+        "nosuid",
+        "nodev",
+        "noexec",
+        "relatime"
+      ],
+      "size": "0 bytes",
+      "size_bytes": 0,
+      "used": "0 bytes",
+      "used_bytes": 0
+    },
+    "/dev/pts": {
+      "available": "0 bytes",
+      "available_bytes": 0,
+      "capacity": "100%",
+      "device": "devpts",
+      "filesystem": "devpts",
+      "options": [
+        "rw",
+        "nosuid",
+        "noexec",
+        "relatime",
+        "gid=3",
+        "mode=620",
+        "ptmxmode=666"
+      ],
+      "size": "0 bytes",
+      "size_bytes": 0,
+      "used": "0 bytes",
+      "used_bytes": 0
+    },
+    "/dev/shm": {
+      "available": "15.57 GiB",
+      "available_bytes": 16718360576,
+      "capacity": "0.00%",
+      "device": "tmpfs",
+      "filesystem": "tmpfs",
+      "options": [
+        "rw",
+        "nosuid",
+        "nodev",
+        "size=16327264k"
+      ],
+      "size": "15.57 GiB",
+      "size_bytes": 16719118336,
+      "used": "740.00 KiB",
+      "used_bytes": 757760
+    },
+    "/home": {
+      "available": "47.71 GiB",
+      "available_bytes": 51223785472,
+      "capacity": "92.62%",
+      "device": "/dev/mapper/linux_vg-home",
+      "filesystem": "ext4",
+      "options": [
+        "rw",
+        "relatime"
+      ],
+      "size": "681.30 GiB",
+      "size_bytes": 731539554304,
+      "used": "598.92 GiB",
+      "used_bytes": 643080417280
+    },
+    "/nix/store": {
+      "available": "8.74 GiB",
+      "available_bytes": 9380720640,
+      "capacity": "95.33%",
+      "device": "/dev/mapper/linux_vg-nixos_2411",
+      "filesystem": "ext4",
+      "options": [
+        "ro",
+        "nosuid",
+        "nodev",
+        "relatime"
+      ],
+      "size": "196.30 GiB",
+      "size_bytes": 210779168768,
+      "used": "178.53 GiB",
+      "used_bytes": 191696625664
+    },
+    "/run": {
+      "available": "7.78 GiB",
+      "available_bytes": 8352890880,
+      "capacity": "0.08%",
+      "device": "tmpfs",
+      "filesystem": "tmpfs",
+      "options": [
+        "rw",
+        "nosuid",
+        "nodev",
+        "size=8163632k",
+        "nr_inodes=819200",
+        "mode=755"
+      ],
+      "size": "7.79 GiB",
+      "size_bytes": 8359559168,
+      "used": "6.36 MiB",
+      "used_bytes": 6668288
+    },
+    "/run/credentials/systemd-journald.service": {
+      "available": "1.00 MiB",
+      "available_bytes": 1048576,
+      "capacity": "0%",
+      "device": "none",
+      "filesystem": "tmpfs",
+      "options": [
+        "ro",
+        "nosuid",
+        "nodev",
+        "noexec",
+        "relatime",
+        "nosymfollow",
+        "size=1024k",
+        "nr_inodes=1024",
+        "mode=700",
+        "noswap"
+      ],
+      "size": "1.00 MiB",
+      "size_bytes": 1048576,
+      "used": "0 bytes",
+      "used_bytes": 0
+    },
+    "/run/keys": {
+      "available": "0 bytes",
+      "available_bytes": 0,
+      "capacity": "100%",
+      "device": "ramfs",
+      "filesystem": "ramfs",
+      "options": [
+        "rw",
+        "nosuid",
+        "nodev",
+        "relatime",
+        "mode=750"
+      ],
+      "size": "0 bytes",
+      "size_bytes": 0,
+      "used": "0 bytes",
+      "used_bytes": 0
+    },
+    "/run/secrets.d": {
+      "available": "0 bytes",
+      "available_bytes": 0,
+      "capacity": "100%",
+      "device": "none",
+      "filesystem": "ramfs",
+      "options": [
+        "rw",
+        "nosuid",
+        "nodev",
+        "noexec",
+        "relatime",
+        "mode=751"
+      ],
+      "size": "0 bytes",
+      "size_bytes": 0,
+      "used": "0 bytes",
+      "used_bytes": 0
+    },
+    "/run/user/1000": {
+      "available": "3.10 GiB",
+      "available_bytes": 3333390336,
+      "capacity": "0.31%",
+      "device": "tmpfs",
+      "filesystem": "tmpfs",
+      "options": [
+        "rw",
+        "nosuid",
+        "nodev",
+        "relatime",
+        "size=3265452k",
+        "nr_inodes=816363",
+        "mode=700",
+        "uid=1000",
+        "gid=100"
+      ],
+      "size": "3.11 GiB",
+      "size_bytes": 3343822848,
+      "used": "9.95 MiB",
+      "used_bytes": 10432512
+    },
+    "/run/user/1000/doc": {
+      "available": "0 bytes",
+      "available_bytes": 0,
+      "capacity": "100%",
+      "device": "portal",
+      "filesystem": "fuse.portal",
+      "options": [
+        "rw",
+        "nosuid",
+        "nodev",
+        "relatime",
+        "user_id=1000",
+        "group_id=100"
+      ],
+      "size": "0 bytes",
+      "size_bytes": 0,
+      "used": "0 bytes",
+      "used_bytes": 0
+    },
+    "/run/user/1000/gvfs": {
+      "available": "0 bytes",
+      "available_bytes": 0,
+      "capacity": "100%",
+      "device": "gvfsd-fuse",
+      "filesystem": "fuse.gvfsd-fuse",
+      "options": [
+        "rw",
+        "nosuid",
+        "nodev",
+        "relatime",
+        "user_id=1000",
+        "group_id=100"
+      ],
+      "size": "0 bytes",
+      "size_bytes": 0,
+      "used": "0 bytes",
+      "used_bytes": 0
+    },
+    "/run/wrappers": {
+      "available": "15.57 GiB",
+      "available_bytes": 16717938688,
+      "capacity": "0.01%",
+      "device": "tmpfs",
+      "filesystem": "tmpfs",
+      "options": [
+        "rw",
+        "nodev",
+        "relatime",
+        "size=16327264k",
+        "mode=755"
+      ],
+      "size": "15.57 GiB",
+      "size_bytes": 16719118336,
+      "used": "1.13 MiB",
+      "used_bytes": 1179648
+    },
+    "/var/lib/nfs/rpc_pipefs": {
+      "available": "0 bytes",
+      "available_bytes": 0,
+      "capacity": "100%",
+      "device": "sunrpc",
+      "filesystem": "rpc_pipefs",
+      "options": [
+        "rw",
+        "relatime"
+      ],
+      "size": "0 bytes",
+      "size_bytes": 0,
+      "used": "0 bytes",
+      "used_bytes": 0
+    }
+  },
+  "networking": {
+    "fqdn": "saturn",
+    "hostname": "saturn",
+    "interfaces": {
+      "docker0": {
+        "bindings": [
+          {
+            "address": "172.17.0.1",
+            "netmask": "255.255.0.0",
+            "network": "172.17.0.0"
+          }
+        ],
+        "ip": "172.17.0.1",
+        "mac": "82:7b:e2:00:88:59",
+        "mtu": 1500,
+        "netmask": "255.255.0.0",
+        "network": "172.17.0.0",
+        "operational_state": "down",
+        "physical": false
+      },
+      "enp8s0": {
+        "duplex": "unknown",
+        "mac": "f0:2f:74:14:bb:89",
+        "mtu": 1500,
+        "operational_state": "down",
+        "physical": true,
+        "speed": -1
+      },
+      "lo": {
+        "bindings": [
+          {
+            "address": "127.0.0.1",
+            "netmask": "255.0.0.0",
+            "network": "127.0.0.0"
+          }
+        ],
+        "bindings6": [
+          {
+            "address": "::1",
+            "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+            "network": "::1",
+            "scope6": "host",
+            "flags": [
+              "permanent"
+            ]
+          }
+        ],
+        "ip": "127.0.0.1",
+        "ip6": "::1",
+        "mtu": 65536,
+        "netmask": "255.0.0.0",
+        "netmask6": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "network": "127.0.0.0",
+        "network6": "::1",
+        "operational_state": "unknown",
+        "physical": false,
+        "scope6": "host"
+      },
+      "wlp7s0": {
+        "bindings": [
+          {
+            "address": "192.168.1.10",
+            "netmask": "255.255.255.0",
+            "network": "192.168.1.0"
+          }
+        ],
+        "bindings6": [
+          {
+            "address": "fe80::dc4e:8bf3:21b0:25b1",
+            "netmask": "ffff:ffff:ffff:ffff::",
+            "network": "fe80::",
+            "scope6": "link",
+            "flags": [
+              "permanent"
+            ]
+          }
+        ],
+        "ip": "192.168.1.10",
+        "ip6": "fe80::dc4e:8bf3:21b0:25b1",
+        "mac": "34:c9:3d:0f:16:3a",
+        "mtu": 1500,
+        "netmask": "255.255.255.0",
+        "netmask6": "ffff:ffff:ffff:ffff::",
+        "network": "192.168.1.0",
+        "network6": "fe80::",
+        "operational_state": "up",
+        "physical": true,
+        "scope6": "link"
+      }
+    },
+    "ip": "192.168.1.10",
+    "ip6": "fe80::dc4e:8bf3:21b0:25b1",
+    "mac": "34:c9:3d:0f:16:3a",
+    "mtu": 1500,
+    "netmask": "255.255.255.0",
+    "netmask6": "ffff:ffff:ffff:ffff::",
+    "network": "192.168.1.0",
+    "network6": "fe80::",
+    "primary": "wlp7s0",
+    "scope6": "link"
+  },
+  "os": {
+    "architecture": "x86_64",
+    "family": "",
+    "hardware": "x86_64",
+    "name": "NixOS",
+    "release": {
+      "full": "26.05",
+      "major": "26.05"
+    },
+    "selinux": {
+      "enabled": false
+    }
+  },
+  "partitions": {
+    "/dev/mapper/linux_vg-home": {
+      "filesystem": "ext4",
+      "mount": "/home",
+      "size": "693.25 GiB",
+      "size_bytes": 744371519488,
+      "uuid": "2d2ff537-2c2c-4e30-ac23-b9fa54e3e7da"
+    },
+    "/dev/mapper/linux_vg-nixos_2411": {
+      "filesystem": "ext4",
+      "mount": "/",
+      "size": "200.00 GiB",
+      "size_bytes": 214748364800,
+      "uuid": "ed972b91-0dc3-48e7-85fa-17423c4728e9"
+    },
+    "/dev/nvme0n1p1": {
+      "filesystem": "vfat",
+      "mount": "/boot",
+      "partlabel": "primary",
+      "parttype": "c12a7328-f81f-11d2-ba4b-00a0c93ec93b",
+      "partuuid": "8cabcf0f-25f3-42aa-8c28-f5d9ef1170f4",
+      "size": "1023.00 MiB",
+      "size_bytes": 1072693248,
+      "uuid": "B588-EA6F"
+    },
+    "/dev/nvme0n1p2": {
+      "filesystem": "LVM2_member",
+      "partlabel": "primary",
+      "parttype": "e6d6d379-f507-44c2-a23c-238f2a3df928",
+      "partuuid": "d991eca9-8a3d-4d1f-b5c3-8967ba939bef",
+      "size": "893.25 GiB",
+      "size_bytes": 959123030016,
+      "uuid": "fvMnpZ-lo14-EogY-2sVS-O3JV-dVEX-JHTAx1"
+    },
+    "/dev/sda1": {
+      "partlabel": "Microsoft reserved partition",
+      "parttype": "e3c9e316-0b5c-4db8-817d-f92df00215ae",
+      "partuuid": "9da25bf0-6a31-4d52-bcca-700e871e049a",
+      "size": "128.00 MiB",
+      "size_bytes": 134217728
+    },
+    "/dev/sda2": {
+      "filesystem": "ntfs",
+      "label": "Main partition",
+      "partlabel": "Basic data partition",
+      "parttype": "ebd0a0a2-b9e5-4433-87c0-68b6b72699c7",
+      "partuuid": "1bc69bdb-479a-4213-863c-ada95fcacd03",
+      "size": "931.39 GiB",
+      "size_bytes": 1000067825664,
+      "uuid": "929E748B9E746A1D"
+    },
+    "/dev/sdb1": {
+      "filesystem": "ntfs",
+      "label": "R\\xc3\\xa9cup\\xc3\\xa9ration",
+      "partlabel": "Basic data partition",
+      "parttype": "de94bba4-06d1-4d40-a16a-bfd50179d6ac",
+      "partuuid": "8bc6e5be-24a3-4abb-a08a-43f6cadff423",
+      "size": "529.00 MiB",
+      "size_bytes": 554696704,
+      "uuid": "8EBE84B1BE84937F"
+    },
+    "/dev/sdb2": {
+      "filesystem": "vfat",
+      "partlabel": "EFI system partition",
+      "parttype": "c12a7328-f81f-11d2-ba4b-00a0c93ec93b",
+      "partuuid": "b1624bdf-5d35-4fc5-8762-e4ac5fac5c88",
+      "size": "100.00 MiB",
+      "size_bytes": 104857600,
+      "uuid": "7884-E6A8"
+    },
+    "/dev/sdb3": {
+      "partlabel": "Microsoft reserved partition",
+      "parttype": "e3c9e316-0b5c-4db8-817d-f92df00215ae",
+      "partuuid": "1d6b31f6-903f-4389-a9c6-21535372335b",
+      "size": "16.00 MiB",
+      "size_bytes": 16777216
+    },
+    "/dev/sdb4": {
+      "filesystem": "ntfs",
+      "partlabel": "Basic data partition",
+      "parttype": "ebd0a0a2-b9e5-4433-87c0-68b6b72699c7",
+      "partuuid": "13e1a3f2-fae3-43dd-94ea-9a02e1657a27",
+      "size": "1.82 TiB",
+      "size_bytes": 1999720415232,
+      "uuid": "D068860A6885F010"
+    }
+  },
+  "path": "/nix/store/a98632fhbnpzzh5ls1ckfmzlk970k41i-facter-4.10.0/lib/ruby/gems/3.4.0/bin:/nix/store/jjxngswsb214vb58qx485jhmilf0kxxy-coreutils-9.10/bin:/nix/store/wf7lr2hf43546jc5kwqh3dbxnpcnw1mn-gnugrep-3.12/bin:/nix/store/2lgfd3sdq70p9mgg7a0mn1f20cfpfpv5-net-tools-2.10/bin:/nix/store/jx13ah7k2zp0w21r2qncpdji93ylcncl-pciutils-3.14.0/bin:/nix/store/5v7plscsjkc8b2xsfz4p0y4c2i97x85l-procps-4.0.6/bin:/nix/store/g9h37kjrpvyzhsq4a79v2qkrpl4y1s7k-util-linux-2.42-bin/bin:/nix/store/df79h6la9hpbvd739qzam20j2p2lqnyp-iproute2-6.19.0/bin:/nix/store/4rmiaxmciw07g7im0cr7z0dy7sfqjj6x-virt-what-1.27/bin:/nix/store/7q0d7kikm7bbv5h17ssxc57i6ap8qd66-zfs-user-2.4.2/bin:/run/wrappers/bin:/home/lelisei/.nix-profile/bin:/nix/profile/bin:/home/lelisei/.local/state/nix/profile/bin:/etc/profiles/per-user/lelisei/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/nix/store/kfwagnh6i1mysf7vxq679rzh30z9zj3g-binutils-wrapper-2.46/bin:/nix/store/iyf812fl29n3s6azkcs1v6k3ypxbmrip-hyprland-guiutils-0.2.1+date=2026-04-17_a968d21/bin:/nix/store/vqpm0alli7j5fvqxwrq9rg4csnkwk0j8-pkgconf-wrapper-2.5.1/bin",
+  "processors": {
+    "cores": 6,
+    "count": 12,
+    "extensions": [
+      "unknown"
+    ],
+    "isa": "unknown",
+    "models": [
+      "AMD Ryzen 5 5600G with Radeon Graphics",
+      "AMD Ryzen 5 5600G with Radeon Graphics",
+      "AMD Ryzen 5 5600G with Radeon Graphics",
+      "AMD Ryzen 5 5600G with Radeon Graphics",
+      "AMD Ryzen 5 5600G with Radeon Graphics",
+      "AMD Ryzen 5 5600G with Radeon Graphics",
+      "AMD Ryzen 5 5600G with Radeon Graphics",
+      "AMD Ryzen 5 5600G with Radeon Graphics",
+      "AMD Ryzen 5 5600G with Radeon Graphics",
+      "AMD Ryzen 5 5600G with Radeon Graphics",
+      "AMD Ryzen 5 5600G with Radeon Graphics",
+      "AMD Ryzen 5 5600G with Radeon Graphics"
+    ],
+    "physicalcount": 1,
+    "speed": "3.56 GHz",
+    "threads": 2
+  },
+  "ruby": {
+    "platform": "x86_64-linux",
+    "sitedir": "/nix/store/h8gjfxvqyixz0gczhdfyfmq2iv0vwccj-ruby-3.4.9/lib/ruby/site_ruby/3.4.0",
+    "version": "3.4.9"
+  },
+  "ssh": {
+    "ed25519": {
+      "fingerprints": {
+        "sha1": "SSHFP 4 1 d40b6599edef6c8e4fe2dfe83368a2beb5a4f1a4",
+        "sha256": "SSHFP 4 2 484b6facaee984d2e1a74b34cada0f9d136edbff479172a825df5d08db413017"
+      },
+      "key": "AAAAC3NzaC1lZDI1NTE5AAAAIEwxLlXAGb6exY2xSp5/MejQN9D0g8aMRVUPd9QVJk/z",
+      "type": "ssh-ed25519"
+    }
+  },
+  "system_uptime": {
+    "days": 0,
+    "hours": 3,
+    "seconds": 13560,
+    "uptime": "3:46 hours"
+  },
+  "timezone": "CEST",
+  "virtual": "physical"
+}
