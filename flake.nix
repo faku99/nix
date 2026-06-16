@@ -27,7 +27,7 @@
       url = "github:noctalia-dev/noctalia/refs/tags/v4.7.7";
     };
     stylix = {
-      url = "github:nix-community/stylix";
+      url = "github:nix-community/stylix/pull/2337/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -164,6 +164,13 @@
             ./hosts/saturn
             inputs.nixos-hardware.nixosModules.common-cpu-amd
             inputs.nixos-hardware.nixosModules.common-gpu-amd
+          ];
+          system = "x86_64-linux";
+        };
+
+        work-laptop = nixosConfig {
+          modules = [
+            ./hosts/work-laptop
           ];
           system = "x86_64-linux";
         };
