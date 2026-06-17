@@ -20,7 +20,7 @@ in
 
     # Required for installing MCP servers
     home.packages = with pkgs; [
-      nodejs_25
+      nodejs
       uv
     ];
 
