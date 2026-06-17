@@ -12,9 +12,6 @@
       network-manager-applet.enable = true;
     };
 
-    # TODO: Uncomment when stylix is updated for v0.55.0
-    stylix.targets.hyprland.enable = false;
-
     wayland.windowManager.hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
