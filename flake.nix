@@ -24,8 +24,7 @@
     };
 
     noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:noctalia-dev/noctalia/refs/tags/v4.7.7";
     };
     stylix = {
       url = "github:nix-community/stylix";
