@@ -171,11 +171,6 @@
       templates = import ./templates;
 
       nixosConfigurations = {
-        jupiter = nixosConfig {
-          modules = [ ./hosts/jupiter ];
-          system = "x86_64-linux";
-        };
-
         saturn = nixosConfig {
           modules = [
             ./hosts/saturn
