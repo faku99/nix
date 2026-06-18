@@ -57,10 +57,10 @@ in
       };
     };
 
-    home.packages = with pkgs; [
-      kdePackages.breeze
-      kdePackages.breeze-icons
-      twitter-color-emoji
+    home.packages = lib.mkIf (config.userConfig.desktop.windowManager != null) [
+      pkgs.kdePackages.breeze
+      pkgs.kdePackages.breeze-icons
+      pkgs.twitter-color-emoji
     ];
 
     fonts.fontconfig = {
