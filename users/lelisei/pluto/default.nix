@@ -37,7 +37,7 @@
     };
   };
 
-  programs.zsh.initContent = ''
-    export PATH="$HOME/.nix-profile/bin:$PATH
+  programs.zsh.envExtra = ''
+    export PATH="$HOME/.nix-profile/bin:$PATH"
   '';
 }
