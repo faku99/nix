@@ -3,8 +3,7 @@ keys:
     - &lelisei 0AAFA0446C8016928C872276DC25BABDE40033A1
   - &hosts
     - &saturn age1s0ftlw5jw3uxy7z5pyhmczt2p7tsg67s2fktl9mg3mx7deyqkyvqym849n
-    - &jupiter age17lhfyhd8qr78rd4cqmt7af6m4n8j4xuh3c892jrjpcjya9fsav4sefpxny
-    - &pluto age1c2jqm2na5meve9240qaam5dvxy6y8qc7rrakyzm0hdj7pfpjxgmsdj7nqe
+    - &pluto age1xuuygra9vg0pxf9p4y0e5kxr478wf8xsdanaculqtk59epu36ghqfgeffr
     - &work-laptop age1tgf8ytnvup5l7lqn7amq3yl7y3ytk9ejqn7yhzyzm4z47t7m7avsn4t4d5
 
 creation_rules:
@@ -15,6 +14,5 @@ creation_rules:
       - *lelisei
       age:
       - *saturn
-      - *jupiter
       - *pluto
       - *work-laptop
