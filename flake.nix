@@ -153,6 +153,7 @@
             inputs.sops-nix.homeManagerModules.sops
             inputs.nvf.homeManagerModules.default
             inputs.stylix.homeModules.stylix
+            inputs.glide-browser.homeModules.default
           ];
         };
     in
