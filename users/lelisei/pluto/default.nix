@@ -7,6 +7,7 @@
 
   userConfig = {
     global.enable = true;
+    theme.enable = true;
 
     programs = {
       dev = {
