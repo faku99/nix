@@ -1,5 +1,28 @@
 {
   "nodes": {
+    "agent-skills": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1781510879,
+        "narHash": "sha256-YE3NCJtgZVa1U2VTjwQVuAhmEJW4raVq7eJaFiX60X8=",
+        "owner": "Kyure-A",
+        "repo": "agent-skills-nix",
+        "rev": "5ff9039277a9d62907426d033ecf76addb2402cb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Kyure-A",
+        "repo": "agent-skills-nix",
+        "type": "github"
+      }
+    },
     "aquamarine": {
       "inputs": {
         "hyprutils": [
@@ -730,6 +753,26 @@
         "type": "github"
       }
     },
+    "mcp-servers-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1781740712,
+        "narHash": "sha256-iYOpMOMY5L3U1Yx/gJqqpEtTd808TErhKf4ggq09I6w=",
+        "owner": "natsukium",
+        "repo": "mcp-servers-nix",
+        "rev": "a4c4f28c472f72fbab064a0d3faa0b887f6f5dd5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "natsukium",
+        "repo": "mcp-servers-nix",
+        "type": "github"
+      }
+    },
     "mnw": {
       "locked": {
         "lastModified": 1780772958,
@@ -1018,6 +1061,22 @@
         "type": "github"
       }
     },
+    "oh-my-opencode-slim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781731275,
+        "narHash": "sha256-kJF2AHUMJmmcXAb4wX40nqQTKHlZXqMLH1SoOf3OK9k=",
+        "owner": "alvinunreal",
+        "repo": "oh-my-opencode-slim",
+        "rev": "8c85c6d526cfdc808be3847af77c2755fd862821",
+        "type": "github"
+      },
+      "original": {
+        "owner": "alvinunreal",
+        "repo": "oh-my-opencode-slim",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -1043,12 +1102,14 @@
     },
     "root": {
       "inputs": {
+        "agent-skills": "agent-skills",
         "disko": "disko",
         "firefox-addons": "firefox-addons",
         "glide-browser": "glide-browser",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "impermanence": "impermanence",
+        "mcp-servers-nix": "mcp-servers-nix",
         "nix-gl": "nix-gl",
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixos-hardware": "nixos-hardware",
@@ -1056,6 +1117,7 @@
         "noctalia": "noctalia",
         "nur": "nur",
         "nvf": "nvf",
+        "oh-my-opencode-slim": "oh-my-opencode-slim",
         "sops-nix": "sops-nix",
         "stylix": "stylix",
         "systems": "systems_6"
