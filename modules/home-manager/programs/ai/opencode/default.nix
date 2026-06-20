@@ -131,7 +131,7 @@ in
             ];
           };
           explorer = {
-            model = "opencode-go/minimal-m2.7";
+            model = "opencode-go/minimax-m2.7";
             skills = [ "context-map" ];
             mcps = [ ];
           };
