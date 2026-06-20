@@ -1,9 +1,18 @@
 {
+  self,
   ...
 }:
+let
+  username = "lelisei";
+in
 {
-  home.username = "lelisei";
+  home.username = username;
   home.stateVersion = "26.05";
+
+  sops = {
+    gnupg.home = "/home/${username}/.gnupg";
+    defaultSopsFile = "${self}/secrets/users/${username}.yaml";
+  };
 
   userConfig = {
     global.enable = true;
@@ -21,6 +30,10 @@
           enable = true;
           defaultEditor = true;
         };
+      };
+
+      misc = {
+        opencode.enable = true;
       };
 
       sh-utils = {
