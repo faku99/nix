@@ -1,4 +1,8 @@
 {
+  lib,
+  ...
+}:
+{
   programs.nvf.settings.vim = {
     lsp = {
       enable = true;
@@ -9,8 +13,6 @@
 
       presets = {
         clangd.enable = true;
-        nixd.enable = true;
-        qmlls.enable = true;
         tailwindcss-language-server.enable = true;
       };
 
@@ -24,11 +26,15 @@
         };
         qmlls = {
           enable = true;
+          cmd = lib.mkForce [
+            "qmlls"
+            "-E"
+          ];
           filetypes = [ "qml" ];
         };
         nixd = {
           enable = true;
-          settings.nix.flake.autoArchive = true;
+          settings.nil.nix.flake.autoArchive = true;
           filetypes = [ "nix" ];
         };
       };
