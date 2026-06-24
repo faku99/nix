@@ -31,6 +31,10 @@
             "-E"
           ];
           filetypes = [ "qml" ];
+          settings.qmlls = {
+            profile = "Qt6";
+            qmlImportPaths = [ "$QML_IMPORT_PATH" ];
+          };
         };
         nixd = {
           enable = true;
