@@ -1,4 +1,7 @@
 {
+  config,
+  lib,
+  pkgs,
   ...
 }:
 {
@@ -15,6 +18,8 @@
 
     utility = {
       diffview-nvim.enable = true; # For neogit
+
+      images.image-nvim.enable = true;
 
       motion.flash-nvim.enable = true;
 
@@ -36,4 +41,8 @@
       }
     ];
   };
+
+  home.packages = lib.mkIf (config.userConfig.desktop.windowManager != null) [
+    pkgs.ueberzugpp # Needed by image-nvim
+  ];
 }
