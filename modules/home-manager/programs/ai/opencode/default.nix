@@ -100,7 +100,8 @@ in
       presets = {
         "opencode-go" = {
           orchestrator = {
-            model = "opencode-go/glm-5.1";
+            model = "opencode-go/glm-5.2";
+            variant = "medium";
             skills = [ "*" ];
             mcps = [
               "*"
