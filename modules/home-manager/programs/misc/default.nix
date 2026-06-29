@@ -1,5 +1,6 @@
 {
   imports = [
+    ./dolphin.nix
     ./libreoffice.nix
     ./okular.nix
     ./rbw.nix
