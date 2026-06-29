@@ -40,6 +40,7 @@ in {
 
     programs = {
       browser = {
+        brave.enable = true;
         glide-browser = {
           enable = true;
           defaultBrowser = true;
@@ -60,6 +61,7 @@ in {
       };
 
       misc = {
+        dolphin.enable = true;
         okular.enable = true;
         opencode.enable = true;
       };
