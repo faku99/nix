@@ -40,7 +40,7 @@ in
           "@ramtinj95/opencode-tokenscope@latest"
           "@simonwjackson/opencode-direnv@latest"
           "@tarquinen/opencode-dcp@latest"
-          "oh-my-opencode-slim"
+          "oh-my-opencode-slim@latest"
         ];
         #mcp = {
         #  filesystem = {
