@@ -66,6 +66,7 @@ in {
       };
 
       misc = {
+        dolphin.enable = true;
         libreoffice.enable = true;
         okular.enable = true;
         opencode.enable = true;
