@@ -44,7 +44,10 @@ in
         name = "Gruvbox-Plus-Dark";
         package = pkgs.gruvbox-plus-icons;
       };
-      # TODO: cursor
+      cursorTheme = {
+        name = "Hackneyed";
+        package = pkgs.hackneyed;
+      };
     };
 
     assertions = [
