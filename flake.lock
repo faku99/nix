@@ -152,11 +152,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1784260973,
-        "narHash": "sha256-IMXGG7aDpVutpujfNZncXcmW3x6ghuplk9+a+NUacBg=",
+        "lastModified": 1784347379,
+        "narHash": "sha256-m8r66xTquhc9q5UQ60Sa8g7wdTFlNKKJQYkIpv9dpfU=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "2e2eb0656979f276904506839505f3d8fc2cdba0",
+        "rev": "a8d506239fd0d3c9bb1921fea35995e803ce3f63",
         "type": "gitlab"
       },
       "original": {
@@ -359,11 +359,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784129366,
-        "narHash": "sha256-N5JiyICSeQF14x+OQebNyPpYowOT9Rs1iKyeCylSzOA=",
+        "lastModified": 1784351324,
+        "narHash": "sha256-By+kuRJZRqs2TuXgtR8vJ8cTKWXw33YG/Yollu5cO1U=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "165228b0efefc3e635e5174020c40ea64271dc25",
+        "rev": "460108009ca1ff69ca2ff19079ca2c838d6e3080",
         "type": "github"
       },
       "original": {
@@ -739,11 +739,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784121079,
-        "narHash": "sha256-JYP/vU0OxS9FFaihP4YiZtj3RTbT/7d2IN4BcjMWt1I=",
+        "lastModified": 1784293699,
+        "narHash": "sha256-NU0hTN14YgxSrTDU0ELAF7i5gjsqHxI9AsbS38nAO/4=",
         "owner": "natsukium",
         "repo": "mcp-servers-nix",
-        "rev": "9e4eb9f3e5f061c0c07d06d5109916de994c5ad0",
+        "rev": "9537416185661acf10c59cec4886105f60bf2a7e",
         "type": "github"
       },
       "original": {
@@ -795,11 +795,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784258287,
-        "narHash": "sha256-2Ai6HVy7Jw/p0G39/um1rHjlFc5ViYBbvdYkHXu7pY8=",
+        "lastModified": 1784343266,
+        "narHash": "sha256-EGkegdTz2n6ESyih8s3dUuPyJQWlYfPp7U41J05g8PY=",
         "owner": "nix-community",
         "repo": "nix-vscode-extensions",
-        "rev": "19b832a9aa28a60f70a2a1b63fcfd1d0a02da072",
+        "rev": "472a3e862c76c64ac3ad75a24d332cb5cdd5f1bb",
         "type": "github"
       },
       "original": {
@@ -813,11 +813,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1784100666,
-        "narHash": "sha256-HF/mrw5NYQfKFZgkfV2h1UL5/E3ccfsE2XJ1AbbLLJ0=",
+        "lastModified": 1784310968,
+        "narHash": "sha256-rkSPTePrKqs4dg+i7ZFCq93+HrClac6oSwXX927SVjA=",
         "owner": "nixos",
         "repo": "nixos-hardware",
-        "rev": "fccfa9031a85b78a437f2f153c1f6449f3bc3185",
+        "rev": "779c32a00155994c86cde8213a8dd4df139d4355",
         "type": "github"
       },
       "original": {
@@ -955,11 +955,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784266294,
-        "narHash": "sha256-QntkgpkSBPfAX5w4LAuu5iqwmiyCKlGXv8TNvwOl/Xc=",
+        "lastModified": 1784351208,
+        "narHash": "sha256-dQHWGHKLePcLL4BOjg//ldjcPvpk3k1a+/wys7hBa/0=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "ced7ec2cb9467933dc2547922b4795ee92f833a1",
+        "rev": "64440c47caec0e106f7f0137a1f539d27c4c00fc",
         "type": "github"
       },
       "original": {
@@ -1002,11 +1002,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784149460,
-        "narHash": "sha256-S1RhDpdnRmRlVhLnze3w51YStpMW7wn+QDtct3Z8UJs=",
+        "lastModified": 1784320861,
+        "narHash": "sha256-sPUghbl8wMmESus7KvsmHIUEyD2mi13/xu7/u2H5SZU=",
         "owner": "notashelf",
         "repo": "nvf",
-        "rev": "ca782441ccbc930ce3959bea1321971d7aac3fb7",
+        "rev": "43fdcbf2e00290479d3f9b97b7f61edd08c4e584",
         "type": "github"
       },
       "original": {
@@ -1018,11 +1018,11 @@
     "oh-my-opencode-slim": {
       "flake": false,
       "locked": {
-        "lastModified": 1784219534,
-        "narHash": "sha256-7Q5KaKj8cgr6fMJYkdDXptmaTOGJ9bCJgmHSn2IFl7I=",
+        "lastModified": 1784314085,
+        "narHash": "sha256-6dhru1h4J1Tn5kAedCTZsAfloSzBZr+un1zxEPpodmY=",
         "owner": "alvinunreal",
         "repo": "oh-my-opencode-slim",
-        "rev": "85deff9aca21046d949ec0a65caee0311e3c26b5",
+        "rev": "bd3a4a5c5c0eddb4aba5d51674048509228e49ab",
         "type": "github"
       },
       "original": {
