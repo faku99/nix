@@ -190,8 +190,8 @@
       };
 
       homeConfigurations = {
-        mercury = homeConfig {
-          modules = [ ./users/lelisei/mercury ];
+        home-laptop = homeConfig {
+          modules = [ ./users/lelisei/home-laptop ];
           system = "x86_64-linux";
         };
 
