@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -31,6 +32,7 @@ in
 
     programs.alacritty = {
       enable = true;
+      package = config.lib.nixGL.wrap pkgs.alacritty;
       settings = {
         keyboard.bindings = [
           {
@@ -39,6 +41,9 @@ in
             action = "SpawnNewInstance";
           }
         ];
+      }
+      // lib.optionalAttrs config.userConfig.shell.enable {
+        terminal.shell = config.userConfig.shell.executable;
       };
     };
   };
