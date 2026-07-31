@@ -2,6 +2,7 @@ keys:
   - &users
     - &lelisei 0AAFA0446C8016928C872276DC25BABDE40033A1
   - &hosts
+    - &home-laptop age17nk25734usxmkqjkycljgpmmln47dqkq3shkelvc0dgn9sepqcks94sgs8
     - &saturn age1s0ftlw5jw3uxy7z5pyhmczt2p7tsg67s2fktl9mg3mx7deyqkyvqym849n
     - &pluto age1xuuygra9vg0pxf9p4y0e5kxr478wf8xsdanaculqtk59epu36ghqfgeffr
     - &work-laptop age1tgf8ytnvup5l7lqn7amq3yl7y3ytk9ejqn7yhzyzm4z47t7m7avsn4t4d5
@@ -13,6 +14,7 @@ creation_rules:
     - pgp:
       - *lelisei
       age:
+      - *home-laptop
       - *saturn
       - *pluto
       - *work-laptop
