@@ -7,6 +7,8 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.userConfig.programs.misc.opencode;
+
+  context = import ../context { inherit lib; };
 in
 {
   options.userConfig.programs.misc.opencode = {
@@ -43,10 +45,22 @@ in
           "@tarquinen/opencode-dcp@latest"
           "oh-my-opencode-slim@latest"
         ];
+        agent = {
+          # Use oh-my-opencode-slim agents instead of OpenCode built-ins
+          build.disable = true;
+          explore.disable = true;
+          general.disable = true;
+          plan.disable = true;
+        };
+      };
+      tui = {
+        plugin = [
+          "oh-my-opencode-slim@latest"
+        ];
       };
     };
 
-    home.file.".config/opencode/AGENTS.md".text = builtins.readFile ./AGENTS.md;
+    home.file.".config/opencode/AGENTS.md".text = context;
 
     ###########################################################################
     # oh-my-opencode-slim configuration
