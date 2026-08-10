@@ -19,10 +19,11 @@ in
       "api-keys/opencode-go" = { };
     };
 
-    # Required for installing MCP servers
     home.packages = with pkgs; [
       nodejs
+      openspec
       uv
+      zellij
     ];
 
     # Claude Code is required by opencode-claude-auth plugin
@@ -42,43 +43,6 @@ in
           "@tarquinen/opencode-dcp@latest"
           "oh-my-opencode-slim@latest"
         ];
-        #mcp = {
-        #  filesystem = {
-        #    enabled = true;
-        #    type = "local";
-        #    command = [
-        #      "npx"
-        #      "-y"
-        #      "@modelcontextprotocol/server-filesystem"
-        #      "."
-        #    ];
-        #  };
-        #  git = {
-        #    enabled = true;
-        #    type = "local";
-        #    command = [
-        #      "uvx"
-        #      "mcp-server-git"
-        #    ];
-        #  };
-        #  github = {
-        #    enabled = true;
-        #    type = "remote";
-        #    url = "https://api.githubcopilot.com/mcp/";
-        #    headers = {
-        #      Authorization = "{file:${config.sops.secrets."opencode/github_token".path}}";
-        #    };
-        #  };
-        #  rg = {
-        #    enabled = true;
-        #    type = "local";
-        #    command = [
-        #      "npx"
-        #      "-y"
-        #      "mcp-ripgrep"
-        #    ];
-        #  };
-        #};
       };
     };
 
@@ -96,73 +60,72 @@ in
       showStartupToast = false;
       setDefaultAgent = true;
 
+      multiplexer = {
+        type = "zellij";
+      };
+
       preset = "opencode-go";
       presets = {
         "opencode-go" = {
           orchestrator = {
-            model = "opencode-go/glm-5.2";
-            variant = "medium";
-            skills = [ "*" ];
-            mcps = [
-              "*"
-              "!context7"
-            ];
+            model = "opencode-go/minimax-m3";
+            variant = "thinking";
           };
           oracle = {
-            model = "opencode-go/deepseek-v4-pro";
+            model = "opencode-go/qwen3.7-max";
             variant = "max";
-            skills = [
-              "refactor-plan"
-              "simplify"
-            ];
-            mcps = [ ];
-          };
-          council = {
-            model = "opencode-go/deepseek-v4-pro";
-            variant = "high";
           };
           librarian = {
-            model = "opencode-go/minimax-m2.7";
-            skills = [ ];
+            model = "opencode-go/deepseek-v4-flash";
+            variant = "high";
             mcps = [
-              "websearch"
               "context7"
               "gh_grep"
-              "github"
             ];
           };
           explorer = {
-            model = "opencode-go/minimax-m2.7";
-            skills = [ "context-map" ];
-            mcps = [ ];
+            model = "opencode-go/deepseek-v4-flash";
+            variant = "high";
           };
           designer = {
-            model = "opencode-go/kimi-k2.6";
-            variant = "medium";
+            model = "opencode-go/kimi-k2.7-code";
           };
           fixer = {
             model = "opencode-go/deepseek-v4-flash";
             variant = "high";
-            skills = [
-              "refactor"
-              "git-commit"
-            ];
-            mcps = [ ];
           };
           observer = {
-            model = "opencode-go/kimi-k2.6";
+            model = "opencode-go/mimo-v2.5";
+          };
+        };
+        "anthropic" = {
+          orchestrator = {
+            model = "anthropic/claude-opus-4-8";
+          };
+          oracle = {
+            model = "anthropic/claude-opus-4-8";
+            variant = "high";
+          };
+          librarian = {
+            model = "anthropic/claude-haiku-4-5-20251001-v1:0";
+            mcps = [
+              "context7"
+              "gh_grep"
+            ];
+          };
+          explorer = {
+            model = "anthropic/claude-haiku-4-5-20251001-v1:0";
+          };
+          designer = {
+            model = "anthropic/claude-sonnet-4-6";
+            variant = "medium";
+          };
+          fixer = {
+            model = "anthropic/claude-haiku-4-5-20251001-v1:0";
           };
         };
       };
-
-      disabled_mcps = [ "context7" ];
     };
-
-    #xdg.configFile = {
-    #  "opencode/agents".source = ./agents;
-    #  "opencode/commands".source = ./commands;
-    #  "opencode/skills".source = ./skills;
-    #};
 
     userConfig.system.impermanence = {
       directories = [
