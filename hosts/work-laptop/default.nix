@@ -53,5 +53,28 @@
     networking = {
       networkmanager.enable = true;
     };
+
+    virtualisation = {
+      docker.enable = true;
+    };
+  };
+
+  # NFS server for RPi development
+  services.nfs = {
+    server = {
+      enable = true;
+      exports = ''
+        /srv          10.0.0.0/24(rw,no_root_squash,no_subtree_check,fsid=root,crossmnt)
+        /srv/proto_v0 10.0.0.0/24(rw,no_subtree_check,no_root_squash)
+      '';
+    };
+  };
+
+  networking.firewall = {
+    enable = true;
+    interfaces."enp60s0u1u3" = {
+      allowedTCPPorts = [ 111 2049 4000 4001 4002 20048 ];
+      allowedUDPPorts = [ 111 2049 4000 4001 4002 20048 ];
+    };
   };
 }
