@@ -9,6 +9,8 @@ let
   cfg = config.userConfig.programs.misc.opencode;
 
   context = import ../context { inherit lib; };
+
+  omos-version = "v2.2.11";
 in
 {
   options.userConfig.programs.misc.opencode = {
@@ -39,11 +41,11 @@ in
           opencode-go.options.apiKey = "{file:${config.sops.secrets."api-keys/opencode-go".path}}";
         };
         plugin = [
-          "@ex-machina/opencode-anthropic-auth@latest"
+          "opencode-claude-auth@v2.1.6"
           "@ramtinj95/opencode-tokenscope@latest"
           "@simonwjackson/opencode-direnv@latest"
           "@tarquinen/opencode-dcp@latest"
-          "oh-my-opencode-slim@latest"
+          "oh-my-opencode-slim@${omos-version}"
         ];
         agent = {
           # Use oh-my-opencode-slim agents instead of OpenCode built-ins
@@ -55,7 +57,7 @@ in
       };
       tui = {
         plugin = [
-          "oh-my-opencode-slim@latest"
+          "oh-my-opencode-slim@${omos-version}"
         ];
       };
     };
@@ -121,21 +123,21 @@ in
             variant = "high";
           };
           librarian = {
-            model = "anthropic/claude-haiku-4-5-20251001-v1:0";
+            model = "anthropic/claude-haiku-4-5-20251001";
             mcps = [
               "context7"
               "gh_grep"
             ];
           };
           explorer = {
-            model = "anthropic/claude-haiku-4-5-20251001-v1:0";
+            model = "anthropic/claude-haiku-4-5-20251001";
           };
           designer = {
             model = "anthropic/claude-sonnet-4-6";
             variant = "medium";
           };
           fixer = {
-            model = "anthropic/claude-haiku-4-5-20251001-v1:0";
+            model = "anthropic/claude-haiku-4-5-20251001";
           };
         };
       };

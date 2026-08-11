@@ -32,9 +32,8 @@ in
       nixfmt
     ];
 
-    programs.vscode = {
+    programs.vscodium = {
       enable = true;
-      package = pkgs.vscodium;
 
       mutableExtensionsDir = false;
 
@@ -95,7 +94,6 @@ in
           "window.menuBarVisibility" = "toggle";
 
           # Workbench settings
-          "workbench.colorTheme" = "Dark Modern";
           "workbench.startupEditor" = "none";
 
           "update.showReleaseNotes" = false;

@@ -2,7 +2,9 @@
   description = "My NixOS system and home configurations";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # Temporary pin since Hyprland requires glaze < 8
+    nixpkgs.url = "github:nixos/nixpkgs/4b1cd35e951dd2760cf83fe5bf5129d26464ae31";
     systems.url = "github:nix-systems/default-linux";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
@@ -27,7 +29,7 @@
       url = "github:noctalia-dev/noctalia/refs/tags/v4.7.7";
     };
     stylix = {
-      url = "github:nix-community/stylix/pull/2337/head";
+      url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -45,7 +47,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland = {
-      url = "github:hyprwm/Hyprland/refs/tags/v0.55.4";
+      url = "github:hyprwm/Hyprland/refs/tags/v0.56.1";
     };
     nix-gl = {
       url = "github:nix-community/nixgl";
