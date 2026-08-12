@@ -40,6 +40,10 @@ in {
 
     programs = {
       ai = {
+        claude-code = {
+          enable = true;
+          work.enable = true;
+        };
         opencode = {
           enable = true;
           oh-my-opencode-slim = {
