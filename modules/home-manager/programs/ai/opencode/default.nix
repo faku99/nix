@@ -6,15 +6,19 @@
 }:
 let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.userConfig.programs.misc.opencode;
+  cfg = config.userConfig.programs.ai.opencode;
 
   context = import ../context { inherit lib; };
 
-  omos-version = "v2.2.11";
+  oh-my-opencode-slim-version = "v2.2.11";
 in
 {
-  options.userConfig.programs.misc.opencode = {
+  options.userConfig.programs.ai.opencode = {
     enable = mkEnableOption "opencode";
+
+    oh-my-opencode-slim = {
+      enable = lib.mkEnableOption "oh-my-opencode-slim";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -30,9 +34,6 @@ in
       zellij
     ];
 
-    # Claude Code is required by opencode-claude-auth plugin
-    programs.claude-code.enable = true;
-
     programs.opencode = {
       enable = true;
       enableMcpIntegration = true;
@@ -41,13 +42,13 @@ in
           opencode-go.options.apiKey = "{file:${config.sops.secrets."api-keys/opencode-go".path}}";
         };
         plugin = [
-          "opencode-claude-auth@v2.1.6"
           "@ramtinj95/opencode-tokenscope@latest"
           "@simonwjackson/opencode-direnv@latest"
           "@tarquinen/opencode-dcp@latest"
-          "oh-my-opencode-slim@${omos-version}"
+        ] ++ lib.lists.optionals cfg.oh-my-opencode-slim.enable [
+          "oh-my-opencode-slim@${oh-my-opencode-slim-version}"
         ];
-        agent = {
+        agent = lib.mkIf cfg.oh-my-opencode-slim.enable {
           # Use oh-my-opencode-slim agents instead of OpenCode built-ins
           build.disable = true;
           explore.disable = true;
@@ -55,9 +56,9 @@ in
           plan.disable = true;
         };
       };
-      tui = {
+      tui = lib.mkIf cfg.oh-my-opencode-slim.enable {
         plugin = [
-          "oh-my-opencode-slim@${omos-version}"
+          "oh-my-opencode-slim@${oh-my-opencode-slim-version}"
         ];
       };
     };
@@ -114,37 +115,12 @@ in
             model = "opencode-go/mimo-v2.5";
           };
         };
-        "anthropic" = {
-          orchestrator = {
-            model = "anthropic/claude-opus-4-8";
-          };
-          oracle = {
-            model = "anthropic/claude-opus-4-8";
-            variant = "high";
-          };
-          librarian = {
-            model = "anthropic/claude-haiku-4-5-20251001";
-            mcps = [
-              "context7"
-              "gh_grep"
-            ];
-          };
-          explorer = {
-            model = "anthropic/claude-haiku-4-5-20251001";
-          };
-          designer = {
-            model = "anthropic/claude-sonnet-4-6";
-            variant = "medium";
-          };
-          fixer = {
-            model = "anthropic/claude-haiku-4-5-20251001";
-          };
-        };
       };
     };
 
     userConfig.system.impermanence = {
       directories = [
+        ".config/opencode"
         ".local/share/opencode"
       ];
     };

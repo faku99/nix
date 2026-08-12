@@ -39,6 +39,15 @@ in {
     };
 
     programs = {
+      ai = {
+        opencode = {
+          enable = true;
+          oh-my-opencode-slim = {
+            enable = true;
+          };
+        };
+      };
+
       browser = {
         brave.enable = true;
         glide-browser = {
@@ -63,7 +72,6 @@ in {
       misc = {
         dolphin.enable = true;
         okular.enable = true;
-        opencode.enable = true;
       };
 
       sh-utils = {
