@@ -39,6 +39,17 @@ in {
     };
 
     programs = {
+      ai = {
+        claude-code = {
+          enable = true;
+          work.enable = true;
+        };
+        opencode = {
+          enable = true;
+          oh-my-opencode-slim.enable = true;
+        };
+      };
+
       browser = {
         brave.enable = true;
         glide-browser = {
@@ -69,7 +80,6 @@ in {
         dolphin.enable = true;
         libreoffice.enable = true;
         okular.enable = true;
-        opencode.enable = true;
         rbw.enable = true;
         telegram.enable = true;
       };
