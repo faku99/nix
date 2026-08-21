@@ -6,18 +6,18 @@ let
 
   fonts = {
     serif = {
-      package = pkgs: pkgs.nerd-fonts.ubuntu;
-      name = "Ubuntu Nerd Font";
+      package = pkgs: pkgs.dejavu_fonts;
+      name = "DejaVu Serif";
     };
 
     sansSerif = {
-      package = pkgs: pkgs.nerd-fonts.ubuntu-sans;
-      name = "Ubuntu Nerd Font Sans";
+      package = pkgs: pkgs.dejavu_fonts;
+      name = "DejaVu Sans";
     };
 
     monospace = {
-      package = pkgs: pkgs.nerd-fonts.roboto-mono;
-      name = "RobotoMono NerdFont Mono";
+      package = pkgs: pkgs.nerd-fonts.jetbrains-mono;
+      name = "JetBrainsMono Nerd Font";
     };
 
     emoji = {
@@ -26,10 +26,10 @@ let
     };
 
     sizes = {
-      applications = 12;
-      desktop = 11;
-      popups = 12;
-      terminal = 11;
+      applications = 14;
+      desktop = 14;
+      popups = 14;
+      terminal = 14;
     };
   };
 
@@ -115,7 +115,6 @@ in
             home.packages = [
               pkgs.kdePackages.breeze
               pkgs.kdePackages.breeze-icons
-              pkgs.twitter-color-emoji
             ];
 
             fonts.fontconfig = {
