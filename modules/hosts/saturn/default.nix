@@ -26,7 +26,6 @@
       den.aspects.nix-ld
       den.aspects.sops
       den.aspects.networkmanager
-      den.aspects.openfortivpn
       den.aspects.docker
       den.aspects.hyprland
     ];
