@@ -4,17 +4,15 @@
     classes = [ "homeManager" ];
     monitors = [
       {
-        name = "eDP-1";
-        width = 1920;
-        height = 1080;
-        refreshRate = 60;
-      }
-      {
         name = "DP-4";
         width = 1920;
         height = 1080;
         primary = true;
-        position = "auto-left";
+      }
+      {
+        name = "eDP-1";
+        width = 1920;
+        height = 1080;
       }
     ];
   };
