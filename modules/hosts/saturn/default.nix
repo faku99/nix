@@ -98,8 +98,6 @@
         den.aspects.nvf
         den.aspects.vscode
 
-        den.aspects.curseforge
-
         den.aspects.dolphin
         den.aspects.libreoffice
         den.aspects.okular

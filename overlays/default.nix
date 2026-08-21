@@ -18,7 +18,4 @@
       if legacyPackages != { } then legacyPackages else packages
     ) inputs;
   };
-
-  # My custom packages
-  additions = final: prev: import ../pkgs { pkgs = final; };
 }
