@@ -313,7 +313,10 @@
               }) (user.monitors or [ ]);
             };
 
-            systemd.variables = [ "--all" ];
+            systemd = {
+              enable = false;
+              variables = [ "--all" ];
+            };
             xwayland.enable = true;
           };
         };
