@@ -6,6 +6,11 @@
       {
         imports = [ inputs.stylix.nixosModules.stylix ];
 
+        # This host and its home-manager users keep independent stylix
+        # instances (different scheme/wallpaper) - don't auto-forward one
+        # into the other.
+        stylix.homeManagerIntegration.autoImport = false;
+
         stylix = {
           enable = true;
 

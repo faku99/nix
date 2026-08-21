@@ -1,4 +1,4 @@
-{ self, ... }:
+{ inputs, self, ... }:
 let
   username = "lelisei";
   homeDirectory = "/home/${username}";
@@ -11,6 +11,8 @@ in
       ifGroupExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
     in
     {
+      imports = [ inputs.sops-nix.nixosModules.sops ];
+
       nix.settings.trusted-users = [ username ];
       programs.zsh.enable = true;
 
@@ -40,4 +42,15 @@ in
         mode = "0600";
       };
     };
+
+  den.aspects.lelisei.homeManager = {
+    imports = [ inputs.sops-nix.homeManagerModules.sops ];
+
+    home.username = username;
+
+    sops = {
+      gnupg.home = "${homeDirectory}/.gnupg";
+      defaultSopsFile = userSecretsFile;
+    };
+  };
 }

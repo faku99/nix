@@ -26,9 +26,10 @@
       softtabstop = 4; # Indent by 4 spaces when pressing TAB
     };
 
+    # theme.name is left to stylix's nvf integration (stylix.targets.nvf) on
+    # hosts that include the theme aspect; without stylix, nvf's own default applies.
     theme = {
       enable = true;
-      name = "base16";
       transparent = true;
     };
   };

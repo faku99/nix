@@ -5,6 +5,9 @@
   lib,
   ...
 }:
+let
+  flakeConfig = config;
+in
 {
   den.default = {
     includes = [
@@ -17,7 +20,14 @@
     nixos =
       { pkgs, ... }:
       {
-        nixpkgs.overlays = builtins.attrValues config.flake.overlays;
+        nixpkgs.overlays = builtins.attrValues flakeConfig.flake.overlays;
+        nixpkgs.config = {
+          allowUnfree = true;
+          segger-jlink.acceptLicense = true;
+          permittedInsecurePackages = [ "segger-jlink-qt4-810" ];
+        };
+
+        system.stateVersion = "26.05";
 
         environment.systemPackages = with pkgs; [ git ];
         fonts.packages = with pkgs; [ font-awesome ];
@@ -98,10 +108,11 @@
 
         nixpkgs = {
           config.allowUnfree = true;
-          overlays = [ inputs.nur.overlays.default ] ++ builtins.attrValues config.flake.overlays;
+          overlays = [ inputs.nur.overlays.default ] ++ builtins.attrValues flakeConfig.flake.overlays;
         };
 
         home.homeDirectory = lib.mkDefault "/home/${config.home.username}";
+        home.stateVersion = "26.05";
         home.packages = with pkgs; [
           atool
           fd

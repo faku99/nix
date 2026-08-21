@@ -1,7 +1,8 @@
 {
   den.aspects.nvf.homeManager.programs.nvf.settings.vim = {
+    statusline.lualine.integrations.breadcrumbs.nvim-navic.enable = true;
+
     ui = {
-      breadcrumbs.enable = true;
       illuminate.enable = true;
       noice = {
         enable = true;

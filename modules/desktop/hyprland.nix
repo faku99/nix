@@ -306,10 +306,10 @@
 
               monitor = map (m: {
                 output = m.name;
-                mode = "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
-                position = m.position;
-                scale = m.scale;
-                transform = m.transform;
+                mode = "${toString m.width}x${toString m.height}@${toString (m.refreshRate or 60)}";
+                position = m.position or "auto";
+                scale = m.scale or 1.0;
+                transform = m.transform or 0;
               }) (user.monitors or [ ]);
             };
 
