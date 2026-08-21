@@ -1,6 +1,0 @@
-{
-  imports = [
-    ./claude-code
-    ./opencode
-  ];
-}
