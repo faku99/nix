@@ -5,7 +5,7 @@
   den.aspects.pluto = {
     includes = with den.aspects; [
       lelisei
-      theme-standalone
+      theme
       direnv
       git
       ssh

@@ -24,10 +24,6 @@
     includes = [
       den.aspects.networkmanager
       den.aspects.docker
-
-      # Aspects with both a nixos and a homeManager half: the nixos half
-      # is pulled in here, the homeManager half via provides.lelisei below.
-      den.aspects.theme
       den.aspects.hyprland
     ];
 
@@ -90,7 +86,7 @@
     # doesn't automatically flow down to its users.
     provides.lelisei = {
       includes = [
-        den.aspects.theme-extras
+        den.aspects.theme
         den.aspects.hyprland
         den.aspects.noctalia
         den.aspects.xdg
