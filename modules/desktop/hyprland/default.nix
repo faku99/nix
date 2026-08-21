@@ -34,7 +34,7 @@
 
             plugins = [ ];
             settings = {
-              bind = import ./_hyprland/binds.nix { inherit lib; };
+              bind = import ./_binds.nix { inherit lib; };
 
               curve = [
                 {
