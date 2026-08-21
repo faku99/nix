@@ -7,7 +7,7 @@ both the NixOS and Home Manager sides of a single concern.
 
 ```
 modules/
-  den.nix, default.nix, formatter.nix, overlays.nix
+  den.nix, default/, formatter.nix, overlays.nix
                           # flake-level wiring, not per-host
   users/lelisei.nix       # den.aspects.lelisei - account, ssh key, sops secret, shell
   hosts/
@@ -29,6 +29,41 @@ A NixOS host's own `includes`/`homeManager` block does **not** automatically flo
 its users - use `provides.<username>` for that, per Den's
 [mutual-provider](https://den.denful.dev/guides/mutual/) mechanism. Standalone
 `den.homes` entities don't have this split; their aspect's `includes` applies directly.
+
+# Installation
+
+Every host (NixOS or not) is an age recipient in `.sops.yaml` - after either install
+path below, import the GPG key and register the host's age key per `docs/sops.md`,
+then rebuild once secrets can decrypt.
+
+## NixOS (saturn, work-laptop)
+
+1. Boot a NixOS installer image. See `docs/fresh_install.md` for wireless bring-up
+   (`wpa_cli`) and the Raspberry Pi 5 UEFI steps if relevant.
+2. Partition and format disks to match the target host's
+   `modules/hosts/<host>/_hardware-configuration.nix` - saturn and work-laptop use
+   hand-written `fileSystems` entries, not disko (disko is only wired into the
+   currently-unused `impermanence-btrfs` aspect).
+3. Install:
+   ```
+   nixos-install --flake github:faku99/nix#<host>
+   ```
+4. Reboot and log in as `lelisei` (password set in `modules/users/lelisei.nix`).
+
+## Nix daemon only (pluto, home-laptop)
+
+1. Install Nix on the existing distro (official installer or the Determinate
+   Systems installer), with flakes and `nix-command` enabled.
+2. Clone this repo.
+3. First run (before `home-manager` is on `PATH`):
+   ```
+   nix run home-manager -- switch --flake github:faku99/nix#<home>
+   ```
+   Afterwards, `home-manager switch --flake .#<home>` from a local clone.
+
+`home-laptop` runs `targets.genericLinux.nixGL` (see
+`modules/hosts/home-laptop/default.nix`) so OpenGL apps work on a non-NixOS
+distro - no extra setup needed for that.
 
 # Build
 

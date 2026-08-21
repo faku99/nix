@@ -19,7 +19,7 @@ OK
 
 ```
 $ sudo -i
-# FLAKE_URL="github:faku99/nixos#hostname"
+# FLAKE_URL="github:faku99/nix#hostname"
 # nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --flake $FLAKE_URL --mode destroy,format,mount
 # nixos-install --flake $FLAKE_URL --no-root-passwd
 ```
