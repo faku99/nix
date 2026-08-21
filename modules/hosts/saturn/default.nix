@@ -23,7 +23,6 @@
     # NixOS-only aspects - applied directly to this host.
     includes = [
       den.aspects.steam
-      den.aspects.nix-ld
       den.aspects.sops
       den.aspects.networkmanager
       den.aspects.docker
