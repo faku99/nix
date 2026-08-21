@@ -7,15 +7,17 @@ both the NixOS and Home Manager sides of a single concern.
 
 ```
 modules/
-  den.nix, default.nix, formatter.nix, packages.nix, overlays.nix, templates.nix
+  den.nix, default.nix, formatter.nix, overlays.nix
                           # flake-level wiring, not per-host
   users/lelisei.nix       # den.aspects.lelisei - account, ssh key, sops secret, shell
   hosts/
-    saturn/, work-laptop/ # den.hosts.<system>.<name> + den.aspects.<name> (NixOS hosts)
-    pluto.nix, home-laptop.nix
+    saturn/, work-laptop/, pluto/, home-laptop/
+                          # each host/home gets its own directory:
+                          # den.hosts.<system>.<name> + den.aspects.<name> (NixOS hosts)
                           # den.homes.<system>.<name> (standalone home-manager)
   desktop/, programs/, shell/, system/
-                          # feature aspects, one per file/directory
+                          # feature aspects, one per file (or its own directory
+                          # when it has more than one file, e.g. desktop/hyprland/)
 ```
 
 Add a feature: create `modules/<area>/<name>.nix` with
