@@ -175,10 +175,6 @@
             iRadiusRatio = 0.3;
             clockFormat = "hh\\nmm";
           };
-          ui = {
-            fontDefault = "DejaVu Sans";
-            fontFixed = "JetBrainsMono Nerd Font";
-          };
           location = {
             name = "Lausanne, Switzerland";
             weatherShowEffects = false;

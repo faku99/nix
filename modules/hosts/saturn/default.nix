@@ -83,7 +83,7 @@
     # doesn't automatically flow down to its users.
     provides.lelisei = {
       includes = [
-        den.aspects.theme
+        den.aspects.theme-extras
         den.aspects.hyprland
         den.aspects.noctalia
         den.aspects.xdg
