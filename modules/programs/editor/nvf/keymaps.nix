@@ -1,5 +1,5 @@
 {
-  programs.nvf.settings.vim = {
+  den.aspects.nvf.homeManager.programs.nvf.settings.vim = {
     globals.mapleader = " ";
 
     binds = {
@@ -10,25 +10,37 @@
     keymaps = [
       {
         key = "<Up>";
-        mode = [ "n" "v" ];
+        mode = [
+          "n"
+          "v"
+        ];
         action = "<nop>";
         desc = "Disable up-arrow key to force using HJKL";
       }
       {
         key = "<Down>";
-        mode = [ "n" "v" ];
+        mode = [
+          "n"
+          "v"
+        ];
         action = "<nop>";
         desc = "Disable down-arrow key to force using HJKL";
       }
       {
         key = "<Left>";
-        mode = [ "n" "v" ];
+        mode = [
+          "n"
+          "v"
+        ];
         action = "<nop>";
         desc = "Disable left-arrow key to force using HJKL";
       }
       {
         key = "<Right>";
-        mode = [ "n" "v" ];
+        mode = [
+          "n"
+          "v"
+        ];
         action = "<nop>";
         desc = "Disable right-arrow key to force using HJKL";
       }

@@ -1,12 +1,8 @@
 {
-  programs.nvf.settings.vim = {
-    terminal = {
-      toggleterm = {
-        enable = true;
-        mappings = {
-          open = "<leader>to";
-        };
-      };
+  den.aspects.nvf.homeManager.programs.nvf.settings.vim = {
+    terminal.toggleterm = {
+      enable = true;
+      mappings.open = "<leader>to";
     };
 
     keymaps = [

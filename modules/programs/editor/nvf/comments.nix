@@ -1,5 +1,5 @@
 {
-  programs.nvf.settings.vim = {
+  den.aspects.nvf.homeManager.programs.nvf.settings.vim = {
     comments.comment-nvim = {
       enable = true;
 
