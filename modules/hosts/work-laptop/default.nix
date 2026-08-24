@@ -103,7 +103,7 @@
 
         den.aspects.nvf
 
-        den.aspects.dolphin
+        den.aspects.thunar
         den.aspects.okular
 
         den.aspects.eza

@@ -96,7 +96,7 @@
         den.aspects.nvf
         den.aspects.vscode
 
-        den.aspects.dolphin
+        den.aspects.thunar
         den.aspects.libreoffice
         den.aspects.okular
         den.aspects.rbw
