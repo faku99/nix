@@ -1,0 +1,13 @@
+{
+  den.aspects.nvf.homeManager.programs.nvf.settings.vim = {
+    formatter.conform-nvim = {
+      enable = true;
+      setupOpts = {
+        formatters_by_ft = {
+          rust = [ "rustfmt" ];
+          nix = [ "nixfmt" ];
+        };
+      };
+    };
+  };
+}

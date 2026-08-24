@@ -1,0 +1,140 @@
+{
+  den.aspects.vscode.homeManager =
+    { pkgs, ... }:
+    {
+      # Packages often required by extensions
+      home.packages = with pkgs; [
+        caddy
+        clang-tools
+        nixd
+        nixfmt
+      ];
+
+      programs.vscodium = {
+        enable = true;
+
+        mutableExtensionsDir = false;
+
+        profiles.default = {
+          extensions = with pkgs.vscode-marketplace; [
+            aaron-bond.better-comments
+            cschlosser.doxdocgen
+            dan-c-underwood.arm
+            esbenp.prettier-vscode
+            jnoortheen.nix-ide
+            llvm-vs-code-extensions.vscode-clangd
+            marus25.cortex-debug
+            matthewpi.caddyfile-support
+            mcu-debug.debug-tracker-vscode
+            mcu-debug.memory-view
+            mcu-debug.peripheral-viewer
+            mcu-debug.rtos-views
+            mkhl.direnv
+            ms-vscode.cpptools
+            rioj7.command-variable
+            rust-lang.rust-analyzer
+            twxs.cmake
+            xaver.clang-format
+          ];
+
+          userSettings = {
+            # Diff editor settings
+            "diffEditor.ignoreTrimWhitespace" = false;
+
+            # Editor settings
+            "editor.insertSpaces" = true;
+            "editor.minimap.enabled" = false;
+            "editor.renderWhitespace" = "all";
+            "editor.rulers" = [
+              80
+              120
+            ];
+            "editor.tabSize" = 4;
+
+            # Explorer settings
+            "explorer.confirmDragAndDrop" = false;
+            "explorer.confirmDelete" = false;
+
+            # Extensions settings
+            "extensions.ignoreRecommendations" = true;
+            "extensions.experimental.affinity" = {
+              "asvetliakov.vscode-neovim" = 1;
+            };
+
+            # Files settings
+            "files.associations" = {
+              "*.h" = "c";
+            };
+            "files.insertFinalNewline" = true;
+            "files.trimTrailingWhitespace" = true;
+
+            # Window settings
+            "window.menuBarVisibility" = "toggle";
+
+            # Workbench settings
+            "workbench.startupEditor" = "none";
+
+            "update.showReleaseNotes" = false;
+
+            "C_Cpp.intelliSenseEngine" = "disabled";
+
+            "[c][cpp]" = {
+              "editor.defaultFormatter" = "xaver.clang-format";
+            };
+
+            "[json]" = {
+              "editor.defaultFormatter" = "esbenp.prettier-vscode";
+            };
+
+            "[nix]" = {
+              "editor.insertSpaces" = true;
+              "editor.tabSize" = 2;
+              "editor.defaultFormatter" = "jnoortheen.nix-ide";
+              "editor.formatOnPaste" = true;
+              "editor.formatOnSave" = true;
+              "editor.formatOnType" = false;
+            };
+
+            "[yaml]" = {
+              "editor.tabSize" = 2;
+            };
+
+            # llvm-vs-code-extensions.vscode-clangd
+            "clangd.arguments" = [
+              "--header-insertion=never"
+            ];
+
+            # jnoortheen.nix-ide
+            "nix.enableLanguageServer" = true;
+            "nix.formatterPath" = "nixfmt";
+            "nix.serverPath" = "nixd";
+
+            # asvetliakov.vscode-neovim
+            "vscode-neovim.ctrlKeysForInsertMode" = [
+              "a"
+              "c"
+              "h"
+              "j"
+              "m"
+              "o"
+              "r"
+              "t"
+              "u"
+              "w"
+            ];
+
+            # matthewpi.caddyfile-support
+            "caddyfile.executable" = "${pkgs.caddy}/bin/caddy";
+
+            # rust.rust-analyzer
+            "rust-analyzer.check.command" = "clippy";
+            "rust-analyzer.checkOnSave" = true;
+            "rust-analyzer.inlayHints.parameterHints.enable" = false;
+            "rust-analyzer.inlayHints.typeHints.enable" = false;
+          };
+        };
+      };
+
+      stylix.targets.vscode.enable = false;
+    };
+}

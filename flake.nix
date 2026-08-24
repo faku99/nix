@@ -8,6 +8,11 @@
     systems.url = "github:nix-systems/default-linux";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
+    # Dendritic pattern
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
+    den.url = "github:denful/den";
+
     # Shared
     disko = {
       url = "github:nix-community/disko";
@@ -69,127 +74,5 @@
     };
   };
 
-  outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      home-manager,
-      systems,
-      ...
-    }:
-    let
-      inherit (self) outputs;
-      lib = nixpkgs.lib // home-manager.lib;
-
-      forAllSystems = lib.genAttrs (import systems);
-
-      forEachPkgs = f: forAllSystems (sys: f nixpkgs.legacyPackages.${sys});
-
-      inputPkgsFor =
-        pkgs:
-        forAllSystems (
-          system:
-          import pkgs {
-            inherit system;
-            config = {
-              allowUnfree = true;
-              segger-jlink.acceptLicense = true;
-              permittedInsecurePackages = [
-                "segger-jlink-qt4-810"
-              ];
-            };
-          }
-        );
-
-      # Nixpkgs for each system
-      nixpkgsFor = inputPkgsFor nixpkgs;
-
-      # specialArgs shared between nixosConfig and homeConfig
-      specialArgs = forAllSystems (system: {
-        inherit inputs outputs;
-        self = self;
-        pkgs-stable = (inputPkgsFor inputs.nixpkgs-stable).${system};
-      });
-
-      nixosConfig =
-        { modules, system }:
-        lib.nixosSystem {
-          pkgs = nixpkgsFor.${system};
-          specialArgs = specialArgs.${system};
-
-          modules = modules ++ [
-            outputs.nixosModules
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                sharedModules = [
-                  inputs.sops-nix.homeManagerModules.sops
-                  outputs.homeManagerModules
-                  inputs.nvf.homeManagerModules.default
-                  inputs.glide-browser.homeModules.default
-                ];
-                extraSpecialArgs = specialArgs.${system};
-              };
-            }
-          ];
-        };
-
-      homeConfig =
-        { modules, system }:
-        lib.homeManagerConfiguration {
-          pkgs = nixpkgsFor.${system};
-          extraSpecialArgs = specialArgs.${system};
-          modules = modules ++ [
-            outputs.homeManagerModules
-            inputs.sops-nix.homeManagerModules.sops
-            inputs.nvf.homeManagerModules.default
-            inputs.stylix.homeModules.stylix
-            inputs.glide-browser.homeModules.default
-          ];
-        };
-    in
-    {
-      inherit lib;
-
-      formatter = forEachPkgs (pkgs: pkgs.nixfmt);
-
-      nixosModules = import ./modules/nixos;
-      homeManagerModules = import ./modules/home-manager;
-
-      overlays = import ./overlays { inherit inputs outputs; };
-
-      packages = forAllSystems (system: import ./pkgs { pkgs = nixpkgsFor.${system}; });
-
-      templates = import ./templates;
-
-      nixosConfigurations = {
-        saturn = nixosConfig {
-          modules = [
-            ./hosts/saturn
-            inputs.nixos-hardware.nixosModules.common-cpu-amd
-            inputs.nixos-hardware.nixosModules.common-gpu-amd
-          ];
-          system = "x86_64-linux";
-        };
-
-        work-laptop = nixosConfig {
-          modules = [
-            ./hosts/work-laptop
-          ];
-          system = "x86_64-linux";
-        };
-      };
-
-      homeConfigurations = {
-        home-laptop = homeConfig {
-          modules = [ ./users/lelisei/home-laptop ];
-          system = "x86_64-linux";
-        };
-
-        pluto = homeConfig {
-          modules = [ ./users/lelisei/pluto ];
-          system = "aarch64-linux";
-        };
-      };
-    };
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 }
