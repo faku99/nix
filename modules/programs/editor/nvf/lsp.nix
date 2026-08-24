@@ -1,7 +1,11 @@
 {
   den.aspects.nvf.homeManager =
-    { lib, ... }:
+    { lib, pkgs, ... }:
     {
+      home.packages = with pkgs; [
+        nixfmt
+      ];
+
       programs.nvf.settings.vim = {
         lsp = {
           enable = true;
@@ -37,8 +41,18 @@
             };
             nixd = {
               enable = true;
-              settings.nil.nix.flake.autoArchive = true;
               filetypes = [ "nix" ];
+              root_markers = [
+                "flake.nix"
+                ".git"
+              ];
+              settings = {
+                nil.nix.flake.autoArchive = true;
+                nixd = {
+                  formatting.command = [ "nixfmt" ];
+                  nixpkgs.expr = "import (builtins.getFlake (toString ./.)).inputs.nixpkgs { }";
+                };
+              };
             };
           };
         };
