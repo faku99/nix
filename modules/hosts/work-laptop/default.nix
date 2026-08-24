@@ -104,6 +104,7 @@
         den.aspects.nvf
 
         den.aspects.thunar
+        den.aspects.shotwell
         den.aspects.okular
 
         den.aspects.eza

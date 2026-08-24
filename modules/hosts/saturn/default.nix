@@ -97,6 +97,7 @@
         den.aspects.vscode
 
         den.aspects.thunar
+        den.aspects.shotwell
         den.aspects.libreoffice
         den.aspects.okular
         den.aspects.rbw
