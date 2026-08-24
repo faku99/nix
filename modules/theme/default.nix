@@ -83,9 +83,9 @@ in
             };
 
             cursor = {
-              package = pkgs.phinger-cursors;
-              name = "phinger-cursors";
-              size = 24;
+              package = pkgs.simp1e-cursors;
+              name = "Simp1e-Gruvbox-Dark";
+              size = 32;
             };
 
             fonts = resolveFonts pkgs;
