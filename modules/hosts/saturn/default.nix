@@ -27,6 +27,7 @@
       den.aspects.networkmanager
       den.aspects.docker
       den.aspects.hyprland
+      den.aspects.openlogi
     ];
 
     nixos =
