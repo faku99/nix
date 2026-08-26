@@ -116,13 +116,28 @@
         den.aspects.zsh
       ];
 
-      homeManager.wayland.windowManager.hyprland.settings.device = [
-        {
-          name = "zsa-technology-labs-moonlander-mark-i";
-          kb_layout = "us";
-          kb_variant = "intl";
-        }
-      ];
+      homeManager.wayland.windowManager.hyprland.settings = {
+        device = [
+          {
+            name = "zsa-technology-labs-moonlander-mark-i";
+            kb_layout = "us";
+            kb_variant = "intl";
+          }
+        ];
+
+        workspace_rule = [
+          {
+            workspace = "1";
+            monitor = "DP-4";
+            default = true;
+          }
+          {
+            workspace = "2";
+            monitor = "eDP-1";
+            default = true;
+          }
+        ];
+      };
     };
   };
 }
