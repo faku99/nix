@@ -20,6 +20,11 @@
         noctalia = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
       in
       {
+        # home-manager now vendors its own programs.noctalia module, which
+        # collides with the one from the noctalia flake - disable the vendored
+        # one in favor of the flake's, matching what its nixosModule already
+        # does for nixpkgs' module.
+        disabledModules = [ "programs/noctalia.nix" ];
         imports = [ inputs.noctalia.homeModules.default ];
 
         home.sessionVariables = {
