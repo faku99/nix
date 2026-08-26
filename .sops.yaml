@@ -18,3 +18,11 @@ creation_rules:
       - *saturn
       - *pluto
       - *work-laptop
+
+  - path_regex: secrets/bitwarden.yaml$
+    key_groups:
+    - pgp:
+      - *lelisei
+      age:
+      - *saturn
+      - *work-laptop
