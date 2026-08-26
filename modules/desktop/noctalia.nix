@@ -1,289 +1,202 @@
 { inputs, ... }:
 {
-  den.aspects.noctalia.homeManager =
-    { config, lib, pkgs, ... }:
-    let
-      noctalia-shell = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    in
-    {
-      imports = [ inputs.noctalia.homeModules.default ];
-
-      home.sessionVariables = {
-        DESKTOP_LAUNCHER = "${lib.getExe noctalia-shell} ipc call launcher toggle";
-        DESKTOP_POWERMENU = "${lib.getExe noctalia-shell} ipc call sessionMenu toggle";
-      };
-
-      wayland.windowManager.hyprland.settings.on = [
-        {
-          _args = [
-            "hyprland.start"
-            (lib.generators.mkLuaInline ''function() hl.exec_cmd("${lib.getExe noctalia-shell}") end'')
-          ];
-        }
+  den.aspects.noctalia = {
+    nixos = {
+      imports = [
+        inputs.noctalia.nixosModules.default
       ];
 
-      programs.noctalia-shell = {
-        enable = true;
-        package = noctalia-shell;
+      programs.noctalia.recommendedServices.enable = true;
+    };
 
-        colors = {
-          mBackground = lib.mkForce "#${config.lib.stylix.colors.base00}";
-          mOnBackground = lib.mkForce "#${config.lib.stylix.colors.base05}";
-          mPrimary = lib.mkForce "#${config.lib.stylix.colors.base0D}";
-          mOnPrimary = lib.mkForce "#${config.lib.stylix.colors.base00}";
-          mSecondary = lib.mkForce "#${config.lib.stylix.colors.base0E}";
-          mOnSecondary = lib.mkForce "#${config.lib.stylix.colors.base00}";
-          mSurface = lib.mkForce "#${config.lib.stylix.colors.base00}";
-          mOnSurface = lib.mkForce "#${config.lib.stylix.colors.base05}";
-          mOutline = lib.mkForce "#${config.lib.stylix.colors.base03}";
+    homeManager =
+      {
+        config,
+        lib,
+        pkgs,
+        ...
+      }:
+      let
+        noctalia = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      in
+      {
+        imports = [ inputs.noctalia.homeModules.default ];
+
+        home.sessionVariables = {
+          DESKTOP_LAUNCHER = "${lib.getExe noctalia} msg panel-toggle launcher";
+          DESKTOP_POWERMENU = "${lib.getExe noctalia} msg panel-toggle session";
         };
 
-        settings = {
-          settingsVersion = 59;
-          bar = {
-            density = "comfortable";
-            fontScale = 1.20;
-            showCapsule = false;
-            enableExclusionZoneInset = false;
-            outerCorners = false;
-            widgets = {
-              left = [
-                {
-                  colorizeSystemIcon = "primary";
-                  colorizeSystemText = "none";
-                  customIconPath = "";
-                  enableColorization = true;
-                  icon = "rocket";
-                  iconColor = "none";
-                  id = "Launcher";
-                  useDistroLogo = true;
-                }
-                {
-                  characterCount = 2;
-                  colorizeIcons = false;
-                  emptyColor = "none";
-                  enableScrollWheel = true;
-                  focusedColor = "primary";
-                  followFocusedScreen = false;
-                  fontWeight = "semibold";
-                  groupedBorderOpacity = 1;
-                  hideUnoccupied = false;
-                  iconScale = 0.8;
-                  id = "Workspace";
-                  labelMode = "index";
-                  occupiedColor = "none";
-                  pillSize = 0.8;
-                  showApplications = false;
-                  showApplicationsHover = false;
-                  showBadge = true;
-                  showLabelsOnlyWhenOccupied = false;
-                  unfocusedIconsOpacity = 1;
-                }
-              ];
-              center = [
-                {
-                  clockColor = "primary";
-                  customFont = "JetBrainsMono Nerd Font";
-                  formatHorizontal = "yyyy-MM-dd HH:mm";
-                  formatVertical = "HH:mm - yyyy-MM-dd";
-                  id = "Clock";
-                  tooltipFormat = "yyyy-MM-dd HH:mm:ss";
-                  useCustomFont = true;
-                }
-              ];
-              right = [
-                {
-                  blacklist = [ ];
-                  chevronColor = "none";
-                  colorizeIcons = true;
-                  drawerEnabled = false;
-                  hidePassive = true;
-                  id = "Tray";
-                  pinned = [ ];
-                }
-                {
-                  compactMode = false;
-                  hideMode = "hidden";
-                  hideWhenIdle = false;
-                  id = "MediaMini";
-                  maxWidth = 145;
-                  panelShowAlbumArt = true;
-                  scrollingMode = "hover";
-                  showAlbumArt = true;
-                  showArtistFirst = true;
-                  showProgressRing = true;
-                  showVisualizer = false;
-                  textColor = "none";
-                  useFixedWidth = false;
-                  visualizerType = "linear";
-                }
-                {
-                  displayMode = "onhover";
-                  iconColor = "none";
-                  id = "Volume";
-                  middleClickCommand = "pwvucontrol || pavucontrol";
-                  textColor = "none";
-                }
-                {
-                  hideWhenZero = true;
-                  hideWhenZeroUnread = true;
-                  iconColor = "none";
-                  id = "NotificationHistory";
-                  showUnreadBadge = true;
-                  unreadBadgeColor = "secondary";
-                }
-                {
-                  compactMode = false;
-                  diskPath = "/home";
-                  iconColor = "none";
-                  id = "SystemMonitor";
-                  showCpuCores = false;
-                  showCpuFreq = false;
-                  showCpuTemp = true;
-                  showCpuUsage = true;
-                  showDiskAvailable = false;
-                  showDiskUsage = false;
-                  showDiskUsageAsPercent = false;
-                  showGpuTemp = false;
-                  showLoadAverage = false;
-                  showMemoryAsPercent = false;
-                  showMemoryUsage = true;
-                  showNetworkStats = true;
-                  showSwapUsage = false;
-                  textColor = "none";
-                  useMonospaceFont = true;
-                  usePadding = true;
-                }
-                {
-                  displayMode = "onhover";
-                  iconColor = "none";
-                  id = "Network";
-                  textColor = "none";
-                }
-                {
-                  iconColor = "error";
-                  id = "SessionMenu";
-                }
-              ];
+        wayland.windowManager.hyprland.settings.on = [
+          {
+            _args = [
+              "hyprland.start"
+              (lib.generators.mkLuaInline ''function() hl.exec_cmd("${lib.getExe noctalia}") end'')
+            ];
+          }
+        ];
+
+        programs.noctalia = {
+          enable = true;
+          package = noctalia;
+
+          settings = {
+            theme = {
+              source = "custom";
+              custom_palette = "stylix";
             };
-            middleClickAction = "settings";
-            middleClickFollowMouse = true;
-          };
-          general = {
-            avatarImage = "/home/lelisei/.face";
-            radiusRatio = 0.3;
-            iRadiusRatio = 0.3;
-            clockFormat = "hh\\nmm";
-          };
-          location = {
-            name = "Lausanne, Switzerland";
-            weatherShowEffects = false;
-            showWeekNumberInCalendar = true;
-            hideWeatherCityName = true;
-            autoLocate = false;
-          };
-          wallpaper.directory = "/home/lelisei/Pictures/Wallpapers";
-          appLauncher = {
-            enableClipboardHistory = true;
-            showCategories = false;
-          };
-          controlCenter = {
-            diskPath = "/home";
-            cards = [
-              {
-                enabled = true;
-                id = "profile-card";
-              }
-              {
-                enabled = true;
-                id = "shortcuts-card";
-              }
-              {
-                enabled = true;
-                id = "audio-card";
-              }
-              {
-                enabled = false;
-                id = "brightness-card";
-              }
-              {
-                enabled = true;
-                id = "weather-card";
-              }
-              {
-                enabled = false;
-                id = "media-sysmon-card";
-              }
-            ];
-          };
-          systemMonitor = {
-            warningColor = "#89b482";
-            criticalColor = "#ea6962";
-          };
-          dock.enabled = false;
-          sessionMenu = {
-            enableCountdown = false;
-            largeButtonsStyle = false;
-            powerOptions = [
-              {
-                action = "lock";
-                command = "";
-                countdownEnabled = true;
-                enabled = false;
-                keybind = "";
-              }
-              {
-                action = "suspend";
-                command = "";
-                countdownEnabled = true;
-                enabled = false;
-                keybind = "";
-              }
-              {
-                action = "hibernate";
-                command = "";
-                countdownEnabled = true;
-                enabled = false;
-                keybind = "";
-              }
-              {
-                action = "reboot";
-                command = "";
-                countdownEnabled = true;
-                enabled = true;
-                keybind = "1";
-              }
-              {
-                action = "logout";
-                command = "";
-                countdownEnabled = true;
-                enabled = false;
-                keybind = "";
-              }
-              {
-                action = "shutdown";
-                command = "";
-                countdownEnabled = true;
-                enabled = true;
-                keybind = "2";
-              }
-              {
-                action = "rebootToUefi";
-                command = "";
-                countdownEnabled = true;
-                enabled = true;
-                keybind = "3";
-              }
-              {
-                action = "userspaceReboot";
-                command = "";
-                countdownEnabled = true;
-                enabled = false;
-                keybind = "";
-              }
-            ];
+
+            shell = {
+              avatar_path = "/home/lelisei/.face";
+              corner_radius_scale = 0.3;
+              time_format = "{:%H:%M}";
+              date_format = "%A %d %B";
+              show_location = false;
+              clipboard_enabled = true;
+
+              launcher.categories = false;
+
+              session = {
+                grid = false;
+                actions = [
+                  {
+                    action = "reboot";
+                    shortcut = "1";
+                  }
+                  {
+                    action = "shutdown";
+                    shortcut = "2";
+                  }
+                  {
+                    action = "command";
+                    label = "Reboot to UEFI";
+                    command = "systemctl reboot --firmware-setup";
+                    shortcut = "3";
+                  }
+                ];
+              };
+            };
+
+            wallpaper.directory = "/home/lelisei/Pictures/Wallpapers";
+
+            weather = {
+              enabled = true;
+              effects = false;
+            };
+
+            location = {
+              address = "Lausanne, Switzerland";
+              auto_locate = false;
+            };
+
+            control_center.calendar.show_week_numbers = true;
+
+            dock.enabled = false;
+
+            bar.main = {
+              capsule = false;
+              radius = 0;
+              scale = 1.2;
+              margin_ends = 0;
+              widget_spacing = 16;
+
+              capsule_radius = 4;
+
+              font_family = lib.mkForce config.stylix.fonts.monospace.name;
+
+              start = [
+                "launcher"
+                "workspaces"
+              ];
+              center = [ "clock" ];
+              end = [
+                "tray"
+                "media"
+                "volume"
+                "sysmon_cpu_usage"
+                "sysmon_cpu_temp"
+                "sysmon_ram_used"
+                "sysmon_net_rx"
+                "sysmon_net_tx"
+                "network"
+                "notifications"
+                "session"
+              ];
+
+              dead_zone.actions.middle = "settings-toggle";
+            };
+
+            widget = {
+              workspaces = {
+                focused_color = "primary";
+                hide_when_empty = false;
+                label_source = "id";
+                max_label_chars = 2;
+                occupied_color = config.lib.stylix.colors.withHashtag.base05;
+                show_all_outputs = false;
+                show_labels = true;
+              };
+
+              clock = {
+                format = "{:%Y-%m-%d %H:%M}";
+                vertical_format = "{:%H:%M} - {:%Y-%m-%d}";
+                tooltip_format = "{:%Y-%m-%d %H:%M:%S}";
+                color = "primary";
+              };
+
+              tray = {
+                drawer = true;
+                hide_passive = true;
+              };
+
+              media = {
+                hide_album_art = false;
+                hide_when_no_media = true;
+                title_scroll = "on_hover";
+              };
+
+              sysmon_cpu_usage = {
+                type = "sysmon";
+                stat = "cpu_usage";
+                visualization = "none";
+              };
+              sysmon_cpu_temp = {
+                type = "sysmon";
+                stat = "cpu_temp";
+                visualization = "none";
+              };
+              sysmon_ram_used = {
+                type = "sysmon";
+                stat = "ram_used";
+                visualization = "none";
+              };
+              sysmon_net_rx = {
+                type = "sysmon";
+                stat = "net_rx";
+                network_speed_compact = true;
+                visualization = "none";
+              };
+              sysmon_net_tx = {
+                type = "sysmon";
+                stat = "net_tx";
+                network_speed_compact = true;
+                visualization = "none";
+              };
+
+              network = {
+                show_label = false;
+              };
+
+              notifications = {
+                hide_when_no_unread = true;
+              };
+
+              session = {
+                icon_color = "error";
+              };
+            };
           };
         };
       };
-    };
+  };
 }

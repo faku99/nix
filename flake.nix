@@ -31,7 +31,7 @@
     };
 
     noctalia = {
-      url = "github:noctalia-dev/noctalia/refs/tags/v4.7.7";
+      url = "github:noctalia-dev/noctalia/refs/tags/v5.0.0-beta.9";
     };
     stylix = {
       url = "github:nix-community/stylix";
