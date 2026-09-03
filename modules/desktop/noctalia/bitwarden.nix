@@ -29,10 +29,12 @@
       # manifest (the sops-nix activation entry just nudges whatever unit
       # is currently loaded, which is stale on a run that adds secrets).
       home.activation.bitwardenLogin = lib.hm.dag.entryAfter [ "reloadSystemd" ] ''
-        $DRY_RUN_CMD ${bw} config server "$(cat ${
-          config.sops.secrets."bitwarden/server_url".path
-        })" >/dev/null
+        # bw refuses to change server config while logged in, so only touch it
+        # right before an actual login attempt, not on every activation.
         if ! ${bw} login --check --quiet; then
+          $DRY_RUN_CMD ${bw} config server "$(cat ${
+            config.sops.secrets."bitwarden/server_url".path
+          })" >/dev/null
           BW_CLIENTID="$(cat ${config.sops.secrets."bitwarden/client_id".path})" \
           BW_CLIENTSECRET="$(cat ${config.sops.secrets."bitwarden/client_secret".path})" \
           $DRY_RUN_CMD ${bw} login --apikey --nointeraction --quiet
