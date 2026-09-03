@@ -12,6 +12,7 @@
       alacritty
       zsh
       glide-browser
+      librewolf
     ];
 
     homeManager = {
