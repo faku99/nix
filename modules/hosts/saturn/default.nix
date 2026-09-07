@@ -88,7 +88,6 @@
         den.aspects.oh-my-opencode-slim
 
         den.aspects.brave
-        den.aspects.glide-browser
         den.aspects.librewolf-default
 
         den.aspects.direnv

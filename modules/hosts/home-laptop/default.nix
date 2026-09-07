@@ -11,7 +11,6 @@
       okular
       alacritty
       zsh
-      glide-browser
       librewolf
     ];
 
