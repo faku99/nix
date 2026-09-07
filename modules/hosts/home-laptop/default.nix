@@ -11,6 +11,7 @@
       okular
       alacritty
       zsh
+      zen
       librewolf
     ];
 

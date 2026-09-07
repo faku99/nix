@@ -96,6 +96,7 @@
         den.aspects.oh-my-opencode-slim
 
         den.aspects.brave
+        den.aspects.zen
         den.aspects.librewolf-default
 
         den.aspects.direnv
