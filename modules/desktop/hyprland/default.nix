@@ -22,7 +22,11 @@
       };
 
       homeManager =
-        { lib, pkgs, ... }:
+        { config, lib, pkgs, ... }:
+        let
+          cursorSize =
+            if config.stylix.enable or false then toString config.stylix.cursor.size else "32";
+        in
         {
           services.network-manager-applet.enable = true;
 
@@ -230,7 +234,7 @@
                 {
                   _args = [
                     "HYPRCURSOR_SIZE"
-                    "24"
+                    cursorSize
                   ];
                 }
                 {
@@ -278,7 +282,7 @@
                 {
                   _args = [
                     "XCURSOR_SIZE"
-                    "24"
+                    cursorSize
                   ];
                 }
                 {
