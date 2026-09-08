@@ -46,6 +46,16 @@
           enableTreesitter = true;
 
           clang.enable = true;
+          markdown = {
+            enable = true;
+            extensions = {
+              markview-nvim.enable = true;
+            };
+            lsp = {
+              enable = true;
+              servers = [ "marksman" ];
+            };
+          };
           nix = {
             enable = true;
             lsp.servers = [ "nixd" ];
