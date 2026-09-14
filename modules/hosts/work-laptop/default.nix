@@ -19,12 +19,10 @@
   };
 
   den.aspects.work-laptop = {
-    # NixOS-only aspects - applied directly to this host.
     includes = [
       den.aspects.networkmanager
       den.aspects.docker
       den.aspects.hyprland
-      den.aspects.openlogi
     ];
 
     nixos =
@@ -81,9 +79,6 @@
         };
       };
 
-    # Everything below is scoped to lelisei on this host (Host -> User
-    # mutual-provider), since a host's own includes/homeManager block
-    # doesn't automatically flow down to its users.
     provides.lelisei = {
       includes = [
         den.aspects.theme
@@ -96,8 +91,7 @@
         den.aspects.oh-my-opencode-slim
 
         den.aspects.brave
-        den.aspects.zen
-        den.aspects.librewolf-default
+        den.aspects.zen-default
 
         den.aspects.direnv
         den.aspects.git
