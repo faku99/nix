@@ -28,6 +28,7 @@
       den.aspects.docker
       den.aspects.hyprland
       den.aspects.openlogi
+      den.aspects.zsa
     ];
 
     nixos =

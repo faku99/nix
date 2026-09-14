@@ -20,9 +20,10 @@
 
   den.aspects.work-laptop = {
     includes = [
-      den.aspects.networkmanager
       den.aspects.docker
       den.aspects.hyprland
+      den.aspects.networkmanager
+      den.aspects.zsa
     ];
 
     nixos =
