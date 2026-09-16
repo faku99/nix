@@ -4,13 +4,13 @@
     classes = [ "homeManager" ];
     monitors = [
       {
-        name = "DP-4";
+        name = "desc:Samsung Electric Company S24D300 0x5A5A4158";
         width = 1920;
         height = 1080;
         position = "0x0";
       }
       {
-        name = "eDP-1";
+        name = "desc:Chimei Innolux Corporation 0x14C9";
         width = 1920;
         height = 1080;
         position = "1920x0";
