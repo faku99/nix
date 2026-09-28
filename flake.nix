@@ -74,7 +74,8 @@
     # AI
     llm-agents-nix = {
       url = "github:numtide/llm-agents.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # TODO: Restore once our nixpkgs are unpinned
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
     oh-my-opencode-slim = {
       url = "github:alvinunreal/oh-my-opencode-slim";
