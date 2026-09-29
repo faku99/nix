@@ -137,7 +137,7 @@ in
     in
     {
       home.packages = [
-        pkgs.claude-code
+        inputs.llm-agents-nix.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
         inputs.llm-agents-nix.packages.${pkgs.stdenv.hostPlatform.system}.ccstatusline
         # used by the settings.json Notification/Stop hooks
         pkgs.libnotify
@@ -167,7 +167,7 @@ in
         home.packages = [
           (pkgs.writeShellScriptBin "claude-work" ''
             export CLAUDE_CONFIG_DIR="${config.home.homeDirectory}/${workConfigDir}"
-            exec "${pkgs.claude-code}/bin/claude" "$@"
+            exec "${inputs.llm-agents-nix.packages.${pkgs.stdenv.hostPlatform.system}.claude-code}/bin/claude" "$@"
           '')
         ];
 
