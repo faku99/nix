@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  den.aspects.hyprland =
+  den.aspects.compositor.hyprland =
     { user, ... }:
     {
       nixos = {

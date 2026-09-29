@@ -21,7 +21,7 @@
   den.aspects.work-laptop = {
     includes = [
       den.aspects.docker
-      den.aspects.hyprland
+      den.aspects.compositor.hyprland
       den.aspects.displayManager.sddm
       den.aspects.networkmanager
       den.aspects.zsa
@@ -84,7 +84,7 @@
     provides.lelisei = {
       includes = [
         den.aspects.theme
-        den.aspects.hyprland
+        den.aspects.compositor.hyprland
         den.aspects.noctalia
         den.aspects.xdg
 
