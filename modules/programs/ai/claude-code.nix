@@ -5,19 +5,14 @@ let
     let
       notifySend = lib.getExe' pkgs.libnotify "notify-send";
       jq = lib.getExe pkgs.jq;
-      title = ''"Claude Code — $(basename "$PWD")"'';
+      title = ''"Claude Code: $(basename "$PWD")"'';
     in
     {
       "CLAUDE.md" = import ./_context { inherit lib; };
       "settings.json" = builtins.toJSON {
-        tui = "fullscreen";
-        theme = "dark";
+        autoUpdates = false;
         enabledPlugins = {
           "clangd-lsp@claude-plugins-official" = true;
-        };
-        statusLine = {
-          type = "command";
-          command = "ccstatusline";
         };
         hooks = {
           # Notification fires on permission prompts and idle-waiting-for-input.
@@ -26,7 +21,10 @@ let
               hooks = [
                 {
                   type = "command";
-                  command = ''${notifySend} -a 'Claude Code' ${title} "$(${jq} -r '.message // "Action required"')" 2>/dev/null || true'';
+                  command = ''
+                    msg=$(cat | ${jq} -r '.message // "Needs your attention"')
+                    ${notifySend} -a "Claude Code" ${title} "$msg" 2>/dev/null || true
+                  '';
                 }
               ];
             }
@@ -36,12 +34,85 @@ let
               hooks = [
                 {
                   type = "command";
-                  command = ''${notifySend} -a 'Claude Code' ${title} "Response complete" 2>/dev/null || true'';
+                  command = ''
+                    reason=$(cat | ${jq} -r '.stop_reason // "completed"')
+                    ${notifySend} -a "Claude Code" ${title} "Task $reason" 2>/dev/null || true
+                  '';
+                }
+              ];
+            }
+          ];
+          StopFailure = [
+            {
+              hooks = [
+                {
+                  type = "command";
+                  command = ''
+                    reason=$(cat | ${jq} -r '.stop_reason // .reason // "failed"')
+                    ${notifySend} -u critical -a "Claude Code" ${title} "Task $reason" 2>/dev/null || true
+                  '';
                 }
               ];
             }
           ];
         };
+        includeCoAuthoredBy = false;
+        model = "opusplan";
+        outputStyle = "Concise";
+        permissions = {
+          deny = [
+            "Bash(rm -rf /*)"
+            "Bash(rm -rf /)"
+            "Bash(sudo *)"
+            "Bash(chmod *)"
+            "Bash(dd if=:*)"
+            "Bash(mkfs.:*)"
+            "Bash(fdisk *)"
+            "Bash(format *)"
+            "Bash(shutdown *)"
+            "Bash(reboot *)"
+            "Bash(halt *)"
+            "Bash(poweroff *)"
+            "Bash(killall *)"
+            "Bash(pkill *)"
+            "Bash(nc -l -:*)"
+            "Bash(ncat -l -:*)"
+            "Bash(netcat -l -:*)"
+            "Bash(docker *)"
+            "Bash(gcloud *)"
+            "Bash(kubectl *)"
+            "Bash(git -C *)"
+            "Bash(git add .)"
+            "Bash(git push *)"
+            "Bash(git status --untracked-files=no -:*)"
+            "Bash(.venv/bin/python*)"
+            "Bash(python*)"
+            "Bash(uv run *)"
+          ];
+        };
+        allow = [
+          "Bash(git log *)"
+          "Bash(git diff *)"
+          "Bash(git show *)"
+          "Bash(git status --short --untracked-files)"
+          "Bash(git add .*)"
+          "Bash(git commit -m *)"
+          "Bash(container *)"
+          "Bash(gh pr view *)"
+          "Bash(gh run view *)"
+          "Bash(jq -r)"
+          "Bash(.venv/bin/ruff)"
+          "Bash(.venv/bin/ty)"
+          "Bash(.venv/bin/pytest)"
+          "Bash(.venv/bin/python3 -m doctest *)"
+          "Bash(~/.claude/skills/archviz/scripts/spec2drawio.py *)"
+        ];
+        statusLine = {
+          type = "command";
+          command = "ccstatusline";
+        };
+        theme = "dark";
+        tui = "fullscreen";
       };
       "ccstatusline-settings.json" = builtins.toJSON {
         version = 4;
@@ -167,7 +238,9 @@ in
         home.packages = [
           (pkgs.writeShellScriptBin "claude-work" ''
             export CLAUDE_CONFIG_DIR="${config.home.homeDirectory}/${workConfigDir}"
-            exec "${inputs.llm-agents-nix.packages.${pkgs.stdenv.hostPlatform.system}.claude-code}/bin/claude" "$@"
+            exec "${
+              inputs.llm-agents-nix.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
+            }/bin/claude" "$@"
           '')
         ];
 
