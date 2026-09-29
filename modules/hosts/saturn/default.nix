@@ -26,7 +26,6 @@
       den.aspects.sops
       den.aspects.networkmanager
       den.aspects.docker
-      den.aspects.compositor.hyprland
       den.aspects.displayManager.sddm
       den.aspects.proton-vpn
       den.aspects.openlogi

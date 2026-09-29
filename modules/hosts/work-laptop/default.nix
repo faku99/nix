@@ -21,7 +21,6 @@
   den.aspects.work-laptop = {
     includes = [
       den.aspects.docker
-      den.aspects.compositor.hyprland
       den.aspects.displayManager.sddm
       den.aspects.networkmanager
       den.aspects.zsa

@@ -2,9 +2,7 @@
   description = "My NixOS system and home configurations";
 
   inputs = {
-    #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # Temporary pin since Hyprland requires glaze < 8
-    nixpkgs.url = "github:nixos/nixpkgs/4b1cd35e951dd2760cf83fe5bf5129d26464ae31";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     systems.url = "github:nix-systems/default-linux";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 

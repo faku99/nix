@@ -1,13 +1,24 @@
 { inputs, ... }:
 {
-  den.aspects.compositor.hyprland =
-    { user, ... }:
-    {
-      nixos = {
+  den.aspects.compositor.hyprland = {
+    # Only ever include this aspect via `provides.<user>.includes`, never
+    # also from a host's bare `includes` list: Den re-resolves an aspect
+    # once per distinct list it's referenced from, and `programs.hyprland`'s
+    # `package`/`portalPackage` are unique-value options that error on any
+    # duplicate definition (even an identical one) - the "mutual-provider"
+    # battery still flows this `nixos` face up to the host regardless.
+    nixos =
+      { pkgs, ... }:
+      {
         programs.hyprland = {
           enable = true;
           withUWSM = true;
           xwayland.enable = true;
+          # Use the flake input's package everywhere, not nixpkgs' own -
+          # avoids building/installing a second, redundant Hyprland.
+          package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+          portalPackage =
+            inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
         };
 
         services.displayManager.defaultSession = "hyprland-uwsm";
@@ -15,308 +26,313 @@
         services.gnome.gnome-keyring.enable = true;
       };
 
-      homeManager =
-        { config, lib, pkgs, ... }:
-        let
-          cursorSize =
-            if config.stylix.enable or false then toString config.stylix.cursor.size else "32";
-        in
-        {
-          services.network-manager-applet.enable = true;
+    homeManager =
+      {
+        config,
+        lib,
+        pkgs,
+        user,
+        ...
+      }:
+      let
+        cursorSize = if config.stylix.enable or false then toString config.stylix.cursor.size else "32";
+      in
+      {
+        services.network-manager-applet.enable = true;
 
-          wayland.windowManager.hyprland = {
-            enable = true;
-            package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-            portalPackage =
-              inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+        wayland.windowManager.hyprland = {
+          enable = true;
+          package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+          portalPackage =
+            inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
-            plugins = [ ];
-            settings = {
-              bind = import ./_binds.nix { inherit lib; };
+          plugins = [ ];
+          settings = {
+            bind = import ./_binds.nix { inherit lib; };
 
-              curve = [
-                {
-                  _args = [
-                    "emphasizedAccel"
-                    {
-                      type = "bezier";
-                      points = [
-                        [
-                          0.3
-                          0
-                        ]
-                        [
-                          0.8
-                          0.15
-                        ]
-                      ];
-                    }
-                  ];
-                }
-                {
-                  _args = [
-                    "emphasizedDecel"
-                    {
-                      type = "bezier";
-                      points = [
-                        [
-                          0.05
-                          0.7
-                        ]
-                        [
-                          0.1
-                          1
-                        ]
-                      ];
-                    }
-                  ];
-                }
-                {
-                  _args = [
-                    "standard"
-                    {
-                      type = "bezier";
-                      points = [
-                        [
-                          0.2
-                          0
-                        ]
-                        [
-                          0
-                          1
-                        ]
-                      ];
-                    }
-                  ];
-                }
-              ];
+            curve = [
+              {
+                _args = [
+                  "emphasizedAccel"
+                  {
+                    type = "bezier";
+                    points = [
+                      [
+                        0.3
+                        0
+                      ]
+                      [
+                        0.8
+                        0.15
+                      ]
+                    ];
+                  }
+                ];
+              }
+              {
+                _args = [
+                  "emphasizedDecel"
+                  {
+                    type = "bezier";
+                    points = [
+                      [
+                        0.05
+                        0.7
+                      ]
+                      [
+                        0.1
+                        1
+                      ]
+                    ];
+                  }
+                ];
+              }
+              {
+                _args = [
+                  "standard"
+                  {
+                    type = "bezier";
+                    points = [
+                      [
+                        0.2
+                        0
+                      ]
+                      [
+                        0
+                        1
+                      ]
+                    ];
+                  }
+                ];
+              }
+            ];
 
-              animation = [
-                {
-                  leaf = "layersIn";
-                  enabled = true;
-                  speed = 3;
-                  bezier = "emphasizedDecel";
-                  style = "slide";
-                }
-                {
-                  leaf = "layersOut";
-                  enabled = true;
-                  speed = 2;
-                  bezier = "emphasizedAccel";
-                  style = "slide";
-                }
-                {
-                  leaf = "fadeLayers";
-                  enabled = true;
-                  speed = 3;
-                  bezier = "standard";
-                }
-                {
-                  leaf = "windowsIn";
-                  enabled = true;
-                  speed = 3;
-                  bezier = "emphasizedDecel";
-                }
-                {
-                  leaf = "windowsOut";
-                  enabled = true;
-                  speed = 2;
-                  bezier = "emphasizedAccel";
-                }
-                {
-                  leaf = "windowsMove";
-                  enabled = true;
-                  speed = 3;
-                  bezier = "standard";
-                }
-                {
-                  leaf = "workspaces";
-                  enabled = true;
-                  speed = 3;
-                  bezier = "standard";
-                }
-                {
-                  leaf = "fade";
-                  enabled = true;
-                  speed = 3;
-                  bezier = "standard";
-                }
-                {
-                  leaf = "fadeDim";
-                  enabled = true;
-                  speed = 3;
-                  bezier = "standard";
-                }
-                {
-                  leaf = "border";
-                  enabled = true;
-                  speed = 3;
-                  bezier = "standard";
-                }
-              ];
+            animation = [
+              {
+                leaf = "layersIn";
+                enabled = true;
+                speed = 3;
+                bezier = "emphasizedDecel";
+                style = "slide";
+              }
+              {
+                leaf = "layersOut";
+                enabled = true;
+                speed = 2;
+                bezier = "emphasizedAccel";
+                style = "slide";
+              }
+              {
+                leaf = "fadeLayers";
+                enabled = true;
+                speed = 3;
+                bezier = "standard";
+              }
+              {
+                leaf = "windowsIn";
+                enabled = true;
+                speed = 3;
+                bezier = "emphasizedDecel";
+              }
+              {
+                leaf = "windowsOut";
+                enabled = true;
+                speed = 2;
+                bezier = "emphasizedAccel";
+              }
+              {
+                leaf = "windowsMove";
+                enabled = true;
+                speed = 3;
+                bezier = "standard";
+              }
+              {
+                leaf = "workspaces";
+                enabled = true;
+                speed = 3;
+                bezier = "standard";
+              }
+              {
+                leaf = "fade";
+                enabled = true;
+                speed = 3;
+                bezier = "standard";
+              }
+              {
+                leaf = "fadeDim";
+                enabled = true;
+                speed = 3;
+                bezier = "standard";
+              }
+              {
+                leaf = "border";
+                enabled = true;
+                speed = 3;
+                bezier = "standard";
+              }
+            ];
 
-              window_rule = [
-                {
-                  match.class = "(.*)";
-                  suppress_event = "maximize";
-                }
-                {
-                  match = {
-                    float = true;
-                    xwayland = false;
-                  };
-                  center = true;
-                }
-              ];
+            window_rule = [
+              {
+                match.class = "(.*)";
+                suppress_event = "maximize";
+              }
+              {
+                match = {
+                  float = true;
+                  xwayland = false;
+                };
+                center = true;
+              }
+            ];
 
-              config = {
-                decoration = {
-                  rounding = 2;
-                  active_opacity = 1.0;
-                  inactive_opacity = 0.8;
+            config = {
+              decoration = {
+                rounding = 2;
+                active_opacity = 1.0;
+                inactive_opacity = 0.8;
 
-                  blur = {
-                    enabled = true;
-                    size = 3;
-                  };
-
-                  shadow.enabled = true;
+                blur = {
+                  enabled = true;
+                  size = 3;
                 };
 
-                dwindle = {
-                  force_split = 2;
-                  preserve_split = true;
-                };
-
-                ecosystem.no_update_news = true;
-
-                general = {
-                  allow_tearing = false;
-                  border_size = 2;
-                  gaps_in = 3;
-                  gaps_out = 5;
-                  layout = "dwindle";
-                  resize_on_border = false;
-                };
-
-                misc = {
-                  disable_hyprland_logo = true;
-                  force_default_wallpaper = 1;
-                };
+                shadow.enabled = true;
               };
 
-              env = [
-                {
-                  _args = [
-                    "CLUTTER_BACKEND"
-                    "wayland"
-                  ];
-                }
-                {
-                  _args = [
-                    "ELECTRON_OZONE_PLATFORM_HINT"
-                    "wayland"
-                  ];
-                }
-                {
-                  _args = [
-                    "GDK_BACKEND"
-                    "waylandx11,*"
-                  ];
-                }
-                {
-                  _args = [
-                    "HYPRCURSOR_SIZE"
-                    cursorSize
-                  ];
-                }
-                {
-                  _args = [
-                    "MOZ_ENABLE_WAYLAND"
-                    "1"
-                  ];
-                }
-                {
-                  _args = [
-                    "QT_AUTO_SCREEN_SCALE_FACTOR"
-                    "1"
-                  ];
-                }
-                {
-                  _args = [
-                    "QT_QPA_PLATFORM"
-                    "wayland;xcb"
-                  ];
-                }
-                {
-                  _args = [
-                    "QT_QPA_PLATFORMTHEME"
-                    "qt6ct"
-                  ];
-                }
-                {
-                  _args = [
-                    "QT_STYLE_OVERRIDE"
-                    "kvantum"
-                  ];
-                }
-                {
-                  _args = [
-                    "QT_WAYLAND_DISABLE_WINDOWDECORATION"
-                    "1"
-                  ];
-                }
-                {
-                  _args = [
-                    "SDL_VIDEODRIVER"
-                    "wayland"
-                  ];
-                }
-                {
-                  _args = [
-                    "XCURSOR_SIZE"
-                    cursorSize
-                  ];
-                }
-                {
-                  _args = [
-                    "XDG_SESSION_DESKTOP"
-                    "Hyprland"
-                  ];
-                }
-                {
-                  _args = [
-                    "XDG_SESSION_TYPE"
-                    "wayland"
-                  ];
-                }
-              ];
+              dwindle = {
+                force_split = 2;
+                preserve_split = true;
+              };
 
-              on = [
-                {
-                  _args = [
-                    "hyprland.start"
-                    (lib.generators.mkLuaInline ''function() hl.exec_cmd("swaync") end'')
-                  ];
-                }
-              ];
+              ecosystem.no_update_news = true;
 
-              monitor = map (m: {
-                output = m.name;
-                mode = "${toString m.width}x${toString m.height}@${toString (m.refreshRate or 60)}";
-                position = m.position or "auto";
-                scale = m.scale or 1.0;
-                transform = m.transform or 0;
-              }) (user.monitors or [ ]);
+              general = {
+                allow_tearing = false;
+                border_size = 2;
+                gaps_in = 3;
+                gaps_out = 5;
+                layout = "dwindle";
+                resize_on_border = false;
+              };
+
+              misc = {
+                disable_hyprland_logo = true;
+                force_default_wallpaper = 1;
+              };
             };
 
-            systemd = {
-              enable = false;
-              variables = [ "--all" ];
-            };
-            xwayland.enable = true;
+            env = [
+              {
+                _args = [
+                  "CLUTTER_BACKEND"
+                  "wayland"
+                ];
+              }
+              {
+                _args = [
+                  "ELECTRON_OZONE_PLATFORM_HINT"
+                  "wayland"
+                ];
+              }
+              {
+                _args = [
+                  "GDK_BACKEND"
+                  "waylandx11,*"
+                ];
+              }
+              {
+                _args = [
+                  "HYPRCURSOR_SIZE"
+                  cursorSize
+                ];
+              }
+              {
+                _args = [
+                  "MOZ_ENABLE_WAYLAND"
+                  "1"
+                ];
+              }
+              {
+                _args = [
+                  "QT_AUTO_SCREEN_SCALE_FACTOR"
+                  "1"
+                ];
+              }
+              {
+                _args = [
+                  "QT_QPA_PLATFORM"
+                  "wayland;xcb"
+                ];
+              }
+              {
+                _args = [
+                  "QT_QPA_PLATFORMTHEME"
+                  "qt6ct"
+                ];
+              }
+              {
+                _args = [
+                  "QT_STYLE_OVERRIDE"
+                  "kvantum"
+                ];
+              }
+              {
+                _args = [
+                  "QT_WAYLAND_DISABLE_WINDOWDECORATION"
+                  "1"
+                ];
+              }
+              {
+                _args = [
+                  "SDL_VIDEODRIVER"
+                  "wayland"
+                ];
+              }
+              {
+                _args = [
+                  "XCURSOR_SIZE"
+                  cursorSize
+                ];
+              }
+              {
+                _args = [
+                  "XDG_SESSION_DESKTOP"
+                  "Hyprland"
+                ];
+              }
+              {
+                _args = [
+                  "XDG_SESSION_TYPE"
+                  "wayland"
+                ];
+              }
+            ];
+
+            on = [
+              {
+                _args = [
+                  "hyprland.start"
+                  (lib.generators.mkLuaInline ''function() hl.exec_cmd("swaync") end'')
+                ];
+              }
+            ];
+
+            monitor = map (m: {
+              output = m.name;
+              mode = "${toString m.width}x${toString m.height}@${toString (m.refreshRate or 60)}";
+              position = m.position or "auto";
+              scale = m.scale or 1.0;
+              transform = m.transform or 0;
+            }) (user.monitors or [ ]);
           };
+
+          systemd = {
+            enable = false;
+            variables = [ "--all" ];
+          };
+          xwayland.enable = true;
         };
-    };
+      };
+  };
 }

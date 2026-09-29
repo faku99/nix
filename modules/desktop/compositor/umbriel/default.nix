@@ -1,11 +1,12 @@
 { inputs, ... }:
 {
   den.aspects.compositor.umbriel = {
-    # Not parametric on `user` (unlike `homeManager` below): this aspect is
-    # included from both the bare host `includes` list and the user-scoped
-    # `provides.lelisei.includes` list, and a `user`-parametric whole-aspect
-    # function gets re-instantiated once per context shape, which would
-    # re-run this foreign `imports` and redeclare `programs.umbriel.enable`.
+    # Only ever include this aspect via `provides.<user>.includes`, never
+    # also from a host's bare `includes` list: Den re-resolves an aspect
+    # once per distinct list it's referenced from, which would re-run this
+    # foreign `imports` and redeclare `programs.umbriel.enable` - the
+    # "mutual-provider" battery still flows this `nixos` face up to the
+    # host regardless.
     nixos = {
       imports = [ inputs.umbriel.nixosModules.default ];
 
