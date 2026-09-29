@@ -81,7 +81,7 @@
     provides.lelisei = {
       includes = [
         den.aspects.theme
-        den.aspects.compositor.hyprland
+        den.aspects.compositor.hyprland-default
         den.aspects.noctalia
         den.aspects.xdg
 

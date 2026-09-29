@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ den, inputs, ... }:
 {
   den.aspects.compositor.hyprland = {
     # Only ever include this aspect via `provides.<user>.includes`, never
@@ -20,8 +20,6 @@
           portalPackage =
             inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
         };
-
-        services.displayManager.defaultSession = "hyprland-uwsm";
 
         services.gnome.gnome-keyring.enable = true;
       };
@@ -334,5 +332,10 @@
           xwayland.enable = true;
         };
       };
+  };
+
+  den.aspects.compositor.hyprland-default = {
+    includes = [ den.aspects.compositor.hyprland ];
+    nixos.services.displayManager.defaultSession = "hyprland-uwsm";
   };
 }
