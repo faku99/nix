@@ -44,7 +44,7 @@ let
         };
       };
       "ccstatusline-settings.json" = builtins.toJSON {
-        version = 3;
+        version = 4;
         lines = [
           [
             {
@@ -73,7 +73,6 @@ let
               id = "7";
               type = "git-changes";
               color = "yellow";
-              metadata.hideNoGit = "false";
             }
           ]
           [
