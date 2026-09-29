@@ -33,6 +33,10 @@
     noctalia = {
       url = "github:noctalia-dev/noctalia/refs/tags/v5.0.1";
     };
+    noctalia-greeter = {
+      url = "github:noctalia-dev/noctalia-greeter";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";

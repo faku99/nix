@@ -22,6 +22,7 @@
     includes = [
       den.aspects.docker
       den.aspects.hyprland
+      den.aspects.displayManager.sddm
       den.aspects.networkmanager
       den.aspects.zsa
     ];
