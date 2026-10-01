@@ -1,5 +1,7 @@
 { den, inputs, ... }:
 {
+  den.hosts.x86_64-linux.saturn.battlenet.dir = ".steam/steam/steamapps/compatdata/2979885964/pfx/drive_c/Program Files (x86)/Battle.net";
+
   den.hosts.x86_64-linux.saturn.users.lelisei = {
     classes = [ "homeManager" ];
     monitors = [
@@ -84,6 +86,7 @@
         den.aspects.compositor.hyprland-default
         den.aspects.noctalia
         den.aspects.xdg
+        den.aspects.battlenet
 
         den.aspects.claude-code
         den.aspects.claude-code-work

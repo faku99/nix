@@ -5,6 +5,10 @@ This flake uses the [dendritic pattern](https://github.com/mightyiam/dendritic) 
 `.nix` file under `modules/`, and each file declares one `den.aspects.<name>` covering
 both the NixOS and Home Manager sides of a single concern.
 
+Per-host values (e.g. paths) are typed options declared on the host schema via
+`den.schema.host.imports` (see `modules/programs/games/battlenet.nix`), set on the host
+as `den.hosts.<system>.<host>.<option>`, and read in an aspect through its `host` argument.
+
 # Installation
 
 Every host (NixOS or not) is an age recipient in `.sops.yaml` - after either install
