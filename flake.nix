@@ -29,7 +29,7 @@
     };
 
     noctalia = {
-      url = "github:noctalia-dev/noctalia/refs/tags/v5.0.1";
+      url = "github:noctalia-dev/noctalia/refs/tags/v5.2.0";
     };
     noctalia-greeter = {
       url = "github:noctalia-dev/noctalia-greeter";
