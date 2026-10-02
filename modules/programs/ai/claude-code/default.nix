@@ -1,16 +1,45 @@
 { den, inputs, ... }:
 let
+  pluginDirsFor =
+    {
+      config,
+      lib,
+    }:
+    let
+      plugins = {
+        # Needs the on_export hook set up by the nvf review.nvim module
+        nvim-review = lib.hasAttrByPath [
+          "programs"
+          "nvf"
+          "settings"
+          "vim"
+          "lazy"
+          "plugins"
+          "review.nvim"
+        ] config;
+      };
+    in
+    # Each entry is loaded as one plugin root, so this is a path list rather than a parent dir
+    lib.concatStringsSep ":" (
+      lib.mapAttrsToList (name: _: "${./plugins/${name}}") (lib.filterAttrs (_: enabled: enabled) plugins)
+    );
+
   homeFiles =
-    { lib, pkgs }:
+    {
+      lib,
+      pkgs,
+      pluginDirs,
+    }:
     let
       notifySend = lib.getExe' pkgs.libnotify "notify-send";
       jq = lib.getExe pkgs.jq;
       title = ''"Claude Code: $(basename "$PWD")"'';
     in
     {
-      "CLAUDE.md" = import ./_context { inherit lib; };
+      "CLAUDE.md" = import ../_context { inherit lib; };
       "settings.json" = builtins.toJSON {
         autoUpdates = false;
+        env.CLAUDE_CODE_PLUGIN_DIRS = "${pluginDirs}";
         enabledPlugins = {
           "clangd-lsp@claude-plugins-official" = true;
         };
@@ -202,9 +231,17 @@ let
 in
 {
   den.aspects.claude-code.homeManager =
-    { lib, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
-      files = homeFiles { inherit lib pkgs; };
+      files = homeFiles {
+        inherit lib pkgs;
+        pluginDirs = pluginDirsFor { inherit config lib; };
+      };
     in
     {
       home.packages = [
@@ -232,7 +269,10 @@ in
       }:
       let
         workConfigDir = ".claude-work";
-        files = homeFiles { inherit lib pkgs; };
+        files = homeFiles {
+          inherit lib pkgs;
+          pluginDirs = pluginDirsFor { inherit config lib; };
+        };
       in
       {
         home.packages = [

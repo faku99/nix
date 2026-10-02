@@ -1,0 +1,5 @@
+{
+  "name": "nvim-review",
+  "version": "0.1.0",
+  "description": "Picks up code reviews exported from Neovim (review.nvim) into .review/inbox and hands them to Claude as MR-style review comments"
+}
