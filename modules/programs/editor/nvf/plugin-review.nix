@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   den.aspects.nvf.homeManager =
-    { pkgs, ... }:
+    { lib, pkgs, ... }:
     let
       inherit (inputs.nvf.lib.nvim.binds) mkKeymap;
 
@@ -18,25 +18,54 @@
       };
     in
     {
+      # Reviews exported to .review/inbox for the nvim-review Claude Code plugin
+      programs.git.ignores = [ ".review" ];
+
       programs.nvf.settings.config.vim = {
         binds.whichKey.register."<leader>r" = "Review";
+
+        # codediff would download its watcher into the read-only store; polling is used instead
+        luaConfigRC.codediff-watcher = inputs.nvf.lib.nvim.dag.entryAnywhere ''
+          vim.env.CODEDIFF_WATCHER_NO_AUTO_INSTALL = "1"
+        '';
 
         # Dependencies
         startPlugins = [
           pkgs.vimPlugins.nui-nvim
+          # TODO: Configure codediff keys
           pkgs.vimPlugins.codediff-nvim
         ];
 
         lazy.plugins."review.nvim" = {
           package = review-nvim;
-          cmd = [ "Review" ];
-          event = [ "" ];
+          setupModule = "review";
+          setupOpts.export.on_export = lib.generators.mkLuaInline ''
+            function(markdown, _)
+              local root = vim.fs.root(0, ".git") or vim.fn.getcwd()
+              local dir = root .. "/.review/inbox"
+              vim.fn.mkdir(dir, "p")
+              local file = dir .. "/" .. os.date("%Y%m%d-%H%M%S") .. ".md"
+              vim.fn.writefile(vim.split(markdown, "\n", { plain = true }), file)
+              vim.notify("Review sent to Claude Code", vim.log.levels.INFO)
+            end
+          '';
+          #cmd = [ "Review" ];
+          event = [ "DeferredUIEnter" ];
           keys = [
             (mkKeymap "n" "<leader>rr" "<cmd>Review<cr>" {
               desc = "Open diff review";
             })
-            (mkKeymap "n" "<leader>re" "<cmd>Review export<cr>" {
-              desc = "Export comments to clipboard";
+            (mkKeymap "n" "<leader>rd" "<cmd>Review delete<cr>" {
+              desc = "Delete comment";
+            })
+            (mkKeymap "n" "<leader>re" "<cmd>Review edit<cr>" {
+              desc = "Edit comment";
+            })
+            (mkKeymap "n" "<leader>rn" ":Review note<cr>" {
+              desc = "Add comment";
+            })
+            (mkKeymap "n" "<leader>rx" "<cmd>Review export<cr>" {
+              desc = "Export review";
             })
           ];
         };
