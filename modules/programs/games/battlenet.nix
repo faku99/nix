@@ -11,7 +11,12 @@
   ];
 
   den.aspects.battlenet.homeManager =
-    { pkgs, host, ... }:
+    {
+      pkgs,
+      host,
+      osConfig,
+      ...
+    }:
     let
       dir =
         if host.battlenet.dir == null then
@@ -20,6 +25,13 @@
           host.battlenet.dir;
     in
     {
+      assertions = [
+        {
+          assertion = osConfig.programs.steam.enable;
+          message = "battlenet runs on Steam's Proton Experimental, add den.aspects.steam to the host.";
+        }
+      ];
+
       home.packages = [
         pkgs.umu-launcher
         (pkgs.writeShellScriptBin "battlenet" ''
@@ -31,9 +43,16 @@
             exit 1
           fi
 
+          # FIXME: switch back to pkgs.proton-ge-bin when WowB.exe survives its loader on GE-Proton
+          export PROTONPATH="$HOME/.local/share/Steam/steamapps/common/Proton - Experimental"
+
+          if [ ! -x "$PROTONPATH/proton" ]; then
+            echo "battlenet: Proton Experimental not found at $PROTONPATH, install it in Steam" >&2
+            exit 1
+          fi
+
           # The prefix is everything above drive_c
           export WINEPREFIX="''${dir%%/drive_c/*}"
-          export PROTONPATH="${pkgs.proton-ge-bin.steamcompattool}"
           export GAMEID="umu-battlenet"
 
           exec umu-run "$exe" "$@"
