@@ -21,6 +21,16 @@
             inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
         };
 
+        # Mesa must match Hyprland's nixpkgs glibc or the driver fails to load
+        hardware.graphics =
+          let
+            hyprPkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+          in
+          {
+            package = hyprPkgs.mesa;
+            package32 = hyprPkgs.pkgsi686Linux.mesa;
+          };
+
         services.gnome.gnome-keyring.enable = true;
       };
 
