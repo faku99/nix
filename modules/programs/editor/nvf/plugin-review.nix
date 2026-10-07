@@ -29,12 +29,34 @@
           vim.env.CODEDIFF_WATCHER_NO_AUTO_INSTALL = "1"
         '';
 
-        # Dependencies
-        startPlugins = [
-          pkgs.vimPlugins.nui-nvim
-          # TODO: Configure codediff keys
-          pkgs.vimPlugins.codediff-nvim
-        ];
+        startPlugins = [ pkgs.vimPlugins.nui-nvim ];
+
+        extraPlugins.codediff = {
+          package = pkgs.vimPlugins.codediff-nvim;
+          setup = ''
+            require("codediff").setup {
+              diff = { layout = "inline" },
+              explorer = { view_mode = "tree" },
+              history = { view_mode = "tree" },
+              keymaps = {
+                view = {
+                  next_hunk = { "}", "]c" },
+                  prev_hunk = { "{", "[c" },
+                  next_file = "<c-n>",
+                  prev_file = "<c-p>",
+                },
+                explorer = {
+                  refresh = "<c-r>",
+                  fold_toggle = "<tab>",
+                },
+                history = {
+                  refresh = "<c-r>",
+                  fold_toggle = "<tab>",
+                },
+              },
+            }
+          '';
+        };
 
         lazy.plugins."review.nvim" = {
           package = review-nvim;
