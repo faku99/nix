@@ -18,6 +18,7 @@ test('a review dropped in the inbox is claimed and submitted as the user', async
   on('fs.write', (_, e) => { files[rel(e.path)] = e.text; return { value: undefined } })
   on('fs.read', (_, e) => ({ value: files[rel(e.path)] }))
   on('process.run', (_, e) => {
+    if (e.argv[0] === 'git') return { value: { exitCode: 0, stdout: '/repo\n', stderr: '' } }
     const [from, to] = e.argv.slice(1).map(rel)
     if (!(from in files)) return { value: { exitCode: 1, stdout: '', stderr: 'gone' } }
     files[to] = files[from]

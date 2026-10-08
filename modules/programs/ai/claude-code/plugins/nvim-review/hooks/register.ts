@@ -1,7 +1,6 @@
 import type { EngineInterface, Register } from 'claude-code'
 
-// Neovim drops exported reviews here (relative to the session's working directory,
-// so start Claude Code from the repo root).
+// Neovim drops exported reviews here, under the git root.
 const INBOX = '.review/inbox'
 const DONE = '.review/done'
 const POLL_MS = 1500
@@ -21,12 +20,22 @@ Reply comment by comment, quoting the file:line each answer refers to. Finish wi
 // never submits the same review twice or two at once.
 let inFlight = false
 
+// Git root of the session's working directory, so a subdirectory start still works.
+async function reviewRoot($: EngineInterface): Promise<string> {
+  const top = await $.process.run(['git', 'rev-parse', '--show-toplevel'])
+  const root = top.exitCode === 0 ? top.stdout.trim() : ''
+  return root === '' ? '' : `${root}/`
+}
+
 // Pick up the oldest review in the inbox, if any. Returns what happened, for /nvim-review.
 async function pickUp($: EngineInterface): Promise<string> {
   if (inFlight) return 'A review is already queued for Claude.'
-  if (!(await $.fs.exists(INBOX))) return 'No review waiting (nothing in .review/inbox).'
+  const root = await reviewRoot($)
+  const inbox = root + INBOX
+  const done = root + DONE
+  if (!(await $.fs.exists(inbox))) return `No review waiting (nothing in ${inbox}).`
 
-  const entries = await $.fs.list(INBOX)
+  const entries = await $.fs.list(inbox)
   const pending = entries
     .filter(f => f.kind === 'file' && f.name.endsWith('.md'))
     .sort((a, b) => a.mtimeMs - b.mtimeMs)
@@ -35,11 +44,11 @@ async function pickUp($: EngineInterface): Promise<string> {
   // Claim it by moving it out of the inbox first. If another Claude Code session
   // in the same repo got there before us, mv fails and that session handles it.
   const name = pending[0].name
-  await $.fs.write(`${DONE}/.keep`, '')
-  const moved = await $.process.run(['mv', `${INBOX}/${name}`, `${DONE}/${name}`])
+  await $.fs.write(`${done}/.keep`, '')
+  const moved = await $.process.run(['mv', `${inbox}/${name}`, `${done}/${name}`])
   if (moved.exitCode !== 0) return 'Another session took that review.'
 
-  const markdown = await $.fs.read(`${DONE}/${name}`)
+  const markdown = await $.fs.read(`${done}/${name}`)
   if (markdown.trim() === '') return 'The waiting review was empty; skipped.'
 
   inFlight = true

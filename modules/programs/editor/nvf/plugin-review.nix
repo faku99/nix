@@ -63,7 +63,7 @@
           setupModule = "review";
           setupOpts.export.on_export = lib.generators.mkLuaInline ''
             function(markdown, _)
-              local root = vim.fs.root(0, ".git") or vim.fn.getcwd()
+              local root = vim.fs.root(vim.fn.getcwd(), ".git") or vim.fn.getcwd()
               local dir = root .. "/.review/inbox"
               vim.fn.mkdir(dir, "p")
               local file = dir .. "/" .. os.date("%Y%m%d-%H%M%S") .. ".md"
