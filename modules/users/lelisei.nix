@@ -48,6 +48,9 @@ in
 
     home.username = username;
 
+    # Read by noctalia and most display managers as the user avatar
+    home.file.".face".source = ./assets/face.jpg;
+
     sops = {
       gnupg.home = "${homeDirectory}/.gnupg";
       defaultSopsFile = userSecretsFile;
