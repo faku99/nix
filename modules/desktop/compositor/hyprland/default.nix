@@ -8,8 +8,11 @@
     # duplicate definition (even an identical one) - the "mutual-provider"
     # battery still flows this `nixos` face up to the host regardless.
     nixos =
-      { pkgs, ... }:
+      { config, lib, pkgs, ... }:
       {
+        # nixos refuses cap_sys_nice on the flake package's bash wrapper, use the ELF
+        security.wrappers.Hyprland.source = lib.mkForce "${config.programs.hyprland.package}/bin/.Hyprland-wrapped";
+
         programs.hyprland = {
           enable = true;
           withUWSM = true;
