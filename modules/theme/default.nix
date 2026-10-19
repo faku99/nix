@@ -1,7 +1,7 @@
 { inputs, ... }:
 let
   base16Scheme = ./gruvbox-dark-modded.yaml;
-  image = ./wallpaper.jpg;
+  image = ./wallpapers/eclipse.jpg;
   polarity = "dark";
 
   fonts = {
@@ -108,9 +108,14 @@ in
             # Not covered by stylix's nixos->home-manager forwarding.
             stylix.targets = {
               gtk.enable = true;
+              # Noctalia draws the wallpaper itself; hyprpaper would cover its picks
+              hyprpaper.enable = lib.mkForce false;
               kde.enable = true;
               qt.enable = true;
             };
+
+            # Picker directory for noctalia (wallpaper.directory)
+            home.file."Pictures/Wallpapers".source = ./wallpapers;
 
             home.packages = [
               pkgs.kdePackages.breeze
