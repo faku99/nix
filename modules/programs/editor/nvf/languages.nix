@@ -60,6 +60,7 @@
             enable = true;
             lsp.servers = [ "nixd" ];
           };
+          protobuf.enable = true;
           python.enable = true;
           qml = {
             enable = true;
