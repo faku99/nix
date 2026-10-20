@@ -971,6 +971,22 @@
         "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst"
       }
     },
+    "nixpkgs_7": {
+      "locked": {
+        "lastModified": 1790652569,
+        "narHash": "sha256-641r7xrlSOHYoktL9/aArPIYNgZJ9eM5URzSEOtPJDY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b6c8664de9b6cc07fe5666a29f91884ba81197c4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "noctalia": {
       "inputs": {
         "nixpkgs": "nixpkgs_6"
@@ -1096,21 +1112,20 @@
     },
     "openlogi": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
+        "nixpkgs": "nixpkgs_7",
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1792481139,
-        "narHash": "sha256-icSCZ8j1rvvTq2ki0C8wDGkT2CtEhRwoIKWK9JQv7hU=",
-        "owner": "AprilNEA",
+        "lastModified": 1792443275,
+        "narHash": "sha256-uelhRbGTaTViOYiczyxnMRfqL8sX42SG2nZMradgwMQ=",
+        "owner": "yangkx1024",
         "repo": "OpenLogi",
-        "rev": "1cabbd1bb3d8d0cd0dc01a9edbcd33122684b0f6",
+        "rev": "972214a66bfb2774157ea88fe95b23fb80dbde21",
         "type": "github"
       },
       "original": {
-        "owner": "AprilNEA",
+        "owner": "yangkx1024",
+        "ref": "nix-cachix",
         "repo": "OpenLogi",
         "type": "github"
       }
