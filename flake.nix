@@ -68,8 +68,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     openlogi = {
-      url = "github:AprilNEA/OpenLogi";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # Uncomment once upstream finally has cachix support
+      #url = "github:AprilNEA/OpenLogi";
+      #inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:yangkx1024/OpenLogi/nix-cachix";
     };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
