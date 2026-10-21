@@ -6,7 +6,7 @@
       enable = true;
       nix-direnv.enable = true;
       config.whitelist = {
-        prefix = [ "~/sources" ];
+        prefix = [ "~/work" ];
         exact = [ "~/nix" ];
       };
     };
