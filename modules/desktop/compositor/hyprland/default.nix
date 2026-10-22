@@ -24,6 +24,11 @@
             inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
         };
 
+        # Hyprland shells out to it at startup; the flake package doesn't pull it in
+        environment.systemPackages = [
+          inputs.hyprland.inputs.hyprland-guiutils.packages.${pkgs.stdenv.hostPlatform.system}.hyprland-guiutils
+        ];
+
         # Mesa must match Hyprland's nixpkgs glibc or the driver fails to load
         hardware.graphics =
           let
