@@ -67,7 +67,7 @@
       # Uncomment once upstream finally has cachix support
       #url = "github:AprilNEA/OpenLogi";
       #inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:yangkx1024/OpenLogi/nix-cachix";
+      url = "github:yangkx1024/OpenLogi/nix-cachix?dir=packaging";
     };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
@@ -80,10 +80,6 @@
       url = "github:numtide/llm-agents.nix";
       # TODO: Restore once our nixpkgs are unpinned
       # inputs.nixpkgs.follows = "nixpkgs";
-    };
-    oh-my-opencode-slim = {
-      url = "github:alvinunreal/oh-my-opencode-slim";
-      flake = false;
     };
   };
 
