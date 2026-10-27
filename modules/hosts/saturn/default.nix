@@ -90,7 +90,6 @@
 
         den.aspects.claude-code
         den.aspects.claude-code-work
-        den.aspects.oh-my-opencode-slim
 
         den.aspects.brave
         den.aspects.zen-default
