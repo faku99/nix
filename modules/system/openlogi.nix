@@ -3,6 +3,9 @@
   den.aspects.openlogi.nixos = {
     imports = [ inputs.openlogi.nixosModules.default ];
 
-    programs.openlogi.enable = true;
+    programs.openlogi = {
+      enable = true;
+      launchAtLogin = true;
+    };
   };
 }
