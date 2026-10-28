@@ -23,6 +23,7 @@
       den.aspects.docker
       den.aspects.displayManager.sddm
       den.aspects.networkmanager
+      den.aspects.openlogi
       den.aspects.zsa
     ];
 
