@@ -116,13 +116,23 @@
         den.aspects.zsh
       ];
 
-      homeManager.wayland.windowManager.hyprland.settings.device = [
+      homeManager =
+        { config, pkgs, ... }:
         {
-          name = "zsa-technology-labs-moonlander-mark-i";
-          kb_layout = "us";
-          kb_variant = "intl";
-        }
-      ];
+          wayland.windowManager.hyprland.settings.device = [
+            {
+              name = "zsa-technology-labs-moonlander-mark-i";
+              kb_layout = "us";
+              kb_variant = "intl";
+            }
+          ];
+
+          xdg.desktopEntries.curseforge = {
+            name = "CurseForge";
+            exec = "${pkgs.appimage-run}/bin/appimage-run ${config.home.homeDirectory}/Applications/Curseforge.AppImage";
+            categories = [ "Game" ];
+          };
+        };
     };
   };
 }
