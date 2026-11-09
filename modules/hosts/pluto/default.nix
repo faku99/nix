@@ -10,6 +10,7 @@
       git
       ssh
       nvf
+      opencode
       eza
       nix-helper
       zsh
