@@ -92,7 +92,6 @@
         den.aspects.claude-code-work
         den.aspects.opencode
 
-        den.aspects.brave
         den.aspects.zen-default
 
         den.aspects.direnv
