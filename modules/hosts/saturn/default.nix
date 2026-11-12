@@ -130,6 +130,7 @@
           xdg.desktopEntries.curseforge = {
             name = "CurseForge";
             exec = "${pkgs.appimage-run}/bin/appimage-run ${config.home.homeDirectory}/Applications/Curseforge.AppImage";
+            icon = ./assets/curseforge.png;
             categories = [ "Game" ];
           };
         };

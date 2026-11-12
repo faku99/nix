@@ -62,6 +62,7 @@
       xdg.desktopEntries.battlenet = {
         name = "Battle.net";
         exec = "battlenet";
+        icon = ./assets/battlenet.png;
         categories = [ "Game" ];
       };
     };
