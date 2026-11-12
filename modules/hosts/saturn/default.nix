@@ -107,6 +107,7 @@
         den.aspects.okular
         den.aspects.rbw
         den.aspects.telegram
+        den.aspects.discord
 
         den.aspects.eza
         den.aspects.nix-helper
