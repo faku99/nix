@@ -7,7 +7,7 @@
       home.homeDirectory = lib.mkDefault "/home/${config.home.username}";
       home.stateVersion = "26.05";
       home.packages = with pkgs; [
-        atool
+        ouch
         fd
         ripgrep
         unzip
