@@ -46,6 +46,7 @@
           systemd-boot.enable = lib.mkForce false;
           efi.canTouchEfiVariables = true;
         };
+        boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
         time.hardwareClockInLocalTime = false;
 
