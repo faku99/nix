@@ -88,54 +88,6 @@ let
         includeCoAuthoredBy = false;
         model = "opusplan";
         outputStyle = "Concise";
-        permissions = {
-          deny = [
-            "Bash(rm -rf /*)"
-            "Bash(rm -rf /)"
-            "Bash(sudo *)"
-            "Bash(chmod *)"
-            "Bash(dd if=:*)"
-            "Bash(mkfs.:*)"
-            "Bash(fdisk *)"
-            "Bash(format *)"
-            "Bash(shutdown *)"
-            "Bash(reboot *)"
-            "Bash(halt *)"
-            "Bash(poweroff *)"
-            "Bash(killall *)"
-            "Bash(pkill *)"
-            "Bash(nc -l -:*)"
-            "Bash(ncat -l -:*)"
-            "Bash(netcat -l -:*)"
-            "Bash(docker *)"
-            "Bash(gcloud *)"
-            "Bash(kubectl *)"
-            "Bash(git -C *)"
-            "Bash(git add .)"
-            "Bash(git push *)"
-            "Bash(git status --untracked-files=no -:*)"
-            "Bash(.venv/bin/python*)"
-            "Bash(python*)"
-            "Bash(uv run *)"
-          ];
-        };
-        allow = [
-          "Bash(git log *)"
-          "Bash(git diff *)"
-          "Bash(git show *)"
-          "Bash(git status --short --untracked-files)"
-          "Bash(git add .*)"
-          "Bash(git commit -m *)"
-          "Bash(container *)"
-          "Bash(gh pr view *)"
-          "Bash(gh run view *)"
-          "Bash(jq -r)"
-          "Bash(.venv/bin/ruff)"
-          "Bash(.venv/bin/ty)"
-          "Bash(.venv/bin/pytest)"
-          "Bash(.venv/bin/python3 -m doctest *)"
-          "Bash(~/.claude/skills/archviz/scripts/spec2drawio.py *)"
-        ];
         statusLine = {
           type = "command";
           command = "ccstatusline";
