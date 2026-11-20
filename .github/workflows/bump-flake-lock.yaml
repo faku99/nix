@@ -23,7 +23,7 @@ jobs:
       - name: Make commit
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Bump flake.lock
+          commit_message: 'chore: bump flake.lock'
           branch: main
           commit_options: '--no-verify --signoff'
           file_pattern: flake.lock
